@@ -5,7 +5,7 @@ const Homepage = () => {
   return (
     <main className='homepage'>
       <nav className='nav'>
-        <img src="/assets/logo.svg" alt="logo"  className='logo'/>
+        <img src="/public/logo.svg"alt="logo"  className='logo'/>
         <ul>
             <li>Campaigns</li>
             <li>News</li>
@@ -13,7 +13,7 @@ const Homepage = () => {
         </ul>
 
         <ul className='navigator'>
-            <li>login <img src="/assets/dropDown.png" alt="dropdown"  className='dropDown'/></li>
+            <li>login <img src="/public/assets/dropDown.png" alt="dropdown"  className='dropDown'/></li>
             <li>Signup</li>
         </ul>
       </nav>

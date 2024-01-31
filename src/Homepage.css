@@ -4,7 +4,7 @@
   min-width: 1440px;
   min-height: 920px;
   max-height: 920px;
-  background-image: url(/public/assets/background.jpg);
+  background-image: url(/assets/background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 1rem;
