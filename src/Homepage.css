@@ -1,0 +1,63 @@
+.homepage {
+  display: flex;
+  flex-direction: column;
+  min-width: 1440px;
+  min-height: 920px;
+  max-height: 920px;
+  background-image: url(/public/assets/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+h2 {
+  color: rgb(247, 223, 9);
+  margin-bottom: -0.5rem;
+}
+
+.nav {
+  display: flex;
+  background-color: rgb(8, 158, 23);
+  align-items: center;
+  color: white;
+}
+
+ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  align-items: end;
+}
+
+li:hover {
+  color: rgb(240, 217, 14);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.navigator {
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.dropDown {
+  width: 1rem;
+}
+
+.slogan {
+  max-width: 50ch;
+  /* align-self: center; */
+  margin-top: 18rem;
+  margin-left: 3rem;
+  color: white;
+  font-weight: 500;
+}
+
+.footer {
+  display: flex;
+  align-self: center;
+  color: white;
+  position: absolute;
+  bottom: 2rem;
+}
