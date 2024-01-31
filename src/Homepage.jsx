@@ -1,11 +1,13 @@
 import React from 'react'
 import './Homepage.css'
+import logo from '/assets/logo.svg';
+import dropdown from '/assets/dropDown.png'
 
 const Homepage = () => {
   return (
     <main className='homepage'>
       <nav className='nav'>
-        <img src="/public/logo.svg"alt="logo"  className='logo'/>
+        <img src={logo}alt="logo"  className='logo'/>
         <ul>
             <li>Campaigns</li>
             <li>News</li>
@@ -13,7 +15,7 @@ const Homepage = () => {
         </ul>
 
         <ul className='navigator'>
-            <li>login <img src="/public/assets/dropDown.png" alt="dropdown"  className='dropDown'/></li>
+            <li>login <img src={dropdown} alt="dropdown"  className='dropDown'/></li>
             <li>Signup</li>
         </ul>
       </nav>
