@@ -8,10 +8,15 @@ const AdminLogin = () => {
       <div className="header">
         <img src={logo} alt="logo" className="logo" />
       </div>
-
       <img src={logo} alt="logo" className="logoB" />
+
       <fieldset>
-        <legend>Administrator Login</legend>
+        <legend>LOGIN</legend>
+
+        <div className="loginOpt">
+          <h3 className="opt">Admin</h3>
+          <h3 className="opt">Student</h3>
+        </div>
         <form>
           <div className="inputItem">
             <label htmlFor="email">Email</label>
@@ -24,26 +29,31 @@ const AdminLogin = () => {
 
           <div className="inputItem">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password"  />
+            <input type="password" id="password" />
           </div>
 
           <div className="inputItem">
-            <label htmlFor="ID">Admin ID</label>
-            <input type="password" id="ID"  />
+            <label htmlFor="ID">Reg No</label>
+            <input type="password" id="ID" />
           </div>
-          <button type="submit">Submit</button>
+          <div className="check">
+            <input type="checkbox" id="check" />
+            <label htmlFor="check">Remember me</label>
+          </div>
+          <button type="submit">LOG IN</button>
         </form>
+        <p className="forgot">Forgot password?</p>
       </fieldset>
 
-     <div className="disclaimer">
-     <div className="support">
-     <p className="disc">Support</p>
-      <p className="disc">Terms of service</p>
-      <p className="disc">Privacy Policy</p>
-     </div>
+      <div className="disclaimer">
+        <div className="support">
+          <p className="disc">Support</p>
+          <p className="disc">Terms of service</p>
+          <p className="disc">Privacy Policy</p>
+        </div>
 
-     <p>A product by DEKUTSO E-vote,inc &copy; 2023-2024</p>
-     </div>
+        <p>A product by DEKUTSO E-vote,inc &copy; 2023-2024</p>
+      </div>
     </main>
   );
 };
