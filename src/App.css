@@ -1,17 +1,100 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&display=swap');
 body {
-    background-color:rgb(217, 217, 217);
+    background-color:rgb(51, 50, 50);
     display: grid;
     justify-content: center;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
+    font-size: 15px;
 }
 
 .logo {
     width: 100px;
+    
 }
 
+.logoB {
+    width: 25rem;
+    align-self: center;
+   
+}
 .app {
     max-width: 1280px;
 }
+
+.header {
+    background-color: rgb(8, 158, 23);
+
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    background-color: rgba(163, 147, 6, 1);
+    padding: 2rem;
+    font-weight: 800;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+    color: rgb(8, 49, 2);
+  
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin:  0 2rem;
+    margin-right: 4rem;
+}
+
+input {
+    padding: 0.5rem 1rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 0;
+}
+
+.inputItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  
+}
+
+button {
+    padding: 0.5rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    width: 7rem;
+    background-color: rgb(8, 158, 23);
+    color: rgb(255, 255, 255);
+    border: 0;
+    border-radius: 0.5rem;
+}
+
+button:hover{
+    background-color: green;
+    font-size: larger;
+    cursor: pointer;
+}
+
+.disclaimer {
+    align-self: center;
+    color: rgb(155, 155, 149);
+}
+
+.support {
+    display: flex;
+    gap: 3rem;
+    margin-top: 6rem;
+
+}
+
+.disc:hover {
+    cursor: pointer;
+    color: blue;
+   
+}
+
 

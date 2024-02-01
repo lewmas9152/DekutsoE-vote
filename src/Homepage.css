@@ -1,14 +1,24 @@
-.homepage {
+main {
   display: flex;
   flex-direction: column;
   min-width: 1440px;
   min-height: 920px;
   max-height: 920px;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: rgb(86, 133, 68);
+  /* justify-content: center; */
+
+ 
+}
+
+.homepage {
   background-image: url(/assets/background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  border-radius: 1rem;
-  overflow: hidden;
+  min-width: 1440px;
+  min-height: 920px;
+  max-height: 920px;
 }
 
 h2 {
@@ -60,4 +70,25 @@ li:hover {
   color: white;
   position: absolute;
   bottom: 2rem;
+  justify-self: center;
+  text-align: center;
+  margin-left: 25vw;
 }
+
+.login-options {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+select {
+  background-color: rgb(8, 158, 23);
+  color: white;
+  outline: none;
+  border: 0;
+
+}
+
+select:hover {
+  cursor: pointer;
+}
+
