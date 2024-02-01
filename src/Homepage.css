@@ -7,7 +7,7 @@ main {
   border-radius: 1rem;
   overflow: hidden;
   background-color: rgb(86, 133, 68);
-  /* justify-content: center; */
+  
 
  
 }
@@ -75,20 +75,5 @@ li:hover {
   margin-left: 25vw;
 }
 
-.login-options {
-  display: flex;
-  flex-direction: column;
-  margin-top: 3rem;
-}
-select {
-  background-color: rgb(8, 158, 23);
-  color: white;
-  outline: none;
-  border: 0;
 
-}
-
-select:hover {
-  cursor: pointer;
-}
 

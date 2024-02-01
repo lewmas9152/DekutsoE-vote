@@ -1,0 +1,71 @@
+.search {
+  display: flex;
+  align-self: center;
+  gap: 5rem;
+  margin-top: 2rem;
+}
+
+.srcInput {
+  width: 15vw;
+ 
+}
+
+.srcIcon,
+.filter {
+  background-color: rgb(92, 94, 92);
+  margin-left: -8.3rem;
+  width: 2rem;
+  height: 1rem;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.item {
+  display: flex;
+  gap: 3rem;
+  background-color: rgb(155, 132, 3);
+  align-self: center;
+  padding: 1rem 3rem;
+  margin-top: 2rem;
+  width: 50vw;
+  border-radius: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.item:hover {
+    cursor: pointer;
+    background-color: rgb(102, 87, 3);
+    
+    
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  justify-self: flex-end;
+ text-align: center;
+ font-weight: 800;
+ gap: 1rem;
+}
+
+.dateSec {
+    display: flex;
+    gap: 15rem;
+    margin-right: 5rem;
+}
+
+
+.elections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scroll-behavior: smooth;
+    overflow:scroll;
+    height: 30vw;
+    margin: 1rem;
+   
+}
