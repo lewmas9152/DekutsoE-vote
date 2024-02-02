@@ -1,0 +1,31 @@
+.logoN {
+  margin-top: 5rem;
+}
+
+.title {
+  color: rgb(26, 99, 3);
+}
+
+.card {
+  display: flex;
+  background-color: rgb(206, 176, 6);
+  margin: 2rem;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  justify-content: space-around;
+  /* max-width: 50vw; */
+  align-self: center;
+}
+
+.vote {
+  width: 20rem;
+  height: 20rem;
+}
+
+.formNew {
+  display: flex;
+  gap: unset;
+  gap: 1rem;
+  font-weight: 800;
+}

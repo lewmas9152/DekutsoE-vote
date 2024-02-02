@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "/assets/logo.svg";
 
-
 const AdminLogin = () => {
   return (
     <main>
@@ -30,16 +29,12 @@ const AdminLogin = () => {
 
           <div className="inputItem">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" 
-            required
-            />
+            <input type="password" id="password" required />
           </div>
 
           <div className="inputItem">
             <label htmlFor="ID">Reg No</label>
-            <input type="password" id="ID" 
-            
-            required/>
+            <input type="password" id="ID" required />
           </div>
           <div className="check">
             <input type="checkbox" id="check" />

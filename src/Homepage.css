@@ -1,15 +1,11 @@
 main {
   display: flex;
   flex-direction: column;
-  min-width: 1440px;
-  min-height: 920px;
-  max-height: 920px;
+  min-width: 60vw;
+  min-height: 45vw;
   border-radius: 1rem;
   overflow: hidden;
   background-color: rgb(86, 133, 68);
-  
-
- 
 }
 
 .homepage {
@@ -69,11 +65,8 @@ li:hover {
   align-self: center;
   color: white;
   position: absolute;
-  bottom: 2rem;
+  bottom: 3rem;
   justify-self: center;
   text-align: center;
   margin-left: 25vw;
 }
-
-
-

@@ -2,7 +2,6 @@ import React from "react";
 import "./Homepage.css";
 import logo from "/assets/logo.svg";
 
-
 const Homepage = () => {
   return (
     <main>
