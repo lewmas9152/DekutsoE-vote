@@ -5,6 +5,7 @@ import AdminLogin from "./AdminLogin";
 import Dashboard from "./Dashboard";
 import NewElection from "./NewElection";
 import MainSec from "./MainSec";
+import Ballot from "./Ballot";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
 
       {/* <Dashboard/> */}
       {/* <NewElection /> */}
-      <MainSec/>
+      {/* <MainSec/> */}
+      <Ballot/>
     </>
   );
 }

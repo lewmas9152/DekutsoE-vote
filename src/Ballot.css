@@ -1,0 +1,52 @@
+.ballot {
+  display: flex;
+  /* align-self: center; */
+  /* justify-self: center; */
+  gap: 2rem;
+  justify-content: center;
+ margin-top: 10%;
+ 
+}
+
+.positions {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color:  rgb(197, 168, 4);
+    /* justify-self: center; */
+    align-self: center;
+    padding: 2rem;
+    border-radius: 1rem;
+
+}
+table {
+  counter-reset: rowNumber;
+
+
+}
+
+table tr {
+  counter-increment: rowNumber;
+ 
+}
+
+table tr td:first-child::before {
+  content: counter(rowNumber) ". ";
+}
+
+td,
+tr {
+  text-align: center;
+  
+}
+
+td {
+ 
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.addBtn {
+    text-transform:none;
+    align-self: flex-end;
+}
