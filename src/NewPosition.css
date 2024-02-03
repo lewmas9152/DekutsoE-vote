@@ -1,0 +1,43 @@
+.choices {
+    display: flex;
+    gap: 2rem;
+}
+
+.inputPos {
+    width: 20rem;
+}
+
+.candidates {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.candidateList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.candidateList>li {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 3rem;
+    background-color: aliceblue;
+    padding: 1rem;
+    border-radius: 1rem;
+
+    
+}
+
+.candidateList>li:hover {
+    text-transform: unset;
+    color: unset;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
