@@ -12,27 +12,29 @@ const NewElection = () => {
     setSelectedTimezone(selected);
   };
   return (
-    <main>
+    <main className="newMain">
       <img src={logo} alt="logo" className="logoB logoN" />
       <div className="card">
         <form action="" className="formNew">
-          < h1 className="title">Create a new election</h1>
-          <label htmlFor="title">Title</label>
+          <h1 className="title">Create a new election</h1>
+          <label htmlFor="title" className="lable">
+            Title
+          </label>
           <input type="text" id="title" required />
-          <div className="date">
-            <h3>
+          <div className="dateB">
+            <label htmlFor="startDate" className="lable">
               <img src={dateIcon} alt="calender" className="icon" />
               Start Date
-            </h3>
-            <input type="datetime-local" />
+            </label>
+            <input type="datetime-local" id="startDate"/>
           </div>
 
-          <div className="date">
-            <h3>
+          <div className="dateB">
+            <label htmlFor="endDate" className="lable">
               <img src={dateIcon} alt="calender" className="icon" />
               End Date
-            </h3>
-            <input type="datetime-local" />
+            </label>
+            <input type="datetime-local" id="endDate"/>
           </div>
 
           <TimezoneSelect

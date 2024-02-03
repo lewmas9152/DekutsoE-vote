@@ -1,0 +1,128 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.navMain {
+  flex-direction: column;
+  display: flex;
+  background-color: rgb(3, 77, 3);
+  width: 15rem;
+}
+
+.logoMain {
+  background-color: rgb(51, 150, 6);
+  width: 100%;
+  height: 50px;
+  align-self: flex-start;
+  /* margin-left: -1rem; */
+  padding-left: -2rem;
+}
+
+.navigate {
+  display: flex;
+  align-items: center;
+  margin: 0.8rem;
+  gap: 0.5rem;
+  color: whitesmoke;
+  margin-top: 1rem;
+}
+
+.navigate:hover {
+  color: gold;
+  cursor: pointer;
+}
+
+.iconNav {
+  width: 1rem;
+}
+
+
+
+.mainCard {
+  width: 100%;
+}
+
+.mainHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: rgb(39, 117, 3);
+}
+
+.page {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  color: gold;
+  font-weight: 800;
+  background-color: rgb(15, 145, 3);
+}
+
+.status {
+  background-color: rgb(197, 168, 4);
+  display: flex;
+  margin: 2rem;
+  align-items: center;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.dateMain {
+  background-color: rgb(69, 148, 5);
+  padding: 1rem 2.5rem;
+  border-radius: 1rem;
+}
+
+.dateSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.URL {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 2rem;
+  color: rgb(4, 110, 4);
+  padding: 2rem;
+  gap: 2rem;
+  border-radius: 1rem;
+  font-weight: 800;
+}
+
+.url {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 20rem;
+}
+
+
+
+.tallies {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tally {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(197, 168, 4) ;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 10rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgb(4, 78, 4);
+  gap: 0.5rem;
+  margin-top: 10%;
+}
+
+.tally img{
+  width: 3rem;
+}

@@ -4,6 +4,7 @@ import Homepage from "./Homepage";
 import AdminLogin from "./AdminLogin";
 import Dashboard from "./Dashboard";
 import NewElection from "./NewElection";
+import MainSec from "./MainSec";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       {/* <AdminLogin/> */}
 
       {/* <Dashboard/> */}
-      <NewElection />
+      {/* <NewElection /> */}
+      <MainSec/>
     </>
   );
 }
