@@ -15,10 +15,10 @@ function App() {
       {/* <Homepage/> */}
       {/* <SignUp/> */}
 
-      {/* <AdminLogin/> */}
+      <AdminLogin/>
 
       {/* <Dashboard/> */}
-      <NewElection />
+      {/* <NewElection /> */}
       {/* <MainSec/> */}
       {/* <Ballot/> */}
       {/* <NewPosition/> */}

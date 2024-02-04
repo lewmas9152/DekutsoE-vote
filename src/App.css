@@ -106,8 +106,12 @@ button:hover {
   font-style: oblique;
 }
 
+a {
+  color: rgb(9, 71, 9);
+}
 .opt {
   text-decoration: underline;
+  margin-bottom: 1rem;
 }
 
 .opt:hover {
