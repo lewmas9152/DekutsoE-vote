@@ -1,20 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "/assets/logo.svg";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
+  const [signUpStatus, setSignUpStatus] = useState("ADMIN SIGNUP");
+  const [identity, setIdentity] = useState("Admin ID");
+
+  const handleSignUpStatus = (newSignUpStatus) => {
+    setSignUpStatus(newSignUpStatus);
+
+    if (newSignUpStatus === "STUDENT SIGNUP") {
+      setIdentity("Reg.no");
+    } else {
+      setIdentity("Admin ID");
+    }
+  };
   return (
     <main>
-      <div className="header">
-        <img src={logo} alt="logo" className="logo" />
-      </div>
+      
       <img src={logo} alt="logo" className="logoB" />
 
       <fieldset>
-        <legend>SIGNUP</legend>
+        <legend>{signUpStatus}</legend>
 
         <div className="loginOpt">
-          <h3 className="opt">Admin</h3>
-          <h3 className="opt">Student</h3>
+          <a href="#">
+            {" "}
+            <h3
+              className="opt"
+              onClick={() => handleSignUpStatus("ADMIN SIGNUP")}
+            >
+              Admin
+            </h3>
+          </a>
+
+          <a href="#">
+            <h3
+              className="opt"
+              onClick={() => handleSignUpStatus("STUDENT SIGNUP")}
+            >
+              Student
+            </h3>
+          </a>
         </div>
         <form>
           <div className="inputItem">
@@ -38,14 +65,17 @@ const SignUp = () => {
           </div>
 
           <div className="inputItem">
-            <label htmlFor="ID">Reg No</label>
+            <label htmlFor="ID">{identity}</label>
             <input type="password" id="ID" required />
           </div>
           <div className="check">
             <input type="checkbox" id="check" />
             <label htmlFor="check">Remember me</label>
           </div>
-          <button type="submit">SIGN IN</button>
+          <button type="submit">
+            {" "}
+            <Link to="/signup/dashboard">SIGN IN</Link>
+          </button>
         </form>
         <p className="forgot">Forgot password?</p>
       </fieldset>

@@ -4,6 +4,8 @@ main {
   min-width: 60vw;
   min-height: 45vw;
   border-radius: 1rem;
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
   overflow: hidden;
   background-color: rgb(86, 133, 68);
 }
@@ -12,13 +14,13 @@ main {
   background-image: url(/assets/background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  min-width: 1440px;
-  min-height: 920px;
-  max-height: 920px;
+  /* min-width: 1440px; */
+  min-width: 60vw;
+  min-height: 45vw;
 }
 
 h2 {
-  color: rgb(247, 223, 9);
+  color: rgb(143, 129, 4);
   margin-bottom: -0.5rem;
 }
 
@@ -27,6 +29,13 @@ h2 {
   background-color: rgb(8, 158, 23);
   align-items: center;
   color: white;
+  align-self: center;
+  justify-self: center;
+  border-radius: 0.5rem;
+  justify-content: space-around;
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
+
 }
 
 ul {
@@ -52,12 +61,16 @@ li:hover {
 }
 
 .slogan {
+  display: flex;
+  flex-direction: column;
   max-width: 50ch;
   /* align-self: center; */
-  margin-top: 18rem;
-  margin-left: 3rem;
-  color: white;
+  margin-top: 10%;
+  margin-left: 2rem;
+  color: rgb(2, 2, 2);
   font-weight: 500;
+  gap: 1rem;
+  text-align: center;
 }
 
 .footer {
@@ -65,8 +78,8 @@ li:hover {
   align-self: center;
   color: white;
   position: absolute;
-  bottom: 3rem;
+  bottom: 4rem;
   justify-self: center;
   text-align: center;
-  margin-left: 25vw;
+  margin-left: 20vw;
 }

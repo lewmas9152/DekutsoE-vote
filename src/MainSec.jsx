@@ -8,26 +8,33 @@ import launch from "/assets/launch.svg";
 import date from "/assets/date.svg";
 import copy from "/assets/copy.svg";
 import "./MainSec.css";
+import { Link } from "react-router-dom";
 
 const MainSec = () => {
   return (
-    <main className="container">
+    <main className="container" id="main">
       <nav className="navMain">
-        <img src={logo} alt="logo" className="logo logoMain" />
-        <p className="navigate">
-          <img src={overview} alt="logo" className="iconNav" />
-          Overview
-        </p>
+        
+        <Link to="/main/overview">
+          <p className="navigate">
+            <img src={overview} alt="logo" className="iconNav" />
+            Overview
+          </p>
+        </Link>
+
         <p className="navigate">
           {" "}
           <img src={settings} alt="Settings" className="iconNav" />
           Settings
         </p>
-        <p className="navigate">
-          {" "}
-          <img src={ballot} alt="Ballot" className="iconNav" />
-          Ballot
-        </p>
+        <Link to="/main/ballot">
+          <p className="navigate">
+            {" "}
+            <img src={ballot} alt="Ballot" className="iconNav" />
+            Ballot
+          </p>
+        </Link>
+     
         <p className="navigate">
           {" "}
           <img src={voters} alt="Voters" className="iconNav" />
@@ -38,8 +45,6 @@ const MainSec = () => {
           <img src={launch} alt="Launch" className="iconNav" />
           Launch
         </p>
-
-       
       </nav>
       <div className="mainCard">
         <div className="mainHeader">
@@ -94,12 +99,14 @@ const MainSec = () => {
         <section className="tallies">
           <p className="tally">
             {" "}
-            <img src={voters} alt="Voters" className="iconNav" /><span>0</span> Voters
+            <img src={voters} alt="Voters" className="iconNav" />
+            <span>0</span> Voters
           </p>
 
           <p className="tally">
             {" "}
-            <img src={ballot} alt="Voters" className="iconNav" /><span>0</span>Ballot Quizes
+            <img src={ballot} alt="Voters" className="iconNav" />
+            <span>0</span>Ballot Quizes
           </p>
 
           <p className="tally">

@@ -1,20 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "/assets/logo.svg";
 
 const AdminLogin = () => {
+
+  const [loginStatus,setLoginStatus] = useState("ADMIN lOGIN");
+  const [identity, setIdentity] = useState ("Admin ID");
+
+ const handleLoginStatus = (newloginStatus) => {
+  setLoginStatus(newloginStatus)
+
+  if (newloginStatus === "STUDENT LOGIN"){
+    setIdentity("Reg.no");
+  }
+  else {
+    setIdentity ("Admin ID");
+  }
+ }
+  
   return (
     <main>
-      <div className="header">
-        <img src={logo} alt="logo" className="logo" />
-      </div>
+     
       <img src={logo} alt="logo" className="logoB" />
 
       <fieldset>
-        <legend>LOGIN</legend>
+        <legend>{loginStatus}</legend>
 
         <div className="loginOpt">
-          <h3 className="opt">Admin</h3>
-          <h3 className="opt">Student</h3>
+          <a href="#"> <h3 className="opt" onClick={() => handleLoginStatus("ADMIN LOGIN")}>Admin</h3></a>
+         
+          <a href="#"><h3 className="opt" onClick={() => handleLoginStatus("STUDENT LOGIN")}>Student</h3></a>
         </div>
         <form>
           <div className="inputItem">
@@ -33,7 +47,7 @@ const AdminLogin = () => {
           </div>
 
           <div className="inputItem">
-            <label htmlFor="ID">Reg No</label>
+            <label htmlFor="ID">{identity}</label>
             <input type="password" id="ID" required />
           </div>
           <div className="check">

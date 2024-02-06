@@ -6,20 +6,7 @@ const Homepage = () => {
   return (
     <main>
       <div className="homepage">
-        <nav className="nav">
-          <img src={logo} alt="logo" className="logo" />
-          <ul>
-            <li>Campaigns</li>
-            <li>News</li>
-            <li>Contacts</li>
-          </ul>
-
-          <ul className="navigator">
-            <li>login</li>
-
-            <li>Signup</li>
-          </ul>
-        </nav>
+     
 
         <section className="slogan">
           <h2>TRASPARENT ,SECURE AND CREDIBLE ONLINE BASED SCHOOL ELECTIONS</h2>

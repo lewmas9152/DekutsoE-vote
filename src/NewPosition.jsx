@@ -2,13 +2,12 @@ import React from "react";
 import logo from "/assets/logo.svg";
 import vote from "/assets/vote.png";
 import './NewPosition.css'
+import { Link } from "react-router-dom";
 
 const NewPosition = () => {
   return (
     <main>
-      <div className="header">
-        <img src={logo} alt="logo" className="logo" />
-      </div>
+    
       <img src={logo} alt="logo" className="logoB" />
 
       <fieldset>
@@ -55,7 +54,7 @@ const NewPosition = () => {
           <img src={vote} alt="vote" className="vote" />
         </div>
 
-        <button>Finish</button>
+        <button> <Link to ="/ballot">Finish</Link></button>
       </fieldset>
 
       <div className="disclaimer">

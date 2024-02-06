@@ -2,7 +2,7 @@
 
 body {
   background-color: rgb(51, 50, 50);
-  display: grid;
+  display: flex;
   justify-content: center;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -20,15 +20,6 @@ body {
 }
 .app {
   max-width: 1280px;
-}
-
-.header {
-  background-color: rgb(8, 158, 23);
-}
-
-.logHeader {
-  align-self: center;
-  color: rgb(212, 183, 17);
 }
 
 fieldset {
@@ -83,8 +74,8 @@ button:hover {
 
 .disclaimer {
   align-self: center;
-
   color: rgb(155, 155, 149);
+  margin-bottom: 1rem;
 }
 
 .support {
@@ -120,6 +111,13 @@ button:hover {
 .check {
   display: flex;
   margin-top: -1rem;
+}
+
+a {
+  text-decoration: none;
+  text-transform: none;
+  margin-bottom: 0.5rem;
+  color: rgb(3, 68, 3);
 }
 
 input[type="checkbox"] {
@@ -176,4 +174,13 @@ input[type="checkbox"] {
 
 .current {
   text-transform: uppercase;
+}
+
+.link {
+  color: blue;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
 }

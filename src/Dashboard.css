@@ -1,3 +1,7 @@
+.nav {
+  width: 100%;
+}
+
 .search {
   display: flex;
   align-self: center;

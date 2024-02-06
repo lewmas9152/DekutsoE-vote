@@ -1,6 +1,15 @@
-*,::before,::after{
-    margin: 0;
-    
-   
-    
+*,
+::before,
+::after {
+  margin: 0;
+}
+
+.routeNav {
+    justify-content: space-between;
+}
+
+.links {
+    display: flex;
+    gap: 1.5rem;
+    margin-right: 1rem;
 }

@@ -9,16 +9,20 @@ import date from "/assets/date.svg";
 import copy from "/assets/copy.svg";
 import "./MainSec.css";
 import "./Ballot.css";
+import { Link } from "react-router-dom";
 
 const Ballot = () => {
   return (
     <main className="container">
       <nav className="navMain">
-        <img src={logo} alt="logo" className="logo logoMain" />
+
+        <Link to="/main/overview">
         <p className="navigate">
           <img src={overview} alt="logo" className="iconNav" />
           Overview
         </p>
+        </Link>
+      
         <p className="navigate">
           {" "}
           <img src={settings} alt="Settings" className="iconNav" />
@@ -73,7 +77,8 @@ const Ballot = () => {
                 <td>3</td>
               </tr>
             </table>
-            <button className="addBtn">Create New</button>
+            
+            <button className="addBtn"><Link to ="/newPosition">Create New</Link></button>
           </section>
 
           <section className="positions">

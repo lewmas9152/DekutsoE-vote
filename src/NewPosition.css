@@ -24,7 +24,7 @@
     display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: 3rem;
-    background-color: aliceblue;
+    background-color: rgba(211, 214, 6, 0.856);
     padding: 1rem;
     border-radius: 1rem;
 
@@ -40,4 +40,5 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+
 }
