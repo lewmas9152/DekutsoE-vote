@@ -1,34 +1,42 @@
 import React, { useState } from "react";
 import logo from "/assets/logo.svg";
 
-const AdminLogin = () => {
+const AdminLogin = ({ userState, handleLoginStatusChange }) => {
+  const [activeOption, setActiveOption] = useState(userState.loginStatus);
 
-  const [loginStatus,setLoginStatus] = useState("ADMIN lOGIN");
-  const [identity, setIdentity] = useState ("Admin ID");
+  const handleOptionClick = (newLoginStatus) => {
+    handleLoginStatusChange(newLoginStatus);
+    setActiveOption(newLoginStatus);
+  };
 
- const handleLoginStatus = (newloginStatus) => {
-  setLoginStatus(newloginStatus)
-
-  if (newloginStatus === "STUDENT LOGIN"){
-    setIdentity("Reg.no");
-  }
-  else {
-    setIdentity ("Admin ID");
-  }
- }
-  
   return (
     <main>
-     
       <img src={logo} alt="logo" className="logoB" />
 
       <fieldset>
-        <legend>{loginStatus}</legend>
+        <legend>{userState.loginStatus}</legend>
 
         <div className="loginOpt">
-          <a href="#"> <h3 className="opt" onClick={() => handleLoginStatus("ADMIN LOGIN")}>Admin</h3></a>
-         
-          <a href="#"><h3 className="opt" onClick={() => handleLoginStatus("STUDENT LOGIN")}>Student</h3></a>
+          <a href="#">
+            {" "}
+            <h3
+              className={activeOption === "ADMIN LOGIN" ? "opt active" : "opt"}
+              onClick={() => handleOptionClick("ADMIN LOGIN")}
+            >
+              Admin
+            </h3>
+          </a>
+
+          <a href="#">
+            <h3
+              className={
+                activeOption === "STUDENT LOGIN" ? "opt active" : "opt"
+              }
+              onClick={() => handleOptionClick("STUDENT LOGIN")}
+            >
+              Student
+            </h3>
+          </a>
         </div>
         <form>
           <div className="inputItem">
@@ -47,7 +55,7 @@ const AdminLogin = () => {
           </div>
 
           <div className="inputItem">
-            <label htmlFor="ID">{identity}</label>
+            <label htmlFor="ID">{userState.identity}</label>
             <input type="password" id="ID" required />
           </div>
           <div className="check">

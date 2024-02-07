@@ -1,19 +1,13 @@
-import React, { useState } from "react";
+import React,{useState} from "react";
 import logo from "/assets/logo.svg";
 import { Link } from "react-router-dom";
 
-const SignUp = () => {
-  const [signUpStatus, setSignUpStatus] = useState("ADMIN SIGNUP");
-  const [identity, setIdentity] = useState("Admin ID");
+const SignUp = ({userState, handleSignUpStatusChange}) => {
+  const [activeOption, setActiveOption] = useState(userState.signUpStatus);
 
-  const handleSignUpStatus = (newSignUpStatus) => {
-    setSignUpStatus(newSignUpStatus);
-
-    if (newSignUpStatus === "STUDENT SIGNUP") {
-      setIdentity("Reg.no");
-    } else {
-      setIdentity("Admin ID");
-    }
+  const handleOptionClick = (newSignUpStatus) => {
+    handleSignUpStatusChange(newSignUpStatus);
+    setActiveOption(newSignUpStatus);
   };
   return (
     <main>
@@ -21,14 +15,14 @@ const SignUp = () => {
       <img src={logo} alt="logo" className="logoB" />
 
       <fieldset>
-        <legend>{signUpStatus}</legend>
+        <legend>{userState.signUpStatus}</legend>
 
         <div className="loginOpt">
           <a href="#">
             {" "}
             <h3
-              className="opt"
-              onClick={() => handleSignUpStatus("ADMIN SIGNUP")}
+              className={activeOption === "ADMIN SIGNUP" ? "opt active" : "opt"}
+              onClick={() => handleOptionClick("ADMIN SIGNUP")}
             >
               Admin
             </h3>
@@ -36,8 +30,10 @@ const SignUp = () => {
 
           <a href="#">
             <h3
-              className="opt"
-              onClick={() => handleSignUpStatus("STUDENT SIGNUP")}
+              className={
+                activeOption === "STUDENT SIGNUP" ? "opt active" : "opt"
+              }
+              onClick={() => handleOptionClick("STUDENT SIGNUP")}
             >
               Student
             </h3>
@@ -65,7 +61,7 @@ const SignUp = () => {
           </div>
 
           <div className="inputItem">
-            <label htmlFor="ID">{identity}</label>
+            <label htmlFor="ID">{userState.identity}</label>
             <input type="password" id="ID" required />
           </div>
           <div className="check">

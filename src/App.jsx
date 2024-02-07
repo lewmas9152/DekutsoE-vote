@@ -24,6 +24,31 @@ function App() {
       [event.target.name]: event.target.value,
     });
   };
+
+  const [userState, setUserState] = useState({
+    signUpStatus: "ADMIN SIGNUP",
+    identity: "Admin ID",
+    loginStatus: "ADMIN LOGIN",
+  });
+
+  const handleSignUpStatusChange = (newSignUpStatus) => {
+    const newIdentity =
+      newSignUpStatus === "ADMIN SIGNUP" ? "Admin ID" : "Reg.no";
+    setUserState({
+      signUpStatus: newSignUpStatus,
+      identity: newIdentity,
+    });
+  };
+
+  const handleLoginStatusChange = (newLoginStatus) => {
+    const newIdentity =
+      newLoginStatus === "ADMIN LOGIN" ? "Admin ID" : "Reg.no";
+    setUserState({
+      loginStatus: newLoginStatus,
+      identity: newIdentity,
+    });
+  };
+
   return (
     <>
       <nav className="nav routeNav">
@@ -73,8 +98,24 @@ function App() {
           <Route path="ballot" element={<Ballot />} />
         </Route>
         <Route path="/ballot" element={<Ballot />} />
-        <Route path="/login" element={<AdminLogin />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/login"
+          element={
+            <AdminLogin
+              userState={userState}
+              handleLoginStatusChange={handleLoginStatusChange}
+            />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <SignUp
+              userState={userState}
+              handleSignUpStatusChange={handleSignUpStatusChange}
+            />
+          }
+        />
         <Route path="/signup">
           <Route path="dashboard" element={<Dashboard />} />
         </Route>
