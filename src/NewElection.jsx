@@ -6,28 +6,30 @@ import "./NewElection.css";
 import vote from "/assets/vote.png";
 import { Link } from "react-router-dom";
 
-const NewElection = ({
-  title,
-  setTitle,
-  startDate,
-  setStartDate,
-  endDate,
-  setEndDate,
-}) => {
+const NewElection = ({ electionData, handleElectionData }) => {
   const [selectedTimezone, setSelectedTimezone] = useState("");
   const handleChange = (selected) => {
-    setSelectedTimezone(selected);
+    handleElectionData({
+      target: { name: "selectedTimezone", value: selected },
+    });
   };
+  const isValid = () => {
+    return (
+      electionData.title &&
+      electionData.startDate &&
+      electionData.endDate &&
+      electionData.selectedTimezone
+    );
+  };
+
+  console.log(electionData.selectedTimezone);
 
   return (
     <>
       <main className="newMain">
         <img src={logo} alt="logo" className="logoB logoN" />
         <div className="card">
-          <form
-            action="#"
-            className="fortitle = {title} startDate = {startDate} endDate ={endDate}mNew"
-          >
+          <form action="#" className="formNew">
             <h1 className="title">Create a new election</h1>
             <label htmlFor="title" className="lable">
               Title
@@ -35,8 +37,9 @@ const NewElection = ({
             <input
               type="text"
               id="title"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              name="title"
+              value={electionData.title}
+              onChange={handleElectionData}
               required
             />
             <div className="dateB">
@@ -47,8 +50,9 @@ const NewElection = ({
               <input
                 type="datetime-local"
                 id="startDate"
-                value={startDate}
-                onChange={(event) => setStartDate(event.target.value)}
+                name="startDate"
+                value={electionData.startDate}
+                onChange={handleElectionData}
               />
             </div>
 
@@ -60,19 +64,24 @@ const NewElection = ({
               <input
                 type="datetime-local"
                 id="endDate"
-                value={endDate}
-                onChange={(event) => setEndDate(event.target.value)}
+                name="endDate"
+                value={electionData.endDate}
+                onChange={handleElectionData}
               />
             </div>
 
             <TimezoneSelect
-              value={selectedTimezone}
+              name="timezone"
+              value={electionData.selectedTimezone}
               onChange={handleChange}
               placeholder="Select Timezone"
               showFilter
             />
-            <button className="continue"><Link to="/newElection/main">Continue</Link></button>
-            
+            <Link to="/newElection/main" disabled={!isValid()}>
+              <button className="continue" disabled={!isValid()}>
+                Continue
+              </button>
+            </Link>
           </form>
           <img src={vote} alt="VoteImg" className="vote" />
         </div>

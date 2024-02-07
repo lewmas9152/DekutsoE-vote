@@ -10,11 +10,10 @@ import copy from "/assets/copy.svg";
 import "./MainSec.css";
 import { Link } from "react-router-dom";
 
-const MainSec = () => {
+const MainSec = ({ electionData }) => {
   return (
     <main className="container" id="main">
       <nav className="navMain">
-        
         <Link to="/main/overview">
           <p className="navigate">
             <img src={overview} alt="logo" className="iconNav" />
@@ -34,7 +33,7 @@ const MainSec = () => {
             Ballot
           </p>
         </Link>
-     
+
         <p className="navigate">
           {" "}
           <img src={voters} alt="Voters" className="iconNav" />
@@ -65,15 +64,15 @@ const MainSec = () => {
                 <img src={date} alt="calender" className="icon" />
                 Start Date
               </h3>
-              <p>01/18/2024 12:00</p>
+              <p>{electionData.startDate}</p>
             </div>
 
             <div className="date dateMain">
-              <h3>
+              <h3 className="dateHeader">
                 <img src={date} alt="calender" className="icon" />
                 End Date
               </h3>
-              <p>01/18/2024 12:00</p>
+              <p>{electionData.endDate}</p>
             </div>
           </section>
           <div className="URL">

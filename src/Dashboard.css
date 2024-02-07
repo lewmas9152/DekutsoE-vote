@@ -58,6 +58,11 @@
   margin-right: 5rem;
 }
 
+.dateHeader {
+  display: flex;
+  align-items: center;
+}
+
 .elections {
   display: flex;
   flex-direction: column;

@@ -9,53 +9,66 @@ import logo from "/assets/logo.svg";
 import AdminLogin from "./AdminLogin";
 import SignUp from "./SignUp";
 import NewPosition from "./NewPosition";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, NavLink, Navigate } from "react-router-dom";
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-
-  console.log(title);
+  const [electionData, setElectionData] = useState({
+    title: "",
+    startDate: "",
+    endDate: "",
+    selectedTimezone: "",
+  });
+  const handleElectionData = (event) => {
+    setElectionData({
+      ...electionData,
+      [event.target.name]: event.target.value,
+    });
+  };
   return (
     <>
       <nav className="nav routeNav">
-        <img src={logo} alt="logo"  className="logo"/>
+        <img src={logo} alt="logo" className="logo" />
         <div className="links">
-        <Link to="/" className="link">Home</Link>
-        <Link to="/dashboard" className="link">Dashboard</Link>
-        <Link to="/newElection" className="link"> NewElection</Link>
-        <Link to="/main" className="link">Main</Link>
-        <Link to="/login" className="link">Login</Link>
-        <Link to="/Signup" className="link">Signup</Link>
+          <NavLink to="/" className="link">
+            Home
+          </NavLink>
+          <NavLink to="/dashboard" className="link">
+            Dashboard
+          </NavLink>
+          <NavLink to="/newElection" className="link">
+            {" "}
+            NewElection
+          </NavLink>
+          <NavLink to="/main" className="link">
+            Main
+          </NavLink>
+          <NavLink to="/login" className="link">
+            Login
+          </NavLink>
+          <NavLink to="/Signup" className="link">
+            Signup
+          </NavLink>
         </div>
-        
       </nav>
 
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route
           path="/dashboard"
-          element={
-            <Dashboard title={title} startDate={startDate} endDate={endDate} />
-          }
+          element={<Dashboard electionData={electionData} />}
         />
         <Route
           path="/newElection"
           element={
             <NewElection
-              title={title}
-              startDate={startDate}
-              endDate={endDate}
-              setTitle={setTitle}
-              setStartDate={setStartDate}
-              setEndDate={setEndDate}
+              electionData={electionData}
+              handleElectionData={handleElectionData}
             />
           }
         />
-      
+
         <Route path="/main">
-          <Route index element={<MainSec/>}/>
+          <Route index element={<MainSec electionData={electionData} />} />
           <Route path="overview" element={<MainSec />} />
           <Route path="ballot" element={<Ballot />} />
         </Route>
@@ -65,8 +78,12 @@ function App() {
         <Route path="/signup">
           <Route path="dashboard" element={<Dashboard />} />
         </Route>
-        <Route path="/newElection/main" element={<MainSec />} />
-        <Route path ="/newPosition" element = {<NewPosition/>}/>
+        <Route path="/newElection">
+          <Route path="main" element={<MainSec />} />
+        </Route>
+
+        <Route path="/newPosition" element={<NewPosition />} />
+        <Route path="*" element={<Homepage />} />
       </Routes>
     </>
   );

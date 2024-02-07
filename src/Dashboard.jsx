@@ -8,19 +8,19 @@ import dropDown from "/assets/dropDown.png";
 import date from "/assets/date.svg";
 import { Link } from "react-router-dom";
 
-const Dashboard = ({title, startDate, endDate}) => {
- 
+const Dashboard = ({ electionData }) => {
   return (
     <main>
-
       <section className="currentView">
         <h2 className="current">Dashboard</h2>
-        <Link to ="/newElection"> <button className="new">
+        <Link to="/newElection">
           {" "}
-          <img src={add} alt="add" className="icon" />
-          CREATE NEW
-        </button></Link>
-       
+          <button className="new">
+            {" "}
+            <img src={add} alt="add" className="icon" />
+            CREATE NEW
+          </button>
+        </Link>
       </section>
 
       <div className="search">
@@ -40,22 +40,22 @@ const Dashboard = ({title, startDate, endDate}) => {
 
       <div className="elections">
         <div className="item">
-          <h2>{title}</h2>
+          <h3>{electionData.title}</h3>
           <section className="dateSec">
             <div className="date">
-              <h3>
+              <h3 className="dateHeader">
                 <img src={date} alt="calender" className="icon" />
-                {startDate}
+                Start Date
               </h3>
-              <p>{startDate}</p>
+              <p>{electionData.startDate}</p>
             </div>
 
             <div className="date">
-              <h3>
+              <h3 className="dateHeader">
                 <img src={date} alt="calender" className="icon" />
-                {endDate}
+                End Date
               </h3>
-              <p>{endDate}</p>
+              <p>{electionData.endDate}</p>
             </div>
           </section>
         </div>
