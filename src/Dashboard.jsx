@@ -8,7 +8,7 @@ import dropDown from "/assets/dropDown.png";
 import date from "/assets/date.svg";
 import { Link } from "react-router-dom";
 
-const Dashboard = ({ electionData }) => {
+const Dashboard = ({ electionData, elections }) => {
   return (
     <main>
       <section className="currentView">
@@ -37,28 +37,29 @@ const Dashboard = ({ electionData }) => {
         />
         <img src={dropDown} alt="dropDown" className="icon filter" />
       </div>
-
       <div className="elections">
-        <div className="item">
-          <h3>{electionData.title}</h3>
-          <section className="dateSec">
-            <div className="date">
-              <h3 className="dateHeader">
-                <img src={date} alt="calender" className="icon" />
-                Start Date
-              </h3>
-              <p>{electionData.startDate}</p>
-            </div>
+        {elections.map((election) => (
+          <div key={election.id} className="item">
+            <h3>{election.title}</h3>
+            <section className="dateSec">
+              <div className="date">
+                <h3 className="dateHeader">
+                  <img src={date} alt="calender" className="icon" />
+                  Start Date
+                </h3>
+                <p>{electionData.startDate}</p>
+              </div>
 
-            <div className="date">
-              <h3 className="dateHeader">
-                <img src={date} alt="calender" className="icon" />
-                End Date
-              </h3>
-              <p>{electionData.endDate}</p>
-            </div>
-          </section>
-        </div>
+              <div className="date">
+                <h3 className="dateHeader">
+                  <img src={date} alt="calender" className="icon" />
+                  End Date
+                </h3>
+                <p>{electionData.endDate}</p>
+              </div>
+            </section>
+          </div>
+        ))}
       </div>
     </main>
   );

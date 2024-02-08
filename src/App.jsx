@@ -49,6 +49,15 @@ function App() {
     });
   };
 
+  const [elections, setElections] = useState([]);
+
+  let counter = 0;
+
+  const addElection = (newElectionData) => {
+    counter++;
+    setElections([...elections, { ...newElectionData, id: counter }]);
+  };
+
   return (
     <>
       <nav className="nav routeNav">
@@ -80,14 +89,18 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route
           path="/dashboard"
-          element={<Dashboard electionData={electionData} />}
+          element={
+            <Dashboard electionData={electionData} elections={elections} />
+          }
         />
         <Route
           path="/newElection"
           element={
             <NewElection
               electionData={electionData}
+              setElectionData={setElectionData}
               handleElectionData={handleElectionData}
+              handleAddElection={addElection}
             />
           }
         />
@@ -120,7 +133,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
         </Route>
         <Route path="/newElection">
-          <Route path="main" element={<MainSec />} />
+          <Route path="main" element={<MainSec electionData={electionData}/>} />
         </Route>
 
         <Route path="/newPosition" element={<NewPosition />} />

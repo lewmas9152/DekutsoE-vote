@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "/assets/logo.svg";
 import dateIcon from "/assets/date.svg";
 import TimezoneSelect from "react-timezone-select";
 import "./NewElection.css";
 import vote from "/assets/vote.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const NewElection = ({ electionData, handleElectionData }) => {
+const NewElection = ({
+  electionData,
+  setElectionData,
+  handleElectionData,
+  handleAddElection,
+}) => {
   const [selectedTimezone, setSelectedTimezone] = useState("");
+  const navigate = useNavigate();
+  const [dataAddedSuccessfully, setDataAddedSuccessfully] = useState(false);
   const handleChange = (selected) => {
     handleElectionData({
       target: { name: "selectedTimezone", value: selected },
@@ -22,14 +29,37 @@ const NewElection = ({ electionData, handleElectionData }) => {
     );
   };
 
-  console.log(electionData.selectedTimezone);
+ 
+   
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      if (!isValid()) {
+        alert("Fill all fields");
+        return;
+      }
+
+      await handleAddElection(electionData);
+      setDataAddedSuccessfully(true);
+      event.target.reset();
+      navigate("/newElection/main");
+    } catch (error) {
+      alert("Error adding election: " + error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (dataAddedSuccessfully) {
+      alert("Election added successfully!");
+    }
+  }, [dataAddedSuccessfully, handleAddElection]);
 
   return (
     <>
       <main className="newMain">
         <img src={logo} alt="logo" className="logoB logoN" />
         <div className="card">
-          <form action="#" className="formNew">
+          <form action="#" className="formNew" onSubmit={handleSubmit}>
             <h1 className="title">Create a new election</h1>
             <label htmlFor="title" className="lable">
               Title
@@ -77,11 +107,10 @@ const NewElection = ({ electionData, handleElectionData }) => {
               placeholder="Select Timezone"
               showFilter
             />
-            <Link to="/newElection/main" disabled={!isValid()}>
-              <button className="continue" disabled={!isValid()}>
-                Continue
-              </button>
-            </Link>
+
+            <button type="submit" className="continue" disabled={!isValid()}>
+              Continue
+            </button>
           </form>
           <img src={vote} alt="VoteImg" className="vote" />
         </div>
