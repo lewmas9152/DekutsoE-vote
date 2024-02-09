@@ -18,6 +18,21 @@ function App() {
     endDate: "",
     selectedTimezone: "",
   });
+
+  const [choiceInfo,setChoiceInfo] = useState({
+    position:"",
+    choice:"",
+    party:"",
+  })
+
+  const [choices,setChoices] = useState ([]);
+
+
+  const handleChoiceInfo =(event) =>{
+    setChoiceInfo({
+      ...choiceInfo,[event.target.name]: event.target.value,
+    })
+  }
   const handleElectionData = (event) => {
     setElectionData({
       ...electionData,
@@ -108,7 +123,7 @@ function App() {
         <Route path="/main">
           <Route index element={<MainSec electionData={electionData} />} />
           <Route path="overview" element={<MainSec />} />
-          <Route path="ballot" element={<Ballot />} />
+          <Route path="ballot" element={<Ballot  elections ={elections}/>} />
         </Route>
         <Route path="/ballot" element={<Ballot />} />
         <Route
@@ -136,7 +151,12 @@ function App() {
           <Route path="main" element={<MainSec electionData={electionData}/>} />
         </Route>
 
-        <Route path="/newPosition" element={<NewPosition />} />
+        <Route path="/newPosition" element={<NewPosition  choiceInfo={choiceInfo}
+        setChoiceInfo ={setChoiceInfo}
+        handleChoiceInfo={handleChoiceInfo}
+       choices={choices}
+       setChoices ={setChoices}
+        />} />
         <Route path="*" element={<Homepage />} />
       </Routes>
     </>
