@@ -1,44 +1,12 @@
-import React, { useState } from "react";
+import React, {  useContext } from "react";
 import logo from "/assets/logo.svg";
 import vote from "/assets/vote.png";
 import "./NewPosition.css";
 import { Link } from "react-router-dom";
+import { ChoicesContext } from "./App";
 
 const NewPosition = () => {
-  const [choiceInfo, setChoiceInfo] = useState({
-    position: "",
-    choices: "",
-    party: "",
-  });
-  const [choicesList, setChoicesList] = useState([]);
-
-  const handleChoiceInfo = (event) => {
-    setChoiceInfo({
-      ...choiceInfo,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const handleAddChoice = () => {
-    if (!choiceInfo.position || choiceInfo.choices.length === 0) {
-      alert("Please fill in all fields to add a choice.");
-      return;
-    }
-
-    const newChoice = {
-      id: choicesList.length + 1,
-      choice: choiceInfo.choices,
-      party: choiceInfo.party,
-    };
-
-    setChoicesList([...choicesList, newChoice]);
-    setChoiceInfo({
-      position: choiceInfo.position,
-      choices: "",
-      party: "",
-    });
-  };
-
+  const { choicesList, choiceInfo, position, handleChoiceInfo, handleAddChoice } = useContext(ChoicesContext);
   return (
     <main>
       <img src={logo} alt="logo" className="logoB" />
@@ -88,14 +56,14 @@ const NewPosition = () => {
             </div>
 
             <button type="button" onClick={handleAddChoice}>
-              Add
+              Add Choice
             </button>
           </div>
         </form>
 
         <div className="candidates">
           <ol className="candidateList">
-            <h3>{choiceInfo.position}</h3>
+            <h3>{position}</h3>
             {choicesList.map((choice, index) => (
               <li key={choice.id}>
                 {index + 1}. {choice.choice} <span>({choice.party})</span>

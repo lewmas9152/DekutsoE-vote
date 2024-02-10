@@ -26,6 +26,15 @@ export const UserContext = createContext({
   handleLoginStatusChange: () => {},
 });
 
+export const ChoicesContext = createContext({
+  choicesList: [],
+  choiceInfo: {},
+  position: "",
+  setPosition: () => {},
+  handleChoiceInfo: () => {},
+  handleAddChoice: () => {},
+});
+
 function App() {
   const [elections, setElections] = useState([]);
   const [electionData, setElectionData] = useState({
@@ -39,20 +48,47 @@ function App() {
     setElections([...elections, { ...newElectionData, id: Date.now() }]);
   };
 
+  const [position, setPosition] = useState("");
   const [choiceInfo, setChoiceInfo] = useState({
-    position: "",
-    choice: "",
+    choices: "",
     party: "",
   });
 
-  const [choices, setChoices] = useState([]);
+  const [choicesList, setChoicesList] = useState([]);
 
   const handleChoiceInfo = (event) => {
+    if (event.target.name === "position") {
+      setPosition(event.target.value);
+    }
     setChoiceInfo({
       ...choiceInfo,
       [event.target.name]: event.target.value,
     });
   };
+
+  const handleAddChoice = () => {
+    if (
+      position === "" ||
+      choiceInfo.choices === "" ||
+      choiceInfo.party === ""
+    ) {
+      alert("Please fill in all fields to add a choice.");
+      return;
+    }
+
+    const newChoice = {
+      id: choicesList.length + 1,
+      choice: choiceInfo.choices,
+      party: choiceInfo.party,
+    };
+
+    setChoicesList([...choicesList, newChoice]);
+    setChoiceInfo({
+      choices: "",
+      party: "",
+    });
+  };
+
   const handleElectionData = (event) => {
     setElectionData({
       ...electionData,
@@ -103,65 +139,65 @@ function App() {
             handleLoginStatusChange,
           }}
         >
-          <nav className="nav routeNav">
-            <img src={logo} alt="logo" className="logo" />
-            <div className="links">
-              <NavLink to="/" className="link">
-                Home
-              </NavLink>
-              <NavLink to="/dashboard" className="link">
-                Dashboard
-              </NavLink>
-              <NavLink to="/newElection" className="link">
-                {" "}
-                NewElection
-              </NavLink>
-              <NavLink to="/main" className="link">
-                Main
-              </NavLink>
-              <NavLink to="/login" className="link">
-                Login
-              </NavLink>
-              <NavLink to="/Signup" className="link">
-                Signup
-              </NavLink>
-            </div>
-          </nav>
+          <ChoicesContext.Provider
+            value={{
+              choicesList,
+              choiceInfo,
+              position,
+              setPosition,
+              handleChoiceInfo,
+              handleAddChoice,
+            }}
+          >
+            <nav className="nav routeNav">
+              <img src={logo} alt="logo" className="logo" />
+              <div className="links">
+                <NavLink to="/" className="link">
+                  Home
+                </NavLink>
+                <NavLink to="/dashboard" className="link">
+                  Dashboard
+                </NavLink>
+                <NavLink to="/newElection" className="link">
+                  {" "}
+                  NewElection
+                </NavLink>
+                <NavLink to="/main" className="link">
+                  Main
+                </NavLink>
+                <NavLink to="/login" className="link">
+                  Login
+                </NavLink>
+                <NavLink to="/Signup" className="link">
+                  Signup
+                </NavLink>
+              </div>
+            </nav>
 
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/newElection" element={<NewElection />} />
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/newElection" element={<NewElection />} />
 
-            <Route path="/main">
-              <Route index element={<MainSec />} />
-              <Route path="overview" element={<MainSec />} />
-              <Route path="ballot" element={<Ballot />} />
-            </Route>
-            <Route path="/ballot" element={<Ballot />} />
-            <Route path="/login" element={<AdminLogin />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signup">
-              <Route path="dashboard" element={<Dashboard />} />
-            </Route>
-            <Route path="/newElection">
-              <Route path="main" element={<MainSec />} />
-            </Route>
+              <Route path="/main">
+                <Route index element={<MainSec />} />
+                <Route path="overview" element={<MainSec />} />
+                <Route path="ballot" element={<Ballot />} />
+              </Route>
+              <Route path="/ballot" element={<Ballot />} />
+              <Route path="/login" element={<AdminLogin />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signup">
+                <Route path="dashboard" element={<Dashboard />} />
+              </Route>
+              <Route path="/newElection">
+                <Route path="main" element={<MainSec />} />
+              </Route>
 
-            <Route
-              path="/newPosition"
-              element={
-                <NewPosition
-                  choiceInfo={choiceInfo}
-                  setChoiceInfo={setChoiceInfo}
-                  handleChoiceInfo={handleChoiceInfo}
-                  choices={choices}
-                  setChoices={setChoices}
-                />
-              }
-            />
-            <Route path="*" element={<Homepage />} />
-          </Routes>
+              <Route path="/newPosition" element={<NewPosition />} />
+              <Route path="*" element={<Homepage />} />
+            </Routes>
+          </ChoicesContext.Provider>
         </UserContext.Provider>
       </ElectionContext.Provider>
     </>
