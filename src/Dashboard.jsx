@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import logo from "/assets/logo.svg";
 import person from "/assets/user.svg";
 import add from "/assets/add.svg";
@@ -7,8 +7,10 @@ import search from "/assets/search.svg";
 import dropDown from "/assets/dropDown.png";
 import date from "/assets/date.svg";
 import { Link } from "react-router-dom";
+import { ElectionContext } from "./App";
 
-const Dashboard = ({ electionData, elections }) => {
+const Dashboard = () => {
+  const { elections,electionData } = useContext(ElectionContext);
   return (
     <main>
       <section className="currentView">

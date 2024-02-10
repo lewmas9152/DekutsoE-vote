@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import logo from "/assets/logo.svg";
 import overview from "/assets/overview.svg";
 import settings from "/assets/settings.svg";
@@ -9,8 +9,10 @@ import date from "/assets/date.svg";
 import copy from "/assets/copy.svg";
 import "./MainSec.css";
 import { Link } from "react-router-dom";
+import { ElectionContext } from "./App";
 
-const MainSec = ({ electionData }) => {
+const MainSec = () => {
+  const { electionData } = useContext(ElectionContext);
   return (
     <main className="container" id="main">
       <nav className="navMain">

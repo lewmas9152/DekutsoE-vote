@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import logo from "/assets/logo.svg";
+import { UserContext  } from "./App";
 
-const AdminLogin = ({ userState, handleLoginStatusChange }) => {
+
+const AdminLogin = () => {
+  const { userState, handleLoginStatusChange } = useContext(UserContext);
   const [activeOption, setActiveOption] = useState(userState.loginStatus);
 
   const handleOptionClick = (newLoginStatus) => {

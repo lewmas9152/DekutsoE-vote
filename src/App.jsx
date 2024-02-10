@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, createContext } from "react";
 import "./App.css";
 import Homepage from "./Homepage";
 import Dashboard from "./Dashboard";
@@ -11,7 +11,23 @@ import SignUp from "./SignUp";
 import NewPosition from "./NewPosition";
 import { Routes, Route, NavLink, Navigate } from "react-router-dom";
 
+export const ElectionContext = createContext({
+  elections: [],
+  electionData: {},
+  setElectionData: () => {},
+  handleElectionData: () => {},
+  handleAddElection: () => {},
+});
+
+export const UserContext = createContext({
+  userState: {},
+  setUserState: () => {},
+  handleSignUpStatusChange: () => {},
+  handleLoginStatusChange: () => {},
+});
+
 function App() {
+  const [elections, setElections] = useState([]);
   const [electionData, setElectionData] = useState({
     title: "",
     startDate: "",
@@ -19,20 +35,24 @@ function App() {
     selectedTimezone: "",
   });
 
-  const [choiceInfo,setChoiceInfo] = useState({
-    position:"",
-    choice:"",
-    party:"",
-  })
+  const handleAddElection = (newElectionData) => {
+    setElections([...elections, { ...newElectionData, id: Date.now() }]);
+  };
 
-  const [choices,setChoices] = useState ([]);
+  const [choiceInfo, setChoiceInfo] = useState({
+    position: "",
+    choice: "",
+    party: "",
+  });
 
+  const [choices, setChoices] = useState([]);
 
-  const handleChoiceInfo =(event) =>{
+  const handleChoiceInfo = (event) => {
     setChoiceInfo({
-      ...choiceInfo,[event.target.name]: event.target.value,
-    })
-  }
+      ...choiceInfo,
+      [event.target.name]: event.target.value,
+    });
+  };
   const handleElectionData = (event) => {
     setElectionData({
       ...electionData,
@@ -64,101 +84,86 @@ function App() {
     });
   };
 
-  const [elections, setElections] = useState([]);
-
-  let counter = 0;
-
-  const addElection = (newElectionData) => {
-    counter++;
-    setElections([...elections, { ...newElectionData, id: counter }]);
-  };
-
   return (
     <>
-      <nav className="nav routeNav">
-        <img src={logo} alt="logo" className="logo" />
-        <div className="links">
-          <NavLink to="/" className="link">
-            Home
-          </NavLink>
-          <NavLink to="/dashboard" className="link">
-            Dashboard
-          </NavLink>
-          <NavLink to="/newElection" className="link">
-            {" "}
-            NewElection
-          </NavLink>
-          <NavLink to="/main" className="link">
-            Main
-          </NavLink>
-          <NavLink to="/login" className="link">
-            Login
-          </NavLink>
-          <NavLink to="/Signup" className="link">
-            Signup
-          </NavLink>
-        </div>
-      </nav>
+      <ElectionContext.Provider
+        value={{
+          elections,
+          electionData,
+          setElectionData,
+          handleElectionData,
+          handleAddElection,
+        }}
+      >
+        <UserContext.Provider
+          value={{
+            userState,
+            setUserState,
+            handleSignUpStatusChange,
+            handleLoginStatusChange,
+          }}
+        >
+          <nav className="nav routeNav">
+            <img src={logo} alt="logo" className="logo" />
+            <div className="links">
+              <NavLink to="/" className="link">
+                Home
+              </NavLink>
+              <NavLink to="/dashboard" className="link">
+                Dashboard
+              </NavLink>
+              <NavLink to="/newElection" className="link">
+                {" "}
+                NewElection
+              </NavLink>
+              <NavLink to="/main" className="link">
+                Main
+              </NavLink>
+              <NavLink to="/login" className="link">
+                Login
+              </NavLink>
+              <NavLink to="/Signup" className="link">
+                Signup
+              </NavLink>
+            </div>
+          </nav>
 
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route
-          path="/dashboard"
-          element={
-            <Dashboard electionData={electionData} elections={elections} />
-          }
-        />
-        <Route
-          path="/newElection"
-          element={
-            <NewElection
-              electionData={electionData}
-              setElectionData={setElectionData}
-              handleElectionData={handleElectionData}
-              handleAddElection={addElection}
-            />
-          }
-        />
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/newElection" element={<NewElection />} />
 
-        <Route path="/main">
-          <Route index element={<MainSec electionData={electionData} />} />
-          <Route path="overview" element={<MainSec />} />
-          <Route path="ballot" element={<Ballot  elections ={elections}/>} />
-        </Route>
-        <Route path="/ballot" element={<Ballot />} />
-        <Route
-          path="/login"
-          element={
-            <AdminLogin
-              userState={userState}
-              handleLoginStatusChange={handleLoginStatusChange}
-            />
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <SignUp
-              userState={userState}
-              handleSignUpStatusChange={handleSignUpStatusChange}
-            />
-          }
-        />
-        <Route path="/signup">
-          <Route path="dashboard" element={<Dashboard />} />
-        </Route>
-        <Route path="/newElection">
-          <Route path="main" element={<MainSec electionData={electionData}/>} />
-        </Route>
+            <Route path="/main">
+              <Route index element={<MainSec />} />
+              <Route path="overview" element={<MainSec />} />
+              <Route path="ballot" element={<Ballot />} />
+            </Route>
+            <Route path="/ballot" element={<Ballot />} />
+            <Route path="/login" element={<AdminLogin />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signup">
+              <Route path="dashboard" element={<Dashboard />} />
+            </Route>
+            <Route path="/newElection">
+              <Route path="main" element={<MainSec />} />
+            </Route>
 
-        <Route path="/newPosition" element={<NewPosition  choiceInfo={choiceInfo}
-        setChoiceInfo ={setChoiceInfo}
-        handleChoiceInfo={handleChoiceInfo}
-       choices={choices}
-       setChoices ={setChoices}
-        />} />
-        <Route path="*" element={<Homepage />} />
-      </Routes>
+            <Route
+              path="/newPosition"
+              element={
+                <NewPosition
+                  choiceInfo={choiceInfo}
+                  setChoiceInfo={setChoiceInfo}
+                  handleChoiceInfo={handleChoiceInfo}
+                  choices={choices}
+                  setChoices={setChoices}
+                />
+              }
+            />
+            <Route path="*" element={<Homepage />} />
+          </Routes>
+        </UserContext.Provider>
+      </ElectionContext.Provider>
     </>
   );
 }

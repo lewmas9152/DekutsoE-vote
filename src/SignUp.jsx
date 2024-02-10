@@ -1,8 +1,10 @@
-import React,{useState} from "react";
+import React,{useState, useContext} from "react";
 import logo from "/assets/logo.svg";
 import { Link } from "react-router-dom";
+import { UserContext  } from "./App";
 
-const SignUp = ({userState, handleSignUpStatusChange}) => {
+const SignUp = () => {
+  const { userState, handleSignUpStatusChange } = useContext(UserContext);
   const [activeOption, setActiveOption] = useState(userState.signUpStatus);
 
   const handleOptionClick = (newSignUpStatus) => {

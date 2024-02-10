@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import logo from "/assets/logo.svg";
 import dateIcon from "/assets/date.svg";
 import TimezoneSelect from "react-timezone-select";
 import "./NewElection.css";
 import vote from "/assets/vote.png";
 import { useNavigate } from "react-router-dom";
+import { ElectionContext } from "./App";
 
-const NewElection = ({
-  electionData,
-  setElectionData,
-  handleElectionData,
-  handleAddElection,
-}) => {
-  const [selectedTimezone, setSelectedTimezone] = useState("");
+const NewElection = () => {
+  const { electionData, handleElectionData, handleAddElection } =
+    useContext(ElectionContext);
+
   const navigate = useNavigate();
   const [dataAddedSuccessfully, setDataAddedSuccessfully] = useState(false);
   const handleChange = (selected) => {
@@ -29,8 +27,6 @@ const NewElection = ({
     );
   };
 
- 
-   
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
