@@ -27,15 +27,15 @@
 
 .item {
   display: flex;
-  gap: 3rem;
+  transition: background-color 0.3s ease-in-out;
   background-color: rgb(155, 132, 3);
   align-self: center;
   padding: 1rem 3rem;
   margin-top: 2rem;
-  width: 50vw;
+  gap: 4rem;
   border-radius: 1rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .item:hover {
@@ -54,7 +54,7 @@
 
 .dateSec {
   display: flex;
-  gap: 15rem;
+  gap: 4rem;
   margin-right: 5rem;
 }
 
@@ -71,4 +71,88 @@
   overflow: auto;
   height: 30vw;
   margin: 1rem;
+}
+
+.sad {
+  width: 20%;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  height: 30vw;
+  font-size: 2rem;
+  font-weight: 500;
+  width: 20ch;
+  text-align: center;
+  color: rgb(2, 71, 2);
+  font-style: italic;
+}
+
+#animation-container {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#animation-container h3 {
+  animation: scrollText 10s linear infinite;
+}
+
+@keyframes scrollText {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.delete {
+  display: none;
+  width: 0;
+  opacity: 0;
+  transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.item:hover> .delete {
+  display: unset;
+  width: 2rem;
+  opacity: 1;
+}
+
+/* .elections
+.delete:hover {
+  width: 2rem;
+
+} */
+
+.delPopUp {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 1rem;
+  color: red;
+  position: absolute;
+  /* left: 50%; */
+  background-color: rgba(222, 184, 135,0.7);
+  padding: 1rem;
+  border-radius: 1rem;
+
+}
+
+.delOptions {
+  display: flex;
+  justify-content: space-between;
+  color: brown;
+}
+
+.option {
+  font-weight: 800;
+}
+
+.option:hover {
+  text-transform: uppercase;
 }

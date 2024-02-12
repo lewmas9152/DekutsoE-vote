@@ -1,19 +1,75 @@
-import React,{useState, useContext} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import logo from "/assets/logo.svg";
 import { Link } from "react-router-dom";
-import { UserContext  } from "./App";
+import { UserContext } from "./App";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { userState, handleSignUpStatusChange } = useContext(UserContext);
   const [activeOption, setActiveOption] = useState(userState.signUpStatus);
 
+  const navigate = useNavigate();
+
   const handleOptionClick = (newSignUpStatus) => {
     handleSignUpStatusChange(newSignUpStatus);
     setActiveOption(newSignUpStatus);
   };
+
+  const [signUpUserInfo, setSignUpUserInfo] = useState({
+    email: "",
+    password: "",
+    confPassword: "",
+    id: "",
+  });
+
+  const handleUserData = (event) => {
+    setSignUpUserInfo({
+      ...signUpUserInfo,
+      [event.target.name]: event.target.value,
+    });
+
+    if (
+      event.target.name === "password" ||
+      event.target.name === "confPassword"
+    ) {
+      setErrorMessage("");
+    }
+  };
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  let isValid = true;
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (
+      !signUpUserInfo.email ||
+      !signUpUserInfo.password ||
+      !signUpUserInfo.confPassword ||
+      !signUpUserInfo.id
+    ) {
+      isValid = false;
+    } else if (signUpUserInfo.password !== signUpUserInfo.confPassword) {
+      isValid = false;
+      setErrorMessage("Passwords do not match");
+    }
+
+    if (isValid) {
+      alert("Sign up successful");
+      navigate("/dashboard");
+      event.target.reset();
+    }
+  };
+
+  useEffect(() => {
+    if (isValid) {
+      setErrorMessage("");
+    }
+  }, [isValid]);
+
   return (
     <main>
-      
       <img src={logo} alt="logo" className="logoB" />
 
       <fieldset>
@@ -41,12 +97,15 @@ const SignUp = () => {
             </h3>
           </a>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="inputItem">
             <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
+              name="email"
+              value={signUpUserInfo.email}
+              onChange={handleUserData}
               placeholder="e.g johndoe@gmail.com"
               required
             />
@@ -54,26 +113,46 @@ const SignUp = () => {
 
           <div className="inputItem">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" required />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={signUpUserInfo.password}
+              onChange={handleUserData}
+              required
+            />
           </div>
 
           <div className="inputItem">
             <label htmlFor="password">Confirm Password</label>
-            <input type="password" id="password" required />
+            <input
+              type="password"
+              id="confPassword"
+              required
+              name="confPassword"
+              value={signUpUserInfo.confPassword}
+              onChange={handleUserData}
+            />
           </div>
+
+          <div className="error">{errorMessage && <p>{errorMessage}</p>}</div>
 
           <div className="inputItem">
             <label htmlFor="ID">{userState.identity}</label>
-            <input type="password" id="ID" required />
+            <input
+              type="password"
+              id="ID"
+              name="id"
+              value={signUpUserInfo.id}
+              onChange={handleUserData}
+              required
+            />
           </div>
           <div className="check">
             <input type="checkbox" id="check" />
             <label htmlFor="check">Remember me</label>
           </div>
-          <button type="submit">
-            {" "}
-            <Link to="/signup/dashboard">SIGN IN</Link>
-          </button>
+          <button type="submit"> SIGN IN</button>
         </form>
         <p className="forgot">Forgot password?</p>
       </fieldset>

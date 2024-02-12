@@ -8,10 +8,7 @@ body {
   font-weight: 400;
   font-size: 15px;
   margin-top: 1rem;
-
 }
-
-
 
 .logo {
   width: 100px;
@@ -194,15 +191,15 @@ input[type="checkbox"] {
   border-radius: 0.5rem;
 }
 
-.link:hover{
+.link:hover {
   text-transform: uppercase;
   color: greenyellow;
 }
 
 .active {
   background-color: rgb(199, 169, 2);
-  text-transform:uppercase;
- font-style:oblique;
+  text-transform: uppercase;
+  font-style: oblique;
   color: rgb(0, 128, 0);
   font-weight: 800;
   padding: 0.5rem;
@@ -210,3 +207,8 @@ input[type="checkbox"] {
   text-decoration: none;
 }
 
+.error {
+  color: red;
+  font-style: italic;
+  margin-top: -1rem;
+}

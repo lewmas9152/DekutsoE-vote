@@ -1,16 +1,21 @@
-import React,{useContext} from "react";
-import logo from "/assets/logo.svg";
-import person from "/assets/user.svg";
+import React, { useContext, useState } from "react";
 import add from "/assets/add.svg";
 import "./Dashboard.css";
 import search from "/assets/search.svg";
 import dropDown from "/assets/dropDown.png";
 import date from "/assets/date.svg";
 import { Link } from "react-router-dom";
+import sad from "/assets/sad.gif";
+import remove from "/assets/delete.svg";
 import { ElectionContext } from "./App";
 
 const Dashboard = () => {
-  const { elections,electionData } = useContext(ElectionContext);
+  const { elections, electionData } = useContext(ElectionContext);
+  const [isDelPopUpVisible, setIsDelPopUpVisible] = useState(false);
+  const handleDeletion = (event) => {
+    setIsDelPopUpVisible(event);
+  };
+
   return (
     <main>
       <section className="currentView">
@@ -60,8 +65,39 @@ const Dashboard = () => {
                 <p>{electionData.endDate}</p>
               </div>
             </section>
+            <div className="delete">
+              <img
+                src={remove}
+                alt="delete"
+                onClick={(e) => handleDeletion(true)}
+              />
+            </div>
+            <div className="deletion">
+              {isDelPopUpVisible && (
+                <div className="delPopUp">
+                  <h4>!!!Dangerous action no recovery on delete</h4>
+                  <div className="delOptions">
+                    <p className="option">Delete Anyway</p>
+                    <p
+                      className="option"
+                      onClick={(e) => handleDeletion(false)}
+                    >
+                      Cancel
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         ))}
+        {elections.length === 0 ? (
+          <section className="empty">
+            <img src={sad} alt="voteIcon" className="sad" />
+            <div id="animation-container">
+              <h3>No elections created yet</h3>
+            </div>
+          </section>
+        ) : null}
       </div>
     </main>
   );

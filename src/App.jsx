@@ -21,7 +21,9 @@ export const ElectionContext = createContext({
 
 export const UserContext = createContext({
   userState: {},
+  userInfo: {},
   setUserState: () => {},
+  handleUserData: () => {},
   handleSignUpStatusChange: () => {},
   handleLoginStatusChange: () => {},
 });
