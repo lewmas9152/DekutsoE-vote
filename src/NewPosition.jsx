@@ -1,6 +1,7 @@
 import React, {  useContext } from "react";
 import logo from "/assets/logo.svg";
 import vote from "/assets/vote.png";
+import sad from "/assets/sad.gif";
 import "./NewPosition.css";
 import { Link } from "react-router-dom";
 import { ChoicesContext } from "./App";
@@ -69,6 +70,14 @@ const NewPosition = () => {
                 {index + 1}. {choice.choice} <span>({choice.party})</span>
               </li>
             ))}
+               {choicesList.length === 0 ? (
+          <section className="empty">
+            <img src={sad} alt="voteIcon" className="sad" />
+            <div id="animation-container">
+              <h3>No positions created yet</h3>
+            </div>
+          </section>
+        ) : null}
           </ol>
 
           <img src={vote} alt="vote" className="vote" />

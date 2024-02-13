@@ -1,0 +1,57 @@
+.table {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.votersTable {
+  max-height: 700px;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.tableHeader {
+  color: white;
+  position: sticky;
+  top: 0;
+}
+
+.th {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: rgb(125, 204, 7);
+  text-align: center;
+}
+
+.tableBtns {
+  display: flex;
+  gap: 1rem;
+  align-self: center;
+  margin: 1rem;
+}
+
+.entry {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  margin-top: auto;
+}
+
+.btn {
+  background-color: goldenrod;
+  text-transform: unset;
+}
+
+.btn:hover {
+  background-color: rgb(184, 231, 14);
+  font-size: unset;
+}
+
+.modal {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}

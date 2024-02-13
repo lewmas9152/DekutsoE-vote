@@ -42,8 +42,6 @@ const AdminLogin = () => {
 
     const isFilled = isvalid();
 
-   
-
     if (isFilled) {
       navigate("/dashboard");
       event.target.reset();

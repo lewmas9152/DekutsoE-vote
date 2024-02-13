@@ -1,49 +1,16 @@
 import React from "react";
-import logo from "/assets/logo.svg";
-import overview from "/assets/overview.svg";
-import settings from "/assets/settings.svg";
 import ballot from "/assets/ballot.svg";
 import voters from "/assets/voters.svg";
 import launch from "/assets/launch.svg";
-import date from "/assets/date.svg";
-import copy from "/assets/copy.svg";
 import "./MainSec.css";
 import "./Ballot.css";
 import { Link } from "react-router-dom";
+import MainNav from "./MainNav";
 
 const Ballot = () => {
   return (
     <main className="container">
-      <nav className="navMain">
-
-        <Link to="/main/overview">
-        <p className="navigate">
-          <img src={overview} alt="logo" className="iconNav" />
-          Overview
-        </p>
-        </Link>
-      
-        <p className="navigate">
-          {" "}
-          <img src={settings} alt="Settings" className="iconNav" />
-          Settings
-        </p>
-        <p className="navigate">
-          {" "}
-          <img src={ballot} alt="Ballot" className="iconNav" />
-          Ballot
-        </p>
-        <p className="navigate">
-          {" "}
-          <img src={voters} alt="Voters" className="iconNav" />
-          Voters
-        </p>
-        <p className="navigate">
-          {" "}
-          <img src={launch} alt="Launch" className="iconNav" />
-          Launch
-        </p>
-      </nav>
+      <MainNav />
       <div className="mainCard">
         <div className="mainHeader">
           <h2>School Executive</h2>

@@ -10,6 +10,7 @@ import AdminLogin from "./AdminLogin";
 import SignUp from "./SignUp";
 import NewPosition from "./NewPosition";
 import { Routes, Route, NavLink, Navigate } from "react-router-dom";
+import Voters from "./Voters";
 
 export const ElectionContext = createContext({
   elections: [],
@@ -157,16 +158,7 @@ function App() {
                 <NavLink to="/" className="link">
                   Home
                 </NavLink>
-                <NavLink to="/dashboard" className="link">
-                  Dashboard
-                </NavLink>
-                <NavLink to="/newElection" className="link">
-                  {" "}
-                  NewElection
-                </NavLink>
-                <NavLink to="/main" className="link">
-                  Main
-                </NavLink>
+
                 <NavLink to="/login" className="link">
                   Login
                 </NavLink>
@@ -178,6 +170,7 @@ function App() {
 
             <Routes>
               <Route path="/" element={<Homepage />} />
+              <Route path="/newPosition" element={<NewPosition />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/newElection" element={<NewElection />} />
 
@@ -185,6 +178,7 @@ function App() {
                 <Route index element={<MainSec />} />
                 <Route path="overview" element={<MainSec />} />
                 <Route path="ballot" element={<Ballot />} />
+                <Route path="voters" element={<Voters />} />
               </Route>
               <Route path="/ballot" element={<Ballot />} />
               <Route path="/login" element={<AdminLogin />} />
