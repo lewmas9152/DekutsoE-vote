@@ -1,12 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import logo from "/assets/logo.svg";
-import { Link } from "react-router-dom";
 import { UserContext } from "./App";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { userState, handleSignUpStatusChange } = useContext(UserContext);
-  const [activeOption, setActiveOption] = useState(userState.signUpStatus);
+  const [activeOption, setActiveOption] = useState("ADMIN SIGNUP");
 
   const navigate = useNavigate();
 

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
   const { userState, handleLoginStatusChange } = useContext(UserContext);
-  const [activeOption, setActiveOption] = useState(userState.loginStatus);
+  const [activeOption, setActiveOption] = useState("ADMIN LOGIN");
 
   const navigate = useNavigate();
 

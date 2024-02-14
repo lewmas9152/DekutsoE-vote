@@ -70,6 +70,7 @@ button:hover {
   background-color: green;
   font-size: larger;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .disclaimer {
@@ -110,6 +111,7 @@ a {
   color: blue;
   cursor: pointer;
   text-decoration: unset;
+  transition: all 0.2s ease-in-out; 
 }
 
 .check {
@@ -192,8 +194,10 @@ input[type="checkbox"] {
 }
 
 .link:hover {
-  text-transform: uppercase;
   color: greenyellow;
+  text-transform: uppercase;
+  font-size: 1.2em; 
+  transition: all 0.2s ease-in-out; 
 }
 
 .active {

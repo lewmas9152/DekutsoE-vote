@@ -66,7 +66,6 @@ li:hover {
   flex-direction: column;
   max-width: 50ch;
   margin-top: 10%;
-  margin-left: 2rem;
   color: rgb(2, 2, 2);
   font-weight: 500;
   gap: 1rem;
@@ -117,6 +116,7 @@ li:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-items: center;
   gap: 5px;
 }
 .contLink:hover {
@@ -125,9 +125,16 @@ li:hover {
   font-weight: 500;
 }
 
+.contLink:hover .hiddenText {
+  display: block;
+  opacity: 1;
+  transition: opacity 20s ease-in-out;
+}
+
 .hiddenText {
   display: none;
   opacity: 0;
+  transition: opacity 20s ease-in-out;
 }
 
 .logoIcon {
@@ -142,7 +149,7 @@ li:hover {
 .logoIcon:hover + .hiddenText {
   display: block;
   opacity: 1;
-  transition: opacity 2s ease-in-out;
+  transition: opacity 20s ease-in-out;
 }
 
 .footer {
@@ -154,4 +161,20 @@ li:hover {
   justify-self: center;
   text-align: center;
   margin-left: 20vw;
+}
+
+.voteGift {
+ width: 30rem;
+ height: 20rem;
+
+}
+
+.homeTop {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+
+ 
 }

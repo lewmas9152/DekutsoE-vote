@@ -5,9 +5,15 @@ import sad from "/assets/sad.gif";
 import "./NewPosition.css";
 import { Link } from "react-router-dom";
 import { ChoicesContext } from "./App";
+import { useNavigate } from "react-router-dom";
 
 const NewPosition = () => {
   const { choicesList, choiceInfo, position, handleChoiceInfo, handleAddChoice } = useContext(ChoicesContext);
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {  
+    navigate("/ballot");
+  };
   return (
     <main>
       <img src={logo} alt="logo" className="logoB" />
@@ -15,7 +21,7 @@ const NewPosition = () => {
       <fieldset>
         <legend>CREATE NEW POSITION</legend>
 
-        <form action="">
+        <form action="#">
           <div className="input">
             <label htmlFor="position">Position</label>
             <input
@@ -56,7 +62,7 @@ const NewPosition = () => {
               />
             </div>
 
-            <button type="button" onClick={handleAddChoice}>
+            <button type="submit" onClick={handleAddChoice}>
               Add Choice
             </button>
           </div>
@@ -83,8 +89,8 @@ const NewPosition = () => {
           <img src={vote} alt="vote" className="vote" />
         </div>
 
-        <button>
-          <Link to="/ballot">Finish</Link>
+        <button onClick={handleNavigation}>
+          Finish
         </button>
       </fieldset>
 

@@ -10,10 +10,17 @@ import remove from "/assets/delete.svg";
 import { ElectionContext } from "./App";
 
 const Dashboard = () => {
-  const { elections, electionData } = useContext(ElectionContext);
-  const [isDelPopUpVisible, setIsDelPopUpVisible] = useState(false);
-  const handleDeletion = (event) => {
-    setIsDelPopUpVisible(event);
+  const { elections, electionData, setElections } = useContext(ElectionContext);
+  const [electionToDelete, setElectionToDelete] = useState(null);
+
+  const handleDeletion = (electionId) => {
+    const updatedElections = elections.filter(election => election.id !== electionId);
+    setElections(updatedElections);
+    setElectionToDelete(null);
+  };
+
+  const handleCancelDeletion = () => {
+    setElectionToDelete(null);
   };
 
   return (
@@ -69,25 +76,22 @@ const Dashboard = () => {
               <img
                 src={remove}
                 alt="delete"
-                onClick={(e) => handleDeletion(true)}
+                onClick={() => setElectionToDelete(election.id)}
               />
             </div>
-            <div className="deletion">
-              {isDelPopUpVisible && (
+            {electionToDelete === election.id && (
+              <div className="deletion">
                 <div className="delPopUp">
                   <h4>!!!Dangerous action no recovery on delete</h4>
                   <div className="delOptions">
-                    <p className="option">Delete Anyway</p>
-                    <p
-                      className="option"
-                      onClick={(e) => handleDeletion(false)}
-                    >
+                    <p className="option" onClick={() => handleDeletion(election.id)}>Delete Anyway</p>
+                    <p className="option" onClick={handleCancelDeletion}>
                       Cancel
                     </p>
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         ))}
         {elections.length === 0 ? (

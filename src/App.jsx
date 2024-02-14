@@ -75,7 +75,6 @@ function App() {
       choiceInfo.choices === "" ||
       choiceInfo.party === ""
     ) {
-      alert("Please fill in all fields to add a choice.");
       return;
     }
 
@@ -128,6 +127,7 @@ function App() {
       <ElectionContext.Provider
         value={{
           elections,
+          setElections,
           electionData,
           setElectionData,
           handleElectionData,
@@ -158,6 +158,7 @@ function App() {
                 <NavLink to="/" className="link">
                   Home
                 </NavLink>
+
 
                 <NavLink to="/login" className="link">
                   Login
@@ -191,7 +192,9 @@ function App() {
               </Route>
 
               <Route path="/newPosition" element={<NewPosition />} />
-              <Route path="*" element={<Homepage />} />
+              <Route path="/Voters" element={<Voters />} />
+
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </ChoicesContext.Provider>
         </UserContext.Provider>

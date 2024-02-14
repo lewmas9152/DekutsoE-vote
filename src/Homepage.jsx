@@ -1,6 +1,6 @@
 import React from "react";
 import "./Homepage.css";
-import logo from "/assets/logo.svg";
+// import voteGift from "/assets/vote.gif";
 import facebook from "/assets/facebook.svg";
 import twitter from "/assets/twitter.svg";
 import instagram from "/assets/instagram.svg";
@@ -11,6 +11,8 @@ const Homepage = () => {
   return (
     <main>
       <div className="homepage">
+
+        <div className="homeTop">
         <section className="slogan">
           <h2>TRASPARENT ,SECURE AND CREDIBLE ONLINE BASED SCHOOL ELECTIONS</h2>
           <p>
@@ -18,6 +20,10 @@ const Homepage = () => {
             secure space for carring out school elections.
           </p>
         </section>
+
+        {/* <img src={voteGift} alt="" className="voteGift" /> */}
+        </div>
+       
 
         <section className="contacts">
           <div className="lined-text">

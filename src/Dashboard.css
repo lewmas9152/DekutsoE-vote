@@ -41,6 +41,7 @@
 .item:hover {
   cursor: pointer;
   background-color: rgb(102, 87, 3);
+  transition: all 0.3s ease-in-out;
 }
 
 .date {
@@ -117,17 +118,12 @@
   transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-.item:hover> .delete {
+.item:hover > .delete {
   display: unset;
   width: 2rem;
   opacity: 1;
+  transition: all 0.3s ease-in-out;
 }
-
-/* .elections
-.delete:hover {
-  width: 2rem;
-
-} */
 
 .delPopUp {
   display: flex;
@@ -136,11 +132,10 @@
   gap: 1rem;
   color: red;
   position: absolute;
-  /* left: 50%; */
-  background-color: rgba(222, 184, 135,0.7);
+  background-color: rgba(222, 184, 135, 0.7);
   padding: 1rem;
   border-radius: 1rem;
-
+  transition: all 0.3s ease-in-out, all 0.3s ease-in-out;
 }
 
 .delOptions {
