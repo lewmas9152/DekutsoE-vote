@@ -22,6 +22,8 @@ body {
   max-width: 1280px;
 }
 
+
+
 fieldset {
   display: flex;
   flex-direction: column;
@@ -198,6 +200,27 @@ input[type="checkbox"] {
   text-transform: uppercase;
   font-size: 1.2em; 
   transition: all 0.2s ease-in-out; 
+}
+
+.links {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.genLinks {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  justify-self: flex-start;
+  margin-left: 2rem;
+  
+}
+
+.regLinks {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-evenly;
+  justify-self: end;
 }
 
 .active {

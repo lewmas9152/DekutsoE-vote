@@ -1,5 +1,4 @@
 import { useState, createContext } from "react";
-import "./App.css";
 import Homepage from "./Homepage";
 import Dashboard from "./Dashboard";
 import NewElection from "./NewElection";
@@ -11,6 +10,7 @@ import SignUp from "./SignUp";
 import NewPosition from "./NewPosition";
 import { Routes, Route, NavLink, Navigate } from "react-router-dom";
 import Voters from "./Voters";
+import "./App.css";
 
 export const ElectionContext = createContext({
   elections: [],
@@ -155,17 +155,30 @@ function App() {
             <nav className="nav routeNav">
               <img src={logo} alt="logo" className="logo" />
               <div className="links">
-                <NavLink to="/" className="link">
-                  Home
-                </NavLink>
+                <div className="genLinks">
+                  <NavLink to="/" className="link">
+                    Home
+                  </NavLink>
 
+                  <NavLink to="/news" className="link">
+                    News
+                  </NavLink>
 
-                <NavLink to="/login" className="link">
-                  Login
-                </NavLink>
-                <NavLink to="/Signup" className="link">
-                  Signup
-                </NavLink>
+                  <NavLink to="/campaigns" className="link">
+                    Campaigns
+                  </NavLink>
+                </div>
+
+                
+
+                <div className="regLinks">
+                  <NavLink to="/login" className="link">
+                    Login
+                  </NavLink>
+                  <NavLink to="/Signup" className="link">
+                    Signup
+                  </NavLink>
+                </div>
               </div>
             </nav>
 

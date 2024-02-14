@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import add from "/assets/add.svg";
 import "./Dashboard.css";
 import search from "/assets/search.svg";
-import dropDown from "/assets/dropDown.png";
+import dropDown from "/assets/dropDown.svg";
 import date from "/assets/date.svg";
 import { Link } from "react-router-dom";
 import sad from "/assets/sad.gif";
@@ -12,6 +12,8 @@ import { ElectionContext } from "./App";
 const Dashboard = () => {
   const { elections, electionData, setElections } = useContext(ElectionContext);
   const [electionToDelete, setElectionToDelete] = useState(null);
+  const [dropDownVisible, setDropDownVisible] = useState(false);
+  const [filterOption, setFilterOption] = useState("");
 
   const handleDeletion = (electionId) => {
     const updatedElections = elections.filter(election => election.id !== electionId);
@@ -21,6 +23,15 @@ const Dashboard = () => {
 
   const handleCancelDeletion = () => {
     setElectionToDelete(null);
+  };
+
+  const handleDropDown = () => {
+    setDropDownVisible(!dropDownVisible);
+  };
+
+  const handleFilterOptionClick = (option) => {
+    setFilterOption(option);
+    setDropDownVisible(false); 
   };
 
   return (
@@ -46,10 +57,19 @@ const Dashboard = () => {
         <img src={search} alt="searchIcon" className="icon srcIcon" />
         <input
           type="text"
+          value={filterOption}
           placeholder="Filter by status..."
           className="srcInput"
         />
-        <img src={dropDown} alt="dropDown" className="icon filter" />
+        <img src={dropDown} alt="dropDown" className="icon filter"  onClick={handleDropDown} />
+        {dropDownVisible && (
+         <div className="dropDownOptions">
+         <p className="option" onClick={() => handleFilterOptionClick("Ongoing")}>Ongoing</p>
+         <p className="option" onClick={() => handleFilterOptionClick("Pending")}>Pending</p>
+         <p className="option" onClick={() => handleFilterOptionClick("Completed")}>Completed</p>
+       </div>
+       
+        )}
       </div>
       <div className="elections">
         {elections.map((election) => (

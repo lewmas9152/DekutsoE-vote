@@ -11,18 +11,16 @@
 
 .srcInput {
   width: 15vw;
+  color: rgb(29, 28, 28);
+  font-weight: 800;
 }
 
 .srcIcon,
 .filter {
-  background-color: rgb(92, 94, 92);
   margin-left: -8.3rem;
-  width: 2rem;
-  height: 1rem;
   padding: 0.7rem;
-  border-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+ 
+ 
 }
 
 .item {
@@ -151,3 +149,30 @@
 .option:hover {
   text-transform: uppercase;
 }
+
+.dropDownOptions {
+  position: absolute;
+  top: calc(19% + 4px); /* Adjust the value to leave space between the icon and options */
+  left: 65%;
+  background-color: rgba(107, 105, 3, 0.7);
+  border: 1px solid #779201;
+  border-radius: 4px;
+  padding: 5px 0;
+  box-shadow: 0px 2px 5px rgba(43, 42, 42, 0.1);
+}
+
+.dropDownOptions p {
+  padding: 8px 20px;
+  margin: 0;
+  cursor: pointer;
+  color: goldenrod;
+}
+
+.dropDownOptions p:hover {
+  background-color: #71ac05;
+  text-transform: unset;
+  font-style: italic;
+  font-weight: 800;
+  color: rgb(24, 68, 4);
+}
+
