@@ -44,13 +44,15 @@ const Ballot = () => {
                 <td>3</td>
               </tr>
             </table>
-            
-            <button className="addBtn"><Link to ="/newPosition">Create New</Link></button>
+
+            <Link to="/newPosition">
+              {" "}
+              <button className="addBtn">Create New</button>
+            </Link>
           </section>
 
           <section className="positions">
             <table>
-                
               <th>Parties</th>
               <th>No of Candidates</th>
 
@@ -69,7 +71,9 @@ const Ballot = () => {
                 <td>3</td>
               </tr>
             </table>
-            <button className="addBtn">Register New</button>
+            <Link to="/NewParty">
+              <button className="addBtn">Register New</button>
+            </Link>
           </section>
         </div>
         <section className="tallies">

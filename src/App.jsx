@@ -11,6 +11,7 @@ import NewPosition from "./NewPosition";
 import { Routes, Route, NavLink, Navigate } from "react-router-dom";
 import Voters from "./Voters";
 import "./App.css";
+import NewParty from "./NewParty";
 
 export const ElectionContext = createContext({
   elections: [],
@@ -169,8 +170,6 @@ function App() {
                   </NavLink>
                 </div>
 
-                
-
                 <div className="regLinks">
                   <NavLink to="/login" className="link">
                     Login
@@ -206,6 +205,7 @@ function App() {
 
               <Route path="/newPosition" element={<NewPosition />} />
               <Route path="/Voters" element={<Voters />} />
+              <Route path="/NewParty" element={<NewParty />} />
 
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>

@@ -34,6 +34,11 @@ fieldset {
   border-radius: 0.5rem;
   margin-top: 0.5rem;
   color: rgb(8, 49, 2);
+  
+}
+
+legend {
+  text-transform: uppercase;
 }
 
 form {
