@@ -1,0 +1,74 @@
+.testimonials {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(11, 104, 3, 0.9);
+  width: 60vw;
+  height: fit-content;
+  text-align: center;
+  margin-top: 9rem;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  align-items: center;
+  position: relative;
+  transition: transform 0.3s ease;
+  color: #02036b;
+}
+
+.testimonial:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  transition: all 0.3s ease;
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+}
+
+.testimonial {
+  padding: 20px;
+  background: #226603;
+  text-align: center;
+  margin: 20px;
+  border-radius: 10px;
+  min-width: 20rem;
+  max-height: fit-content;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: rgb(12, 12, 12);
+}
+.testimonial h3 {
+  margin: 0;
+  margin-top: 1rem;
+  padding: 0;
+  color: rgb(187, 144, 4);
+  font-style: italic;
+  font-weight: 400;
+}
+.pagination {
+  margin-bottom: 10px;
+}
+
+.pagination-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.pagination-dot.active {
+  background-color: #555;
+}
+
+.next {
+  width: 5rem;
+  cursor: pointer;
+}
+
+.nextLeft {
+  transform: rotate(180deg) translate3d(690%, 250%, 0);
+}
+
+.nextRight {
+  transform: translate3d(690%, -350%, 0);
+}

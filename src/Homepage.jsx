@@ -1,29 +1,29 @@
 import React from "react";
 import "./Homepage.css";
-// import voteGift from "/assets/vote.gif";
 import facebook from "/assets/facebook.svg";
 import twitter from "/assets/twitter.svg";
 import instagram from "/assets/instagram.svg";
 import linkedin from "/assets/linkedin.svg";
 import phone from "/assets/phone.svg";
+import Testimonials from "./Testimonials";
 
 const Homepage = () => {
   return (
     <main>
       <div className="homepage">
-
         <div className="homeTop">
-        <section className="slogan">
-          <h2>TRASPARENT ,SECURE AND CREDIBLE ONLINE BASED SCHOOL ELECTIONS</h2>
-          <p>
-            Revolutionalising the voting experience by creating a safe and more
-            secure space for carring out school elections.
-          </p>
-        </section>
-
-        {/* <img src={voteGift} alt="" className="voteGift" /> */}
+          <section className="slogan">
+            <h2>
+              TRASPARENT ,SECURE AND CREDIBLE ONLINE BASED SCHOOL ELECTIONS
+            </h2>
+            <p>
+              Revolutionalising the voting experience by creating a safe and
+              more secure space for carring out school elections.
+            </p>
+          </section>
         </div>
-       
+
+        <Testimonials />
 
         <section className="contacts">
           <div className="lined-text">
