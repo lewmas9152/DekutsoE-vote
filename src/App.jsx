@@ -12,6 +12,7 @@ import { Routes, Route, NavLink, Navigate } from "react-router-dom";
 import Voters from "./Voters";
 import "./App.css";
 import NewParty from "./NewParty";
+import Voting from "./Voting";
 
 export const ElectionContext = createContext({
   elections: [],
@@ -31,8 +32,9 @@ export const UserContext = createContext({
 });
 
 export const ChoicesContext = createContext({
+  positions: {},
   choicesList: [],
-  choiceInfo: {},
+  choiceInfo: { choices: "", party: "" },
   position: "",
   setPosition: () => {},
   handleChoiceInfo: () => {},
@@ -52,6 +54,7 @@ function App() {
     setElections([...elections, { ...newElectionData, id: Date.now() }]);
   };
 
+  const [positions, setPositions] = useState("");
   const [position, setPosition] = useState("");
   const [choiceInfo, setChoiceInfo] = useState({
     choices: "",
@@ -79,17 +82,12 @@ function App() {
       return;
     }
 
-    const newChoice = {
-      id: choicesList.length + 1,
-      choice: choiceInfo.choices,
-      party: choiceInfo.party,
-    };
-
-    setChoicesList([...choicesList, newChoice]);
-    setChoiceInfo({
-      choices: "",
-      party: "",
-    });
+    const newChoice = { choice: choiceInfo.choices, party: choiceInfo.party };
+    setPositions(prevPositions => ({
+      ...prevPositions,
+      [position]: [...(prevPositions[position] || []), newChoice]
+    }));
+    setChoiceInfo({ choices: "", party: "" });
   };
 
   const handleElectionData = (event) => {
@@ -145,6 +143,7 @@ function App() {
         >
           <ChoicesContext.Provider
             value={{
+              positions,
               choicesList,
               choiceInfo,
               position,
@@ -169,6 +168,8 @@ function App() {
                     Campaigns
                   </NavLink>
                 </div>
+
+
 
                 <div className="regLinks">
                   <NavLink to="/login" className="link">
@@ -206,12 +207,14 @@ function App() {
               <Route path="/newPosition" element={<NewPosition />} />
               <Route path="/Voters" element={<Voters />} />
               <Route path="/NewParty" element={<NewParty />} />
+              <Route path="/voting" element={<Voting />} />
 
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </ChoicesContext.Provider>
         </UserContext.Provider>
       </ElectionContext.Provider>
+      
     </>
   );
 }

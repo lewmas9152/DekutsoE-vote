@@ -8,12 +8,14 @@ import { ChoicesContext } from "./App";
 import { useNavigate } from "react-router-dom";
 
 const NewPosition = () => {
-  const { choicesList, choiceInfo, position, handleChoiceInfo, handleAddChoice } = useContext(ChoicesContext);
+  const { positions, choiceInfo, position,setPosition, handleChoiceInfo, handleAddChoice } = useContext(ChoicesContext);
   const navigate = useNavigate();
 
   const handleNavigation = () => {  
     navigate("/ballot");
   };
+
+ 
   return (
     <main>
       <img src={logo} alt="logo" className="logoB" />
@@ -28,8 +30,8 @@ const NewPosition = () => {
               type="text"
               id="position"
               name="position"
-              value={choiceInfo.position}
-              onChange={handleChoiceInfo}
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
               required
               className="inputPos"
             />
@@ -71,19 +73,19 @@ const NewPosition = () => {
         <div className="candidates">
           <ol className="candidateList">
             <h3>{position}</h3>
-            {choicesList.map((choice, index) => (
-              <li key={choice.id}>
+            {positions[position]&&positions[position].map((choice, index) => (
+              <li key={index}>
                 {index + 1}. {choice.choice} <span>({choice.party})</span>
               </li>
             ))}
-               {choicesList.length === 0 ? (
+               {!positions[position] && (
           <section className="empty">
             <img src={sad} alt="voteIcon" className="sad" />
             <div id="animation-container">
               <h3>No positions created yet</h3>
             </div>
           </section>
-        ) : null}
+        )}
           </ol>
 
           <img src={vote} alt="vote" className="vote" />

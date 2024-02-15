@@ -1,13 +1,16 @@
-import React from "react";
+import React,{useContext} from "react";
 import ballot from "/assets/ballot.svg";
 import voters from "/assets/voters.svg";
 import launch from "/assets/launch.svg";
+import sad from "/assets/sad.gif";
 import "./MainSec.css";
 import "./Ballot.css";
 import { Link } from "react-router-dom";
 import MainNav from "./MainNav";
+import { ChoicesContext } from "./App";
 
 const Ballot = () => {
+  const { positions } = useContext(ChoicesContext);
   return (
     <main className="container">
       <MainNav />
@@ -26,23 +29,31 @@ const Ballot = () => {
         <div className="ballot">
           <section className="positions">
             <table>
-              <th>Positions</th>
-              <th>No of Candidates</th>
+              <thead>
+                <tr>
+                  <th>Positions</th>
+                  <th>No of Candidates</th>
+                </tr>
+              </thead>
 
-              <tr>
-                <td>President</td>
-                <td>5</td>
-              </tr>
+              <tbody>{
+                Object.entries(positions).map(([position, choices], index) => (
+                  <tr key={index}>
+                    <td>{position}</td>
+                    <td>{choices.length}</td>
+                  </tr>
+                ))}
 
-              <tr>
-                <td>Secretary</td>
-                <td>6</td>
-              </tr>
-
-              <tr>
-                <td>Treasurer</td>
-                <td>3</td>
-              </tr>
+                {!positions && (
+                   <section className=" emptySmall">
+                   <img src={sad} alt="voteIcon" className="sad" />
+                   <div id="animation-container">
+                     <h3>No positions created yet</h3>
+                   </div>
+                 </section>
+                )}
+              
+              </tbody>
             </table>
 
             <Link to="/newPosition">
@@ -53,23 +64,52 @@ const Ballot = () => {
 
           <section className="positions">
             <table>
-              <th>Parties</th>
-              <th>No of Candidates</th>
+              <thead>
+                <tr>
+                  <th>Parties</th>
+                  <th>No of Candidates</th>
+                </tr>
+              </thead>
 
-              <tr>
-                <td>Comrades Alliance Party</td>
-                <td>5</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td>Comrades Alliance Party</td>
+                  <td>5</td>
+                </tr>
 
-              <tr>
-                <td>United Democratic Party</td>
-                <td>6</td>
-              </tr>
+                <tr>
+                  <td>United Democratic Party</td>
+                  <td>6</td>
+                </tr>
 
-              <tr>
-                <td>Utumishi Kwa Wote Party</td>
-                <td>3</td>
-              </tr>
+                <tr>
+                  <td>Utumishi Kwa Wote Party</td>
+                  <td>3</td>
+                </tr>
+
+                <tr>
+                  <td>Utumishi Kwa Wote Party</td>
+                  <td>3</td>
+                </tr>
+
+                <tr>
+                  <td>Utumishi Kwa Wote Party</td>
+                  <td>3</td>
+                </tr>
+
+                <tr>
+                  <td>Utumishi Kwa Wote Party</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Utumishi Kwa Wote Party</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Utumishi Kwa Wote Party</td>
+                  <td>3</td>
+                </tr>
+              </tbody>
             </table>
             <Link to="/NewParty">
               <button className="addBtn">Register New</button>
