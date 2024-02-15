@@ -42,6 +42,15 @@ const NewElection = () => {
         return;
       }
 
+      const start = new Date(electionData.startDate);
+
+      const currentDate = new Date();
+
+      if (start < currentDate) {
+        setErrorMessage("Start date must in the future.");
+        return;
+      }
+
       if (!isTimeDifferenceValid()) {
         setErrorMessage(
           "The difference between start and end time must be at least 2 hours."
