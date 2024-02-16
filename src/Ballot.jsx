@@ -1,16 +1,39 @@
-import React,{useContext} from "react";
+import React, { useContext, useEffect } from "react";
 import ballot from "/assets/ballot.svg";
 import voters from "/assets/voters.svg";
 import launch from "/assets/launch.svg";
 import sad from "/assets/sad.gif";
 import "./MainSec.css";
 import "./Ballot.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MainNav from "./MainNav";
 import { ChoicesContext } from "./App";
 
 const Ballot = () => {
-  const { positions } = useContext(ChoicesContext);
+  const {
+    positions,
+    selectedPosition,
+    setSelectedPosition,
+    setSelectedChoices,
+  } = useContext(ChoicesContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setSelectedPosition("");
+  }, []);
+
+  const handlePositionClick = (position, choices) => {
+    setSelectedPosition(position);
+    setSelectedChoices(choices);
+  };
+
+  useEffect(() => {
+    if (selectedPosition) {
+      navigate(`/voting/${encodeURIComponent(selectedPosition)}`);
+    }
+  }, [selectedPosition, navigate]);
+
   return (
     <main className="container">
       <MainNav />
@@ -36,23 +59,30 @@ const Ballot = () => {
                 </tr>
               </thead>
 
-              <tbody>{
-                Object.entries(positions).map(([position, choices], index) => (
-                  <tr key={index}>
+              <tbody>
+                {Object.entries(positions).map(([position, choices], index) => (
+                  <tr
+                    key={index}
+                    className="navTd"
+                    onClick={() => handlePositionClick(position, choices)}
+                  >
                     <td>{position}</td>
                     <td>{choices.length}</td>
                   </tr>
                 ))}
 
                 {!positions && (
-                   <section className=" emptySmall">
-                   <img src={sad} alt="voteIcon" className="sad" />
-                   <div id="animation-container">
-                     <h3>No positions created yet</h3>
-                   </div>
-                 </section>
+                  <tr>
+                    <td colSpan="2">
+                      <section className=" emptySmall">
+                        <img src={sad} alt="voteIcon" className="sad" />
+                        <div id="animation-container">
+                          <h3>No positions created yet</h3>
+                        </div>
+                      </section>
+                    </td>
+                  </tr>
                 )}
-              
               </tbody>
             </table>
 

@@ -36,6 +36,10 @@ export const ChoicesContext = createContext({
   choicesList: [],
   choiceInfo: { choices: "", party: "" },
   position: "",
+  selectedPosition: "",
+  selectedChoices: [],
+  setSelectedPosition: () => {},
+  setSelectedChoices: () => {},
   setPosition: () => {},
   handleChoiceInfo: () => {},
   handleAddChoice: () => {},
@@ -62,6 +66,8 @@ function App() {
   });
 
   const [choicesList, setChoicesList] = useState([]);
+  const [selectedPosition, setSelectedPosition] = useState("");
+  const [selectedChoices, setSelectedChoices] = useState([]);
 
   const handleChoiceInfo = (event) => {
     if (event.target.name === "position") {
@@ -83,9 +89,9 @@ function App() {
     }
 
     const newChoice = { choice: choiceInfo.choices, party: choiceInfo.party };
-    setPositions(prevPositions => ({
+    setPositions((prevPositions) => ({
       ...prevPositions,
-      [position]: [...(prevPositions[position] || []), newChoice]
+      [position]: [...(prevPositions[position] || []), newChoice],
     }));
     setChoiceInfo({ choices: "", party: "" });
   };
@@ -147,9 +153,13 @@ function App() {
               choicesList,
               choiceInfo,
               position,
+              selectedPosition,
+              selectedChoices,
               setPosition,
               handleChoiceInfo,
               handleAddChoice,
+              setSelectedPosition,
+              setSelectedChoices,
             }}
           >
             <nav className="nav routeNav">
@@ -168,8 +178,6 @@ function App() {
                     Campaigns
                   </NavLink>
                 </div>
-
-
 
                 <div className="regLinks">
                   <NavLink to="/login" className="link">
@@ -208,13 +216,13 @@ function App() {
               <Route path="/Voters" element={<Voters />} />
               <Route path="/NewParty" element={<NewParty />} />
               <Route path="/voting" element={<Voting />} />
+              <Route path="/voting/:position" element={<Voting />} />
 
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </ChoicesContext.Provider>
         </UserContext.Provider>
       </ElectionContext.Provider>
-      
     </>
   );
 }

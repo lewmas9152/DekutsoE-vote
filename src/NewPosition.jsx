@@ -15,7 +15,6 @@ const NewPosition = () => {
     navigate("/ballot");
   };
 
- 
   return (
     <main>
       <img src={logo} alt="logo" className="logoB" />

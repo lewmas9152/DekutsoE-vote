@@ -1,27 +1,44 @@
-import React, { useState } from 'react';
+import React, { useContext } from "react";
+import logo from "/assets/logo.svg";
+import { ChoicesContext } from "./App";
+
 
 const Voting = () => {
-
+  const {selectedPosition, selectedChoices} = useContext(ChoicesContext);
 
   return (
-   <>
-   <main className="container" id="main">
-        <div className="mainCard">
-            <div className="mainHeader">
-            <h2>School Executive</h2>
-            <h2>0 voters</h2>
-            </div>
-            <hr />
-            <p className="page">
-            <img src={overview} alt="overview" className="iconNav" />
-            Overview
-            </p>
-            <hr />
-    
-          
-        </div>
-    </main>
-   </>
+    <>
+      <main>
+        <img src={logo} alt="logo" className="logoB" />
+
+        <fieldset>
+          <legend>{selectedPosition}</legend>
+          <form action="#">
+            <table>
+              <thead>
+                <tr>
+                  <th>Candidate</th>
+                  <th>Party</th>
+                  <th>Vote</th>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedChoices.map((choice, index) => (
+                  <tr key={index}>
+                    <td>{choice.choice}</td>
+                    <td>{choice.party}</td>
+                    <td>
+                      <input type="radio" name="vote" value={choice.party} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <button>Submit</button>
+          </form>
+        </fieldset>
+      </main>
+    </>
   );
 };
 
