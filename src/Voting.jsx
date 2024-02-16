@@ -1,10 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import logo from "/assets/logo.svg";
 import { ChoicesContext } from "./App";
-
+import "./Voting.css";
 
 const Voting = () => {
-  const {selectedPosition, selectedChoices} = useContext(ChoicesContext);
+  const { selectedPosition, selectedChoices } = useContext(ChoicesContext);
+  const [selectedChoice, setSelectedChoice] = useState("");
+
+  const handleRadioChange = (event) => {
+    setSelectedChoice(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Selected choice:", selectedChoice);
+  };
 
   return (
     <>
@@ -13,7 +23,9 @@ const Voting = () => {
 
         <fieldset>
           <legend>{selectedPosition}</legend>
-          <form action="#">
+          <form onSubmit={handleSubmit}>
+            {" "}
+            {/* Added onSubmit event handler */}
             <table>
               <thead>
                 <tr>
@@ -25,16 +37,25 @@ const Voting = () => {
               <tbody>
                 {selectedChoices.map((choice, index) => (
                   <tr key={index}>
-                    <td>{choice.choice}</td>
+                    <td>
+                      <label htmlFor={index}>{choice.choice}</label>
+                    </td>
                     <td>{choice.party}</td>
                     <td>
-                      <input type="radio" name="vote" value={choice.party} />
+                      <input
+                        type="radio"
+                        name="vote"
+                        value={choice.choice}
+                        id={index}
+                        checked={selectedChoice === choice.choice}
+                        onChange={handleRadioChange}
+                      />
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <button>Submit</button>
+            <button type="submit">Submit</button>{" "}
           </form>
         </fieldset>
       </main>

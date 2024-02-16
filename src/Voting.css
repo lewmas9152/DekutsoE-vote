@@ -1,0 +1,8 @@
+.votingTable tr {
+  display: flex;
+  border: none;
+  text-align: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
