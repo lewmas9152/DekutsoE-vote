@@ -5,7 +5,12 @@ import { useNavigate } from "react-router-dom";
 import Disclaimer from "./Disclaimer";
 
 const Login = () => {
-  const { userState, handleLoginStatusChange } = useContext(UserContext);
+  const {
+    userState,
+    currentUserEmail,
+    setCurrentuserEmail,
+    handleLoginStatusChange,
+  } = useContext(UserContext);
   const [activeOption, setActiveOption] = useState("ADMIN LOGIN");
 
   const navigate = useNavigate();
@@ -43,9 +48,35 @@ const Login = () => {
 
     const isFilled = isvalid();
 
+
     if (isFilled) {
-      navigate("/dashboard");
-      event.target.reset();
+      let url = `https://dekutso-evote-backend.onrender.com/${
+        userState.loginStatus === "ADMIN LOGIN" ? "admin/login" : "login"
+      }`;
+
+      let data = {
+        identity: loginUserInfo.email,
+        password: loginUserInfo.password,
+      };
+
+      fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+        },
+        method: "post",
+        body: JSON.stringify(data),
+      }).then(async (res) => {
+        if (res.status !== 201) {
+          alert("There was an error. Please try again.");
+          return;
+        }
+        alert("Sign up successful");
+        let data = await res.json();
+        localStorage.setItem("token", data.token);
+        setCurrentuserEmail(loginUserInfo.email);
+        navigate("/dashboard");
+        event.target.reset();
+      });
     } else {
       alert("Please fill in all the required Details");
     }

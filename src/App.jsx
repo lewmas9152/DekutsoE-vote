@@ -5,6 +5,7 @@ import NewElection from "./NewElection";
 import MainSec from "./MainSec";
 import Ballot from "./Ballot";
 import logo from "/assets/logo.svg";
+import user from "/assets/user.svg";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import NewPosition from "./NewPosition";
@@ -25,6 +26,8 @@ export const ElectionContext = createContext({
 export const UserContext = createContext({
   userState: {},
   userInfo: {},
+  currentUserEmail: "",
+  setCurrentuserEmail: () => {},
   setUserState: () => {},
   handleUserData: () => {},
   handleSignUpStatusChange: () => {},
@@ -127,6 +130,9 @@ function App() {
     });
   };
 
+  const [currentUserEmail, setCurrentuserEmail] = useState("");
+  console.log(currentUserEmail);
+
   return (
     <>
       <ElectionContext.Provider
@@ -142,6 +148,8 @@ function App() {
         <UserContext.Provider
           value={{
             userState,
+            currentUserEmail,
+            setCurrentuserEmail,
             setUserState,
             handleSignUpStatusChange,
             handleLoginStatusChange,
@@ -179,17 +187,25 @@ function App() {
                   </NavLink>
                 </div>
 
-            
-
-
-                <div className="regLinks">
-                  <NavLink to="/login" className="link">
-                    Login
-                  </NavLink>
-                  <NavLink to="/Signup" className="link">
-                    Signup
-                  </NavLink>
-                </div>
+                {currentUserEmail ? (
+                 
+                    <NavLink  key="profile" >
+                      <div className="user">
+                        <img src={user} alt="user" className="icon" />
+                        <p>{currentUserEmail}</p>
+                      </div>
+                    </NavLink>
+                 
+                ) : (
+                  <div className="regLinks">
+                    <NavLink to="/login" className="link">
+                      Login
+                    </NavLink>
+                    <NavLink to="/Signup" className="link">
+                      Signup
+                    </NavLink>
+                  </div>
+                )}
               </div>
             </nav>
 

@@ -5,7 +5,12 @@ import { useNavigate } from "react-router-dom";
 import Disclaimer from "./Disclaimer";
 
 const SignUp = () => {
-  const { userState, handleSignUpStatusChange } = useContext(UserContext);
+  const {
+    userState,
+    currentUserEmail,
+    setCurrentuserEmail,
+    handleSignUpStatusChange,
+  } = useContext(UserContext);
   const [activeOption, setActiveOption] = useState("ADMIN SIGNUP");
 
   const navigate = useNavigate();
@@ -56,9 +61,32 @@ const SignUp = () => {
     }
 
     if (isValid) {
-      alert("Sign up successful");
-      navigate("/dashboard");
-      event.target.reset();
+      let url = `https://dekutso-evote-backend.onrender.com/${userState.signUpStatus === "ADMIN SIGNUP" ? "admin/signup" : "signup"}`;
+
+      let data = {
+        email : signUpUserInfo.email,
+        password : signUpUserInfo.password,
+        ...(userState.signUpStatus === "ADMIN SIGNUP" ? {adminId : signUpUserInfo.id} : {regNo : signUpUserInfo.id})
+      }
+      
+      fetch(url , {
+        headers : {
+          "Content-type" : "application/json",
+        },
+        method : "post",
+        body : JSON.stringify(data)
+      }).then(async (res)=>{
+        if(res.status !== 201){
+          alert("There was an error. Please try again.");
+          return;
+        }
+        alert("Sign up successful");
+        let data = await res.json();
+        localStorage.setItem("token" , data.token);
+        setCurrentuserEmail(signUpUserInfo.email);
+        navigate("/dashboard");
+        event.target.reset();
+      })
     }
   };
 
