@@ -8,14 +8,15 @@ import { Link } from "react-router-dom";
 import sad from "/assets/sad.gif";
 import remove from "/assets/delete.svg";
 import { ElectionContext } from "./App";
+import { UserContext } from "./App";
 
 const Dashboard = () => {
   const { elections, electionData, setElections } = useContext(ElectionContext);
+  const { userState } = useContext(UserContext);
   const [electionToDelete, setElectionToDelete] = useState(null);
   const [dropDownVisible, setDropDownVisible] = useState(false);
   const [filterOption, setFilterOption] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  
 
   const handleDeletion = (electionId) => {
     const updatedElections = elections.filter(
@@ -50,13 +51,13 @@ const Dashboard = () => {
     } else if (filterOption === "Completed") {
       return currentDate > endDate;
     } else {
-      return true; 
+      return true;
     }
   });
 
   const filteredElectionsByTitle = filteredElections.filter((election) =>
-  election.title.toLowerCase().includes(searchQuery.toLowerCase())
-);
+    election.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const noFilteredElectionsMessage = (
     <section className="empty">
@@ -77,14 +78,17 @@ const Dashboard = () => {
     <main>
       <section className="currentView">
         <h2 className="current">Dashboard</h2>
-        <Link to="/newElection">
-          {" "}
-          <button className="new">
+        {userState.loginStatus === "ADMIN LOGIN" ||
+        userState.signUpStatus === "ADMIN SIGNUP" ? (
+          <Link to="/newElection">
             {" "}
-            <img src={add} alt="add" className="icon" />
-            CREATE NEW
-          </button>
-        </Link>
+            <button className="new">
+              {" "}
+              <img src={add} alt="add" className="icon" />
+              CREATE NEW
+            </button>
+          </Link>
+        ) : null}
       </section>
 
       <div className="search">
@@ -162,13 +166,17 @@ const Dashboard = () => {
                   <p>{electionData.endDate}</p>
                 </div>
               </section>
-              <div className="delete">
-                <img
-                  src={remove}
-                  alt="delete"
-                  onClick={() => setElectionToDelete(election.id)}
-                />
-              </div>
+
+              {userState.loginStatus === "ADMIN LOGIN" ||
+              userState.signUpStatus === "ADMIN SIGNUP" ? (
+                <div className="delete">
+                  <img
+                    src={remove}
+                    alt="delete"
+                    onClick={() => setElectionToDelete(election.id)}
+                  />
+                </div>
+              ) : null}
               {electionToDelete === election.id && (
                 <div className="deletion">
                   <div className="delPopUp">

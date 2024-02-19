@@ -4,7 +4,7 @@ import { UserContext } from "./App";
 import { useNavigate } from "react-router-dom";
 import Disclaimer from "./Disclaimer";
 
-const AdminLogin = () => {
+const Login = () => {
   const { userState, handleLoginStatusChange } = useContext(UserContext);
   const [activeOption, setActiveOption] = useState("ADMIN LOGIN");
 
@@ -134,4 +134,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin;
+export default Login;

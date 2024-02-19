@@ -7,7 +7,7 @@ import "./MainSec.css";
 import "./Ballot.css";
 import { Link, useNavigate } from "react-router-dom";
 import MainNav from "./MainNav";
-import { ChoicesContext } from "./App";
+import { ChoicesContext, UserContext } from "./App";
 
 const Ballot = () => {
   const {
@@ -16,6 +16,8 @@ const Ballot = () => {
     setSelectedPosition,
     setSelectedChoices,
   } = useContext(ChoicesContext);
+
+  const { userState } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -85,11 +87,13 @@ const Ballot = () => {
                 )}
               </tbody>
             </table>
-
-            <Link to="/newPosition">
-              {" "}
-              <button className="addBtn">Create New</button>
-            </Link>
+            {userState.signUpStatus === "ADMIN SIGNUP" ||
+            userState.loginStatus === "ADMIN LOGIN" ? (
+              <Link to="/newPosition">
+                {" "}
+                <button className="addBtn">Create New</button>
+              </Link>
+            ) : null}
           </section>
 
           <section className="positions">
@@ -141,9 +145,13 @@ const Ballot = () => {
                 </tr>
               </tbody>
             </table>
-            <Link to="/NewParty">
-              <button className="addBtn">Register New</button>
-            </Link>
+
+            {userState.signUpStatus === "ADMIN SIGNUP" ||
+            userState.loginStatus === "ADMIN LOGIN" ? (
+              <Link to="/NewParty">
+                <button className="addBtn">Register New</button>
+              </Link>
+            ) : null}
           </section>
         </div>
         <section className="tallies">

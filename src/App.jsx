@@ -5,7 +5,7 @@ import NewElection from "./NewElection";
 import MainSec from "./MainSec";
 import Ballot from "./Ballot";
 import logo from "/assets/logo.svg";
-import AdminLogin from "./AdminLogin";
+import Login from "./Login";
 import SignUp from "./SignUp";
 import NewPosition from "./NewPosition";
 import { Routes, Route, NavLink, Navigate } from "react-router-dom";
@@ -179,6 +179,9 @@ function App() {
                   </NavLink>
                 </div>
 
+            
+
+
                 <div className="regLinks">
                   <NavLink to="/login" className="link">
                     Login
@@ -203,7 +206,7 @@ function App() {
                 <Route path="voters" element={<Voters />} />
               </Route>
               <Route path="/ballot" element={<Ballot />} />
-              <Route path="/login" element={<AdminLogin />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/signup">
                 <Route path="dashboard" element={<Dashboard />} />
