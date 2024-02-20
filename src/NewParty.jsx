@@ -1,24 +1,36 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import logo from "/assets/logo.svg";
 import "./NewParty.css";
 import Disclaimer from "./Disclaimer";
+import { ChoicesContext } from "./App";
 
 const NewParty = () => {
+  const {parties,setParties} = useContext(ChoicesContext)
   const [partyInfo, setPartyInfo] = useState({
     partyName: "",
     partyLogo: "",
     partySlogan: "",
-    partyManifesto: "",
   });
 
   const handlePartyData = (event) => {
+
     setPartyInfo({
       ...partyInfo,
       [event.target.name]: event.target.value,
     });
   };
 
-  console.log(partyInfo);
+  const handlePartyAdd = (e) => {
+    e.preventDefault();
+    setParties([...parties, partyInfo]);
+
+    setPartyInfo({
+      partyName: "",
+      partyLogo: "",
+      partySlogan: "",
+    });
+  };
+
   return (
     <>
       <main>
@@ -27,7 +39,7 @@ const NewParty = () => {
           <legend>Create New Party</legend>
           <div className="cardParty">
             <hr />
-            <form className="form">
+            <form className="form" onSubmit={handlePartyAdd}>
               <div className="formGroup">
                 <label htmlFor="partyName">Party Name</label>
                 <input
@@ -37,6 +49,7 @@ const NewParty = () => {
                   name="partyName"
                   value={partyInfo.partyName}
                   onChange={handlePartyData}
+                  required
                 />
               </div>
               <div className="formGroup">
@@ -48,6 +61,7 @@ const NewParty = () => {
                   name="partyLogo"
                   value={partyInfo.partyLogo}
                   onChange={handlePartyData}
+                  required
                 />
               </div>
               <div className="formGroup">
@@ -59,23 +73,35 @@ const NewParty = () => {
                   name="partySlogan"
                   value={partyInfo.partySlogan}
                   onChange={handlePartyData}
+                  required
                 />
               </div>
-              <div className="formGroup">
-                <label htmlFor="partyManifesto">Party Manifesto</label>
-                <textarea
-                  id="partyManifesto"
-                  className="input"
-                  cols={30}
-                  rows={10}
-                  name="partyManifesto"
-                  value={partyInfo.partyManifesto}
-                  onChange={handlePartyData}
-                />
-              </div>
-              <button className="addBtn">Create</button>
+              <button type="submit" className="addBtn positionBtn">
+                Create
+              </button>
             </form>
+            <div className="parties">
+              <table className="partyList">
+                <thead>
+                  <tr>
+                    <th>Party</th>
+                    <th>Slogan</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {parties.map((party, index) => (
+                    <tr key={index}>
+                      <td>{party.partyName}</td>
+                      <td className="partySlogan">{party.partySlogan} </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
+
+          <button>Finish</button>
         </fieldset>
 
         <Disclaimer />

@@ -3,6 +3,7 @@ import logo from "/assets/logo.svg";
 import { UserContext } from "./App";
 import { useNavigate } from "react-router-dom";
 import Disclaimer from "./Disclaimer";
+import { ElectionContext } from "./App";
 
 const SignUp = () => {
   const {
@@ -11,6 +12,8 @@ const SignUp = () => {
     setCurrentuserEmail,
     handleSignUpStatusChange,
   } = useContext(UserContext);
+
+  const { getElectionsFromDatabase } = useContext(ElectionContext);
   const [activeOption, setActiveOption] = useState("ADMIN SIGNUP");
 
   const navigate = useNavigate();
@@ -61,32 +64,37 @@ const SignUp = () => {
     }
 
     if (isValid) {
-      let url = `https://dekutso-evote-backend.onrender.com/${userState.signUpStatus === "ADMIN SIGNUP" ? "admin/signup" : "signup"}`;
+      let url = `https://dekutso-evote-backend.onrender.com/${
+        userState.signUpStatus === "ADMIN SIGNUP" ? "admin/signup" : "signup"
+      }`;
 
       let data = {
-        email : signUpUserInfo.email,
-        password : signUpUserInfo.password,
-        ...(userState.signUpStatus === "ADMIN SIGNUP" ? {adminId : signUpUserInfo.id} : {regNo : signUpUserInfo.id})
-      }
-      
-      fetch(url , {
-        headers : {
-          "Content-type" : "application/json",
+        email: signUpUserInfo.email,
+        password: signUpUserInfo.password,
+        ...(userState.signUpStatus === "ADMIN SIGNUP"
+          ? { adminId: signUpUserInfo.id }
+          : { regNo: signUpUserInfo.id }),
+      };
+
+      fetch(url, {
+        headers: {
+          "Content-type": "application/json",
         },
-        method : "post",
-        body : JSON.stringify(data)
-      }).then(async (res)=>{
-        if(res.status !== 201){
+        method: "post",
+        body: JSON.stringify(data),
+      }).then(async (res) => {
+        if (res.status !== 201) {
           alert("There was an error. Please try again.");
           return;
         }
         alert("Sign up successful");
         let data = await res.json();
-        localStorage.setItem("token" , data.token);
+        localStorage.setItem("token", data.token);
         setCurrentuserEmail(signUpUserInfo.email);
         navigate("/dashboard");
         event.target.reset();
-      })
+        getElectionsFromDatabase();
+      });
     }
   };
 

@@ -3,6 +3,7 @@ import logo from "/assets/logo.svg";
 import { UserContext } from "./App";
 import { useNavigate } from "react-router-dom";
 import Disclaimer from "./Disclaimer";
+import { ElectionContext } from "./App";
 
 const Login = () => {
   const {
@@ -11,6 +12,8 @@ const Login = () => {
     setCurrentuserEmail,
     handleLoginStatusChange,
   } = useContext(UserContext);
+
+  const { getElectionsFromDatabase } = useContext(ElectionContext);
   const [activeOption, setActiveOption] = useState("ADMIN LOGIN");
 
   const navigate = useNavigate();
@@ -76,6 +79,7 @@ const Login = () => {
         setCurrentuserEmail(loginUserInfo.email);
         navigate("/dashboard");
         event.target.reset();
+        getElectionsFromDatabase();
       });
     } else {
       alert("Please fill in all the required Details");

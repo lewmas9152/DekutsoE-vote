@@ -18,6 +18,9 @@ const Dashboard = () => {
   const [filterOption, setFilterOption] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
+
+
+
   const handleDeletion = (electionId) => {
     const updatedElections = elections.filter(
       (election) => election.id !== electionId

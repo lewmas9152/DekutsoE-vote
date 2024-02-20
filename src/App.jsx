@@ -8,12 +8,13 @@ import logo from "/assets/logo.svg";
 import user from "/assets/user.svg";
 import Login from "./Login";
 import SignUp from "./SignUp";
-import NewPosition from "./NewPosition";
+import CreateCandidate from "./CreateCandidate";
 import { Routes, Route, NavLink, Navigate } from "react-router-dom";
 import Voters from "./Voters";
 import "./App.css";
 import NewParty from "./NewParty";
 import Voting from "./Voting";
+import NewPosition from "./NewPosition";
 
 export const ElectionContext = createContext({
   elections: [],
@@ -21,6 +22,7 @@ export const ElectionContext = createContext({
   setElectionData: () => {},
   handleElectionData: () => {},
   handleAddElection: () => {},
+  getElectionsFromDatabase: () => {},
 });
 
 export const UserContext = createContext({
@@ -35,12 +37,14 @@ export const UserContext = createContext({
 });
 
 export const ChoicesContext = createContext({
-  positions: {},
+  positions:[],
+  position: "",
+  parties:[],
   choicesList: [],
   choiceInfo: { choices: "", party: "" },
-  position: "",
   selectedPosition: "",
   selectedChoices: [],
+  setParties:() => {},
   setSelectedPosition: () => {},
   setSelectedChoices: () => {},
   setPosition: () => {},
@@ -61,8 +65,10 @@ function App() {
     setElections([...elections, { ...newElectionData, id: Date.now() }]);
   };
 
-  const [positions, setPositions] = useState("");
+  // const [positions, setPositions] = useState("");
+  const [parties, setParties] = useState([]);
   const [position, setPosition] = useState("");
+  const [positions, setPositions] = useState([]);
   const [choiceInfo, setChoiceInfo] = useState({
     choices: "",
     party: "",
@@ -133,6 +139,36 @@ function App() {
   const [currentUserEmail, setCurrentuserEmail] = useState("");
   console.log(currentUserEmail);
 
+  const getElectionsFromDatabase = async () => {
+    try {
+      const response = await fetch(
+        "https://dekutso-evote-backend.onrender.com/api/elections",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token"),
+          }
+        }
+      );
+      const data = await response.json();
+      const loadedElections = [];
+
+      for (const key in data) {
+        loadedElections.push({
+          id: key,
+          title: data[key].title,
+          startDate: data[key].startDate,
+          endDate: data[key].endDate,
+        });
+      }
+
+      setElections(loadedElections);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+console.log(positions)
   return (
     <>
       <ElectionContext.Provider
@@ -143,6 +179,7 @@ function App() {
           setElectionData,
           handleElectionData,
           handleAddElection,
+          getElectionsFromDatabase,
         }}
       >
         <UserContext.Provider
@@ -158,12 +195,13 @@ function App() {
           <ChoicesContext.Provider
             value={{
               positions,
+              parties,
               choicesList,
               choiceInfo,
-              position,
               selectedPosition,
               selectedChoices,
-              setPosition,
+              setParties,
+              setPositions,
               handleChoiceInfo,
               handleAddChoice,
               setSelectedPosition,
@@ -186,6 +224,8 @@ function App() {
                     Campaigns
                   </NavLink>
                 </div>
+
+                
 
                 {currentUserEmail ? (
                  
@@ -211,9 +251,11 @@ function App() {
 
             <Routes>
               <Route path="/" element={<Homepage />} />
-              <Route path="/newPosition" element={<NewPosition />} />
+              <Route path="/CreateCandidate" element={<CreateCandidate />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/newElection" element={<NewElection />} />
+              <Route path="/NewPosition" element={<NewPosition />} />
+
 
               <Route path="/main">
                 <Route index element={<MainSec />} />
@@ -231,7 +273,7 @@ function App() {
                 <Route path="main" element={<MainSec />} />
               </Route>
 
-              <Route path="/newPosition" element={<NewPosition />} />
+              <Route path="/CreateCandidate" element={<CreateCandidate />} />
               <Route path="/Voters" element={<Voters />} />
               <Route path="/NewParty" element={<NewParty />} />
               <Route path="/voting" element={<Voting />} />
