@@ -9,6 +9,7 @@ import sad from "/assets/sad.gif";
 import remove from "/assets/delete.svg";
 import { ElectionContext } from "./App";
 import { UserContext } from "./App";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { elections, electionData, setElections } = useContext(ElectionContext);
@@ -17,9 +18,7 @@ const Dashboard = () => {
   const [dropDownVisible, setDropDownVisible] = useState(false);
   const [filterOption, setFilterOption] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-
-
-
+  const navigate = useNavigate();
 
   const handleDeletion = (electionId) => {
     const updatedElections = elections.filter(
@@ -76,6 +75,15 @@ const Dashboard = () => {
   };
 
   const reversedFilteredElections = filteredElectionsByTitle.reverse();
+
+  const navigateElection = (event) => {
+    const electionElement = event.target.closest(".item");
+
+    if (electionElement) {
+      const electionId = electionElement.id;
+      navigate(`/main/${electionId}`);
+    }
+  };
 
   return (
     <main>
@@ -138,7 +146,7 @@ const Dashboard = () => {
           </div>
         )}
       </div>
-      <div className="elections">
+      <div className="elections" onClick={navigateElection}>
         {elections.length === 0 ? (
           <section className="empty">
             <img src={sad} alt="voteIcon" className="sad" />
@@ -176,7 +184,10 @@ const Dashboard = () => {
                   <img
                     src={remove}
                     alt="delete"
-                    onClick={() => setElectionToDelete(election.id)}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setElectionToDelete(election.id);
+                    }}
                   />
                 </div>
               ) : null}
@@ -187,11 +198,20 @@ const Dashboard = () => {
                     <div className="delOptions">
                       <p
                         className="option"
-                        onClick={() => handleDeletion(election.id)}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleDeletion(election.id);
+                        }}
                       >
                         Delete Anyway
                       </p>
-                      <p className="option" onClick={handleCancelDeletion}>
+                      <p
+                        className="option"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleCancelDeletion();
+                        }}
+                      >
                         Cancel
                       </p>
                     </div>

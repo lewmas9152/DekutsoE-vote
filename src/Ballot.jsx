@@ -38,7 +38,6 @@ const Ballot = () => {
     }
   }, [selectedPosition, navigate]);
 
-  console.log(positions);
 
   return (
     <main className="container">
