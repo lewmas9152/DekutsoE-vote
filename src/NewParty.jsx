@@ -3,6 +3,7 @@ import logo from "/assets/logo.svg";
 import "./NewParty.css";
 import Disclaimer from "./Disclaimer";
 import { ChoicesContext } from "./App";
+import { useNavigate } from "react-router-dom";
 
 const NewParty = () => {
   const {parties,setParties} = useContext(ChoicesContext)
@@ -11,6 +12,8 @@ const NewParty = () => {
     partyLogo: "",
     partySlogan: "",
   });
+
+  const navigate = useNavigate();
 
   const handlePartyData = (event) => {
 
@@ -22,6 +25,12 @@ const NewParty = () => {
 
   const handlePartyAdd = (e) => {
     e.preventDefault();
+    const partyExists = parties.some(party => party.partyName === partyInfo.partyName);
+
+    if (partyExists) {
+      alert("Party already exists");
+      return;
+    }
     setParties([...parties, partyInfo]);
 
     setPartyInfo({
@@ -30,6 +39,10 @@ const NewParty = () => {
       partySlogan: "",
     });
   };
+
+  const handleNavigation =() => {
+    navigate("/Ballot")
+  }
 
   return (
     <>
@@ -101,7 +114,7 @@ const NewParty = () => {
             </div>
           </div>
 
-          <button>Finish</button>
+          <button onClick={handleNavigation}>Finish</button>
         </fieldset>
 
         <Disclaimer />

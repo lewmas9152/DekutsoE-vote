@@ -2,13 +2,13 @@ import React, { useState, useContext } from "react";
 import logo from "/assets/logo.svg";
 import Disclaimer from "./Disclaimer";
 import { ChoicesContext } from "./App";
+import { useNavigate } from "react-router-dom";
 
 const NewPosition = () => {
-  const { positions, setPositions } = useContext(ChoicesContext);
-  const [positionInfo, setPositionInfo] = useState({
-    positionName: "",
-    maxCandidates: "",
-  });
+  const { positions, positionInfo,setPositionInfo,setPositions } = useContext(ChoicesContext);
+
+
+  const navigate = useNavigate();
 
   const handlePositionInfo = (e) => {
     setPositionInfo({
@@ -19,6 +19,14 @@ const NewPosition = () => {
 
   const handlePositionAdd = (e) => {
     e.preventDefault();
+    const positionExists = positions.some(
+      (position) => position.positionName === positionInfo.positionName
+    );
+
+    if (positionExists) {
+      alert("Position already exists");
+      return;
+    }
     setPositions([...positions, positionInfo]);
 
     setPositionInfo({
@@ -26,6 +34,10 @@ const NewPosition = () => {
       maxCandidates: "",
     });
   };
+
+  const handleNavigation =() => {
+    navigate("/Ballot")
+  }
   return (
     <main>
       <img src={logo} alt="logo" className="logoB" />
@@ -41,6 +53,7 @@ const NewPosition = () => {
               name="positionName"
               value={positionInfo.positionName}
               onChange={handlePositionInfo}
+              required
             />
           </div>
 
@@ -53,6 +66,7 @@ const NewPosition = () => {
               className="input"
               value={positionInfo.maxCandidates}
               onChange={handlePositionInfo}
+              required
             />
           </div>
 
@@ -80,7 +94,7 @@ const NewPosition = () => {
           </table>
         </div>
 
-        <button className="positionBtn">Finish</button>
+        <button className="positionBtn" onClick={handleNavigation}>Finish</button>
       </fieldset>
 
       <Disclaimer />

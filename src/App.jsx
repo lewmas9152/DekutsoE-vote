@@ -37,17 +37,21 @@ export const UserContext = createContext({
 });
 
 export const ChoicesContext = createContext({
-  positions:[],
+  positions: [],
   position: "",
-  parties:[],
+  positionInfo:"",
+  parties: [],
   choicesList: [],
   choiceInfo: { choices: "", party: "" },
   selectedPosition: "",
   selectedChoices: [],
-  setParties:() => {},
+  setParties: () => {},
+  setPositionInfo:() =>{},
+  setChoicesList: () => {}, 
   setSelectedPosition: () => {},
   setSelectedChoices: () => {},
   setPosition: () => {},
+  setPositions: () => {},
   handleChoiceInfo: () => {},
   handleAddChoice: () => {},
 });
@@ -59,6 +63,11 @@ function App() {
     startDate: "",
     endDate: "",
     selectedTimezone: "",
+  });
+
+  const [positionInfo, setPositionInfo] = useState({
+    positionName: "",
+    maxCandidates: "",
   });
 
   const handleAddElection = (newElectionData) => {
@@ -88,22 +97,7 @@ function App() {
     });
   };
 
-  const handleAddChoice = () => {
-    if (
-      position === "" ||
-      choiceInfo.choices === "" ||
-      choiceInfo.party === ""
-    ) {
-      return;
-    }
 
-    const newChoice = { choice: choiceInfo.choices, party: choiceInfo.party };
-    setPositions((prevPositions) => ({
-      ...prevPositions,
-      [position]: [...(prevPositions[position] || []), newChoice],
-    }));
-    setChoiceInfo({ choices: "", party: "" });
-  };
 
   const handleElectionData = (event) => {
     setElectionData({
@@ -147,8 +141,8 @@ function App() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("token"),
-          }
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
         }
       );
       const data = await response.json();
@@ -167,8 +161,8 @@ function App() {
     } catch (error) {
       console.log(error);
     }
-  }
-console.log(positions)
+  };
+  console.log(positions);
   return (
     <>
       <ElectionContext.Provider
@@ -195,15 +189,20 @@ console.log(positions)
           <ChoicesContext.Provider
             value={{
               positions,
+              positionInfo,
               parties,
+              position,
               choicesList,
               choiceInfo,
               selectedPosition,
               selectedChoices,
+              setChoicesList,
+              setPositionInfo,
               setParties,
               setPositions,
+              setPosition,
+              setChoiceInfo,
               handleChoiceInfo,
-              handleAddChoice,
               setSelectedPosition,
               setSelectedChoices,
             }}
@@ -225,17 +224,15 @@ console.log(positions)
                   </NavLink>
                 </div>
 
-                
+      
 
                 {currentUserEmail ? (
-                 
-                    <NavLink  key="profile" >
-                      <div className="user">
-                        <img src={user} alt="user" className="icon" />
-                        <p>{currentUserEmail}</p>
-                      </div>
-                    </NavLink>
-                 
+                  <NavLink key="profile">
+                    <div className="user">
+                      <img src={user} alt="user" className="icon" />
+                      <p>{currentUserEmail}</p>
+                    </div>
+                  </NavLink>
                 ) : (
                   <div className="regLinks">
                     <NavLink to="/login" className="link">
@@ -255,7 +252,6 @@ console.log(positions)
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/newElection" element={<NewElection />} />
               <Route path="/NewPosition" element={<NewPosition />} />
-
 
               <Route path="/main">
                 <Route index element={<MainSec />} />

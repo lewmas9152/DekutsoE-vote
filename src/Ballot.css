@@ -42,6 +42,7 @@ th, td {
   border-bottom: 1px solid #ddd;
 }
 
+
 tr:nth-child(even) {
   background-color: #6e7501;
 }

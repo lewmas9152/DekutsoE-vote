@@ -10,16 +10,33 @@ const CreateCandidate = () => {
   const {
     positions,
     parties,
+    choicesList,
+    setChoicesList,
     choiceInfo,
+    setChoiceInfo,
     position,
     setPosition,
     handleChoiceInfo,
-    handleAddChoice,
   } = useContext(ChoicesContext);
   const navigate = useNavigate();
 
   const handleNavigation = () => {
     navigate("/ballot");
+  };
+
+  const handleAddChoice = (e) => {
+    e.preventDefault();
+    if (
+      position === "" ||
+      choiceInfo.choices === "" ||
+      choiceInfo.party === ""
+    ) {
+      return;
+    }
+
+    const newChoice = { choice: choiceInfo.choices, party: choiceInfo.party };
+    setChoicesList([...choicesList, newChoice]);
+    setChoiceInfo({ choices: "", party: "" });
   };
 
   return (
@@ -29,7 +46,7 @@ const CreateCandidate = () => {
       <fieldset>
         <legend>ADD CANDIDATE</legend>
 
-        <form action="#">
+        <form onSubmit={handleAddChoice}>
           <div className="input">
             <label htmlFor="position">Position</label>
             <select
@@ -40,14 +57,18 @@ const CreateCandidate = () => {
               required
               className="inputPos"
             >
-              {positions.map((position) => (
-                <option
-                  value={position.positionName}
-                  key={position.positionName}
-                >
-                  {position.positionName}
-                </option>
-              ))}
+              {positions.length === 0 ? (
+                <option value="">No positions available</option>
+              ) : (
+                positions.map((position) => (
+                  <option
+                    value={position.positionName}
+                    key={position.positionName}
+                  >
+                    {position.positionName}
+                  </option>
+                ))
+              )}
             </select>
           </div>
 
@@ -75,15 +96,19 @@ const CreateCandidate = () => {
                 required
                 className="inputPos"
               >
-                {parties.map((party) => (
-                  <option value={party.partyName} key={party.partyName}>
-                    {party.partyName}
-                  </option>
-                ))}
+                {parties.length === 0 ? (
+                  <option value="">No parties available</option>
+                ) : (
+                  parties.map((party) => (
+                    <option value={party.partyName} key={party.partyName}>
+                      {party.partyName}
+                    </option>
+                  ))
+                )}
               </select>
             </div>
 
-            <button type="submit" onClick={handleAddChoice}>
+            <button type="submit">
               Add Choice
             </button>
           </div>
@@ -92,17 +117,16 @@ const CreateCandidate = () => {
         <div className="candidates">
           <ol className="candidateList">
             <h3>{position}</h3>
-            {positions[position] &&
-              positions[position].map((choice, index) => (
-                <li key={index}>
-                  {index + 1}. {choice.choice} <span>({choice.party})</span>
-                </li>
-              ))}
-            {!positions[position] && (
+            {choicesList.map((choice, index) => (
+              <li key={index}>
+                {index + 1}. {choice.choice} <span>({choice.party})</span>
+              </li>
+            ))}
+            {choicesList.length === 0 && (
               <section className="empty">
                 <img src={sad} alt="voteIcon" className="sad" />
                 <div id="animation-container">
-                  <h3>No positions created yet</h3>
+                  <h3>No Candidates created yet</h3>
                 </div>
               </section>
             )}

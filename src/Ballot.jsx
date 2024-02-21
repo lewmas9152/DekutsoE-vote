@@ -12,8 +12,10 @@ import { ChoicesContext, UserContext } from "./App";
 const Ballot = () => {
   const {
     positions,
+    positionInfo,
     selectedPosition,
     setSelectedPosition,
+    setPositionInfo,
     setSelectedChoices,
   } = useContext(ChoicesContext);
 
@@ -23,7 +25,7 @@ const Ballot = () => {
 
   useEffect(() => {
     setSelectedPosition("");
-  }, []);
+  }, [setSelectedPosition]);
 
   const handlePositionClick = (position, choices) => {
     setSelectedPosition(position);
@@ -59,34 +61,17 @@ const Ballot = () => {
               <thead>
                 <tr>
                   <th>Positions</th>
-                  <th>No of Candidates</th>
+                  <th>Max Candidates</th>
                 </tr>
               </thead>
 
               <tbody>
-                {Object.entries(positions).map(([position, choices], index) => (
-                  <tr
-                    key={index}
-                    className="navTd"
-                    onClick={() => handlePositionClick(position, choices)}
-                  >
-                    <td>{position}</td>
-                    <td>{choices.length}</td>
+                {positions.map((position, index) => (
+                  <tr key={index}>
+                    <td>{position.positionName}</td>
+                    <td>{position.maxCandidates}</td>
                   </tr>
                 ))}
-
-                {!positions && (
-                  <tr>
-                    <td colSpan="2">
-                      <section className=" emptySmall">
-                        <img src={sad} alt="voteIcon" className="sad" />
-                        <div id="animation-container">
-                          <h3>No positions created yet</h3>
-                        </div>
-                      </section>
-                    </td>
-                  </tr>
-                )}
               </tbody>
             </table>
             {userState.signUpStatus === "ADMIN SIGNUP" ||
