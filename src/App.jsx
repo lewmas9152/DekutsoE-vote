@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import Homepage from "./Homepage";
 import Dashboard from "./Dashboard";
 import NewElection from "./NewElection";
@@ -9,7 +9,7 @@ import user from "/assets/user.svg";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import CreateCandidate from "./CreateCandidate";
-import { Routes, Route, NavLink, Navigate } from "react-router-dom";
+import { Routes, Route, NavLink, Navigate, useParams } from "react-router-dom";
 import Voters from "./Voters";
 import "./App.css";
 import NewParty from "./NewParty";
@@ -18,6 +18,8 @@ import NewPosition from "./NewPosition";
 
 export const ElectionContext = createContext({
   elections: [],
+  electionId: "",
+  setElectionId: () => {},
   electionData: {},
   setElectionData: () => {},
   handleElectionData: () => {},
@@ -130,7 +132,6 @@ function App() {
   };
 
   const [currentUserEmail, setCurrentuserEmail] = useState("");
-  console.log(currentUserEmail);
 
   const getElectionsFromDatabase = async () => {
     try {
@@ -161,14 +162,56 @@ function App() {
       console.log(error);
     }
   };
-  console.log(positions);
+
+  const token = localStorage.getItem("token");
+
+  // maintaining loginStatus
+  // const fetchUserData = async (token) => {
+  //   try {
+  //     const response = await fetch(`https://dekutso-evote-backend.onrender.com/${
+  //       userState.signUpStatus === "ADMIN SIGNUP" ? "admin/signup" : "signup"
+  //     }`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error("Failed to fetch user data");
+  //     }
+  //     return await response.json();
+  //   } catch (error) {
+  //     throw new Error("Error fetching user data");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+
+  //   if (token) {
+  //     fetchUserData(token)
+  //       .then((userData) => {
+  //         setCurrentuserEmail(userData.email);
+  //         getElectionsFromDatabase();
+  //         Navigate("/dashboard");
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching user data:", error);
+  //         localStorage.removeItem("token");
+  //       });
+  //   }
+  // }, []);
+
+  const [electionId, setElectionId] = useState("");
+
   return (
     <>
       <ElectionContext.Provider
         value={{
           elections,
-          setElections,
           electionData,
+          electionId,
+          setElectionId,
+          setElections,
           setElectionData,
           handleElectionData,
           handleAddElection,
@@ -221,6 +264,12 @@ function App() {
                   <NavLink to="/campaigns" className="link">
                     Campaigns
                   </NavLink>
+
+                  {token && (
+                    <NavLink to="/dashboard" className="link">
+                      Dashboard
+                    </NavLink>
+                  )}
                 </div>
 
                 {currentUserEmail ? (
@@ -271,6 +320,7 @@ function App() {
               <Route path="/NewParty" element={<NewParty />} />
               <Route path="/voting" element={<Voting />} />
               <Route path="/voting/:position" element={<Voting />} />
+              <Route path="/main/:electionId" element={<MainSec />} />
 
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>

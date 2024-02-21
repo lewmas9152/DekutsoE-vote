@@ -10,10 +10,10 @@ import remove from "/assets/delete.svg";
 import { ElectionContext } from "./App";
 import { UserContext } from "./App";
 import { useNavigate } from "react-router-dom";
-import { get } from "react-hook-form";
 
 const Dashboard = () => {
-  const { elections, electionData, getElectionsFromDatabase } = useContext(ElectionContext);
+  const { elections, setElectionId, getElectionsFromDatabase } =
+    useContext(ElectionContext);
   const { userState } = useContext(UserContext);
   const [electionToDelete, setElectionToDelete] = useState(null);
   const [dropDownVisible, setDropDownVisible] = useState(false);
@@ -24,7 +24,7 @@ const Dashboard = () => {
   const handleDeletion = (electionId) => {
     let url = `https://dekutso-evote-backend.onrender.com/api/elections/${electionId}`;
 
-    let fetchOptions= {
+    let fetchOptions = {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -89,16 +89,11 @@ const Dashboard = () => {
 
   const reversedFilteredElections = filteredElectionsByTitle.reverse();
 
-  const navigateElection = (event) => {
-    const electionElement = event.target.closest(".item");
-
-    if (electionElement) {
-      const electionId = electionElement.id;
-      navigate(`/main/${electionId}`);
-    }
+  const navigateElection = (electionId) => {
+    setElectionId(electionId);
+    navigate(`/main/${electionId}`);
   };
 
-  console.log(elections.electionId)
   return (
     <main>
       <section className="currentView">
@@ -160,7 +155,7 @@ const Dashboard = () => {
           </div>
         )}
       </div>
-      <div className="elections" onClick={navigateElection}>
+      <div className="elections">
         {elections.length === 0 ? (
           <section className="empty">
             <img src={sad} alt="voteIcon" className="sad" />
@@ -172,7 +167,11 @@ const Dashboard = () => {
           noFilteredElectionsMessage
         ) : (
           reversedFilteredElections.map((election) => (
-            <div key={election._id} className="item">
+            <div
+              key={election._id}
+              className="item"
+              onClick={() => navigateElection(election._id)}
+            >
               <h3 className="electionTitle">{election.title}</h3>
               <section className="dateSec">
                 <div className="date">
@@ -180,7 +179,7 @@ const Dashboard = () => {
                     <img src={date} alt="calender" className="icon" />
                     Start Date
                   </h3>
-                  <p>{electionData.startDate}</p>
+                  <p>{election.startDate}</p>
                 </div>
 
                 <div className="date">
@@ -188,7 +187,7 @@ const Dashboard = () => {
                     <img src={date} alt="calender" className="icon" />
                     End Date
                   </h3>
-                  <p>{electionData.endDate}</p>
+                  <p>{election.endDate}</p>
                 </div>
               </section>
 
