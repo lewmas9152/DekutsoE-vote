@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { ElectionContext } from "./App";
 
 const NewElection = () => {
-  const { electionData, handleElectionData, handleAddElection } =
+  const { electionData, handleElectionData, handleAddElection , getElectionsFromDatabase} =
     useContext(ElectionContext);
   const navigate = useNavigate();
   const [dataAddedSuccessfully, setDataAddedSuccessfully] = useState(false);
@@ -58,10 +58,31 @@ const NewElection = () => {
         return;
       }
 
-      await handleAddElection(electionData);
-      setDataAddedSuccessfully(true);
-      event.target.reset();
-      navigate("/newElection/main");
+      let url = "https://dekutso-evote-backend.onrender.com/api/elections"
+
+      let reqBody = {
+        title : electionData.title,
+        startDate : electionData.startDate,
+        endDate : electionData.endDate,
+        timeZone : electionData.selectedTimezone
+      }
+
+      let fetchOptions = {
+        method : "post",
+        headers : {
+          "Content-type" : "application/json",
+          "Authorization" : "Bearer " + localStorage.getItem("token")
+        },
+        body : JSON.stringify(reqBody)
+      }
+
+      fetch(url , fetchOptions).then((res)=>{
+        if(res.status !== 201) return alert("An error occurred. Please try again.");
+
+        navigate("/dashboard");
+        event.target.reset();
+        getElectionsFromDatabase();
+      });
     } catch (error) {
       alert("Error adding election: " + error.message);
     }

@@ -10,9 +10,10 @@ import remove from "/assets/delete.svg";
 import { ElectionContext } from "./App";
 import { UserContext } from "./App";
 import { useNavigate } from "react-router-dom";
+import { get } from "react-hook-form";
 
 const Dashboard = () => {
-  const { elections, electionData, setElections } = useContext(ElectionContext);
+  const { elections, electionData, getElectionsFromDatabase } = useContext(ElectionContext);
   const { userState } = useContext(UserContext);
   const [electionToDelete, setElectionToDelete] = useState(null);
   const [dropDownVisible, setDropDownVisible] = useState(false);
@@ -21,11 +22,23 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const handleDeletion = (electionId) => {
-    const updatedElections = elections.filter(
-      (election) => election.id !== electionId
-    );
-    setElections(updatedElections);
-    setElectionToDelete(null);
+    let url = `https://dekutso-evote-backend.onrender.com/api/elections/${electionId}`;
+
+    let fetchOptions= {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+
+    fetch(url, fetchOptions).then(async (res) => {
+      if (res.status !== 200) {
+        alert("There was an error. Please try again.");
+        return;
+      }
+      getElectionsFromDatabase();
+    });
   };
 
   const handleCancelDeletion = () => {
@@ -85,6 +98,7 @@ const Dashboard = () => {
     }
   };
 
+  console.log(elections.electionId)
   return (
     <main>
       <section className="currentView">
@@ -158,8 +172,8 @@ const Dashboard = () => {
           noFilteredElectionsMessage
         ) : (
           reversedFilteredElections.map((election) => (
-            <div key={election.id} className="item">
-              <h3>{election.title}</h3>
+            <div key={election._id} className="item">
+              <h3 className="electionTitle">{election.title}</h3>
               <section className="dateSec">
                 <div className="date">
                   <h3 className="dateHeader">
@@ -186,12 +200,12 @@ const Dashboard = () => {
                     alt="delete"
                     onClick={(event) => {
                       event.stopPropagation();
-                      setElectionToDelete(election.id);
+                      setElectionToDelete(election._id);
                     }}
                   />
                 </div>
               ) : null}
-              {electionToDelete === election.id && (
+              {electionToDelete === election._id && (
                 <div className="deletion">
                   <div className="delPopUp">
                     <h4>!!!Dangerous action no recovery on delete</h4>
@@ -200,7 +214,7 @@ const Dashboard = () => {
                         className="option"
                         onClick={(event) => {
                           event.stopPropagation();
-                          handleDeletion(election.id);
+                          handleDeletion(election._id);
                         }}
                       >
                         Delete Anyway

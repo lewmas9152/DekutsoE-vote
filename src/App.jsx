@@ -39,15 +39,15 @@ export const UserContext = createContext({
 export const ChoicesContext = createContext({
   positions: [],
   position: "",
-  positionInfo:"",
+  positionInfo: "",
   parties: [],
   choicesList: [],
   choiceInfo: { choices: "", party: "" },
   selectedPosition: "",
   selectedChoices: [],
   setParties: () => {},
-  setPositionInfo:() =>{},
-  setChoicesList: () => {}, 
+  setPositionInfo: () => {},
+  setChoicesList: () => {},
   setSelectedPosition: () => {},
   setSelectedChoices: () => {},
   setPosition: () => {},
@@ -59,6 +59,7 @@ export const ChoicesContext = createContext({
 function App() {
   const [elections, setElections] = useState([]);
   const [electionData, setElectionData] = useState({
+    _id: "",
     title: "",
     startDate: "",
     endDate: "",
@@ -71,7 +72,7 @@ function App() {
   });
 
   const handleAddElection = (newElectionData) => {
-    setElections([...elections, { ...newElectionData, id: Date.now() }]);
+    setElections([...elections, { ...newElectionData }]);
   };
 
   // const [positions, setPositions] = useState("");
@@ -96,8 +97,6 @@ function App() {
       [event.target.name]: event.target.value,
     });
   };
-
-
 
   const handleElectionData = (event) => {
     setElectionData({
@@ -150,7 +149,7 @@ function App() {
 
       for (const key in data) {
         loadedElections.push({
-          id: key,
+          _id: data[key]._id,
           title: data[key].title,
           startDate: data[key].startDate,
           endDate: data[key].endDate,
@@ -223,8 +222,6 @@ function App() {
                     Campaigns
                   </NavLink>
                 </div>
-
-      
 
                 {currentUserEmail ? (
                   <NavLink key="profile">
