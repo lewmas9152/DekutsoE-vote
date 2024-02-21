@@ -7,10 +7,12 @@ import date from "/assets/date.svg";
 import "./MainSec.css";
 import { ElectionContext } from "./App";
 import MainNav from "./MainNav";
+import MainSecHeader from "./MainSecHeader";
 
 const MainSec = () => {
-  const { elections,electionId } = useContext(ElectionContext);
-  const [selectedElection, setSelectedElection] = useState(null);
+  const { elections, electionId, selectedElection, setSelectedElection } =
+    useContext(ElectionContext);
+
   useEffect(() => {
     if (electionId) {
       const foundElection = elections.find(
@@ -18,17 +20,14 @@ const MainSec = () => {
       );
       setSelectedElection(foundElection);
     }
-  }, [electionId, elections]);
+  }, [electionId, elections, setSelectedElection]);
   return (
     <main className="container" id="main">
       <MainNav />
       <div className="mainCard">
         {selectedElection && (
           <>
-            <div className="mainHeader">
-              <h2>{selectedElection.title}</h2>
-              <h2>0 Voters</h2>
-            </div>
+            <MainSecHeader />
             <hr />
             <p className="page">
               <img src={overview} alt="overview" className="iconNav" />

@@ -7,6 +7,7 @@ import "./MainSec.css";
 import "./Ballot.css";
 import { Link, useNavigate } from "react-router-dom";
 import MainNav from "./MainNav";
+import MainSecHeader from "./MainSecHeader";
 import { ChoicesContext, UserContext } from "./App";
 
 const Ballot = () => {
@@ -38,15 +39,11 @@ const Ballot = () => {
     }
   }, [selectedPosition, navigate]);
 
-
   return (
     <main className="container">
       <MainNav />
       <div className="mainCard">
-        <div className="mainHeader">
-          <h2>School Executive</h2>
-          <h2>3 Positions</h2>
-        </div>
+        <MainSecHeader />
         <hr />
         <p className="page">
           <img src={ballot} alt="overview" className="iconNav" />

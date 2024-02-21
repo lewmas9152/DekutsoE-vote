@@ -19,8 +19,10 @@ import NewPosition from "./NewPosition";
 export const ElectionContext = createContext({
   elections: [],
   electionId: "",
-  setElectionId: () => {},
   electionData: {},
+  selectedElection:"",
+  setSelectedElection:() => {},
+  setElectionId: () => {},
   setElectionData: () => {},
   handleElectionData: () => {},
   handleAddElection: () => {},
@@ -89,6 +91,7 @@ function App() {
   const [choicesList, setChoicesList] = useState([]);
   const [selectedPosition, setSelectedPosition] = useState("");
   const [selectedChoices, setSelectedChoices] = useState([]);
+  const [selectedElection, setSelectedElection] = useState(null);
 
   const handleChoiceInfo = (event) => {
     if (event.target.name === "position") {
@@ -210,6 +213,8 @@ function App() {
           elections,
           electionData,
           electionId,
+          selectedElection,
+          setSelectedElection,
           setElectionId,
           setElections,
           setElectionData,
