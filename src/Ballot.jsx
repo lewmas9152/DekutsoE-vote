@@ -13,14 +13,15 @@ import { ChoicesContext, UserContext } from "./App";
 const Ballot = () => {
   const {
     positions,
-    positionInfo,
     selectedPosition,
+    choicesList,
     setSelectedPosition,
-    setPositionInfo,
     setSelectedChoices,
   } = useContext(ChoicesContext);
 
   const { userState } = useContext(UserContext);
+
+
 
   const navigate = useNavigate();
 
@@ -31,13 +32,20 @@ const Ballot = () => {
   const handlePositionClick = (position, choices) => {
     setSelectedPosition(position);
     setSelectedChoices(choices);
+
+    if (
+      userState.signUpStatus === "ADMIN SIGNUP" ||
+      userState.loginStatus === "ADMIN LOGIN"
+    ) {
+      navigate(`/CreateCandidate/${encodeURIComponent(position)}`);
+    }
+    navigate(`/Voting/${encodeURIComponent(position)}`);
   };
 
-  useEffect(() => {
-    if (selectedPosition) {
-      navigate(`/voting/${encodeURIComponent(selectedPosition)}`);
-    }
-  }, [selectedPosition, navigate]);
+  const countChoicesForPosition = (positionName) => {
+    return choicesList.filter((choice) => choice.position === positionName)
+      .length;
+  };
 
   return (
     <main className="container">
@@ -56,18 +64,42 @@ const Ballot = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Positions</th>
-                  <th>Max Candidates</th>
+                  <th>Position</th>
+                  <th>Number Of Candidates</th>
                 </tr>
               </thead>
 
               <tbody>
-                {positions.map((position, index) => (
-                  <tr key={index}>
-                    <td>{position.positionName}</td>
-                    <td>{position.maxCandidates}</td>
+                {positions.length > 0 ? (
+                  positions.map((position, index) => (
+                    <tr
+                      key={index}
+                      className="position"
+                      onClick={() =>
+                        handlePositionClick(
+                          position.positionName,
+                          choicesList.filter(
+                            (choice) =>
+                              choice.position === position.positionName
+                          )
+                        )
+                      }
+                    >
+                      <td>{position.positionName}</td>
+                      <td>{countChoicesForPosition(position.positionName)}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr className="emptySmall">
+                    <td>
+                      <img src={sad} alt="voteIcon" className="sad" />
+                    </td>
+
+                    <td id="animation-container">
+                      <h3>No Positions created yet</h3>
+                    </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
             {userState.signUpStatus === "ADMIN SIGNUP" ||

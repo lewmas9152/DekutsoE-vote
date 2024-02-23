@@ -104,6 +104,8 @@ const SignUp = () => {
     }
   }, [isValid]);
 
+  
+
   return (
     <main>
       <img src={logo} alt="logo" className="logoB" />

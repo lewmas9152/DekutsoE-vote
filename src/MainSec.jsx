@@ -25,8 +25,7 @@ const MainSec = () => {
     <main className="container" id="main">
       <MainNav />
       <div className="mainCard">
-        {selectedElection && (
-          <>
+     
             <MainSecHeader />
             <hr />
             <p className="page">
@@ -92,8 +91,7 @@ const MainSec = () => {
                 <span>not</span>Launched
               </p>
             </section>
-          </>
-        )}
+       
       </div>
     </main>
   );

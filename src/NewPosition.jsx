@@ -1,12 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import logo from "/assets/logo.svg";
 import Disclaimer from "./Disclaimer";
-import { ChoicesContext } from "./App";
+import { ChoicesContext, ElectionContext } from "./App";
 import { useNavigate } from "react-router-dom";
 
 const NewPosition = () => {
-  const { positions, positionInfo,setPositionInfo,setPositions } = useContext(ChoicesContext);
-
+  const { positions, positionInfo, setPositionInfo, setPositions } =
+    useContext(ChoicesContext);
+  const { electionId, getPositionFromDatabase } = useContext(ElectionContext);
 
   const navigate = useNavigate();
 
@@ -27,17 +28,41 @@ const NewPosition = () => {
       alert("Position already exists");
       return;
     }
-    setPositions([...positions, positionInfo]);
+    let url = `https://dekutso-evote-backend.onrender.com/api/positions/${electionId}`;
 
-    setPositionInfo({
-      positionName: "",
-      maxCandidates: "",
+    let data = {
+      name: positionInfo.positionName,
+      maxCandidates: positionInfo.maxCandidates,
+    };
+
+    let fetchOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+      body: JSON.stringify(data),
+    };
+
+    fetch(url, fetchOptions).then(async (res) => {
+      if (res.status !== 201) {
+        alert("There was an error. Please try again.");
+        return;
+      }
+      getPositionFromDatabase();
+
+  console.log(positionInfo);
+      setPositionInfo({
+        positionName: "",
+        maxCandidates: "",
+      });
     });
   };
 
-  const handleNavigation =() => {
-    navigate("/Ballot")
-  }
+
+  const handleNavigation = () => {
+    navigate("/Ballot");
+  };
   return (
     <main>
       <img src={logo} alt="logo" className="logoB" />
@@ -94,7 +119,9 @@ const NewPosition = () => {
           </table>
         </div>
 
-        <button className="positionBtn" onClick={handleNavigation}>Finish</button>
+        <button className="positionBtn" onClick={handleNavigation}>
+          Finish
+        </button>
       </fieldset>
 
       <Disclaimer />

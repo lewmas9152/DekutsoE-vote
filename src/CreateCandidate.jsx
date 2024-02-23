@@ -5,6 +5,7 @@ import sad from "/assets/sad.gif";
 import "./CreateCandidate.css";
 import { ChoicesContext } from "./App";
 import { useNavigate } from "react-router-dom";
+import { set } from "react-hook-form";
 
 const CreateCandidate = () => {
   const {
@@ -34,10 +35,22 @@ const CreateCandidate = () => {
       return;
     }
 
-    const newChoice = { choice: choiceInfo.choices, party: choiceInfo.party };
+    const newChoice = { choice: choiceInfo.choices, party: choiceInfo.party, position: position};
     setChoicesList([...choicesList, newChoice]);
     setChoiceInfo({ choices: "", party: "" });
   };
+
+  console.log("choiceList", choicesList);
+
+  const handlePositionChange = (newPosition) => {
+    const updatedChoices = choicesList.map((choice) => ({
+      ...choice,
+      position: newPosition,
+    }));
+    setChoicesList(updatedChoices);
+    setPosition(newPosition);
+  };
+
 
   return (
     <main>
@@ -53,7 +66,7 @@ const CreateCandidate = () => {
               name="position"
               id="position"
               value={position}
-              onChange={(e) => setPosition(e.target.value)}
+              onChange={(e) => handlePositionChange(e.target.value)}
               required
               className="inputPos"
             >

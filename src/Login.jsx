@@ -85,6 +85,8 @@ const Login = () => {
       alert("Please fill in all the required Details");
     }
   };
+
+  
   return (
     <main>
       <img src={logo} alt="logo" className="logoB" />
@@ -143,17 +145,6 @@ const Login = () => {
               />
             </div>
 
-            <div className="inputItem">
-              <label htmlFor="ID">{userState.identity}</label>
-              <input
-                type="password"
-                id="ID"
-                name="id"
-                value={loginUserInfo.id}
-                onChange={handleUserData}
-                required
-              />
-            </div>
             <div className="check">
               <input type="checkbox" id="check" />
               <label htmlFor="check">Remember me</label>

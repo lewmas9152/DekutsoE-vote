@@ -2,11 +2,12 @@ import React, { useState,useContext } from "react";
 import logo from "/assets/logo.svg";
 import "./NewParty.css";
 import Disclaimer from "./Disclaimer";
-import { ChoicesContext } from "./App";
+import { ChoicesContext , ElectionContext} from "./App";
 import { useNavigate } from "react-router-dom";
 
 const NewParty = () => {
   const {parties,setParties} = useContext(ChoicesContext)
+  const {getPartiesFromDatabase} = useContext(ElectionContext)
   const [partyInfo, setPartyInfo] = useState({
     partyName: "",
     partyLogo: "",
@@ -31,13 +32,38 @@ const NewParty = () => {
       alert("Party already exists");
       return;
     }
-    setParties([...parties, partyInfo]);
 
-    setPartyInfo({
-      partyName: "",
-      partyLogo: "",
-      partySlogan: "",
+    let url = `https://dekutso-evote-backend.onrender.com/api/parties`;
+
+    let data = {
+      name: partyInfo.partyName,
+      slogan: partyInfo.partySlogan
+    }
+
+    let fetchOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+      body: JSON.stringify(data),
+    };
+
+    fetch(url, fetchOptions).then(async (res) => {
+      if (res.status !== 201) {
+        alert("There was an error. Please try again.");
+        return;
+      }
+      getPartiesFromDatabase();
     });
+  
+    // setParties([...parties, partyInfo]);
+
+    // setPartyInfo({
+    //   partyName: "",
+    //   partyLogo: "",
+    //   partySlogan: "",
+    // });
   };
 
   const handleNavigation =() => {

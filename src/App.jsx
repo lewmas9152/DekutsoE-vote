@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext } from "react";
 import Homepage from "./Homepage";
 import Dashboard from "./Dashboard";
 import NewElection from "./NewElection";
@@ -9,7 +9,7 @@ import user from "/assets/user.svg";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import CreateCandidate from "./CreateCandidate";
-import { Routes, Route, NavLink, Navigate, useParams } from "react-router-dom";
+import { Routes, Route, NavLink, Navigate } from "react-router-dom";
 import Voters from "./Voters";
 import "./App.css";
 import NewParty from "./NewParty";
@@ -20,13 +20,17 @@ export const ElectionContext = createContext({
   elections: [],
   electionId: "",
   electionData: {},
-  selectedElection:"",
-  setSelectedElection:() => {},
+  selectedElection: "",
+  setSelectedElection: () => {},
   setElectionId: () => {},
   setElectionData: () => {},
   handleElectionData: () => {},
   handleAddElection: () => {},
   getElectionsFromDatabase: () => {},
+  getPartiesFromDatabase: () => {},
+  getPositionFromDatabase: () => {},
+  getCandidatesFromDatabase: () => {},
+  getVotersFromDatabase: () => {},
 });
 
 export const UserContext = createContext({
@@ -91,7 +95,8 @@ function App() {
   const [choicesList, setChoicesList] = useState([]);
   const [selectedPosition, setSelectedPosition] = useState("");
   const [selectedChoices, setSelectedChoices] = useState([]);
-  const [selectedElection, setSelectedElection] = useState(null);
+  const [selectedElection, setSelectedElection] = useState("");
+  const [votersList, setVotersList] = useState([]);
 
   const handleChoiceInfo = (event) => {
     if (event.target.name === "position") {
@@ -134,7 +139,11 @@ function App() {
     });
   };
 
-  const [currentUserEmail, setCurrentuserEmail] = useState("");
+  const [currentUserEmail, setCurrentuserEmail] = useState(
+    localStorage.getItem("email") || ""
+  );
+
+  localStorage.setItem("email", currentUserEmail);
 
   const getElectionsFromDatabase = async () => {
     try {
@@ -166,43 +175,127 @@ function App() {
     }
   };
 
+  const getPositionFromDatabase = async () => {
+    try {
+      const response = await fetch(
+        `https://dekutso-evote-backend.onrender.com/api/positions/${electionId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      const data = await response.json();
+      const loadedPositions = [];
+
+      for (const key in data) {
+        loadedPositions.push({
+          positionName: data[key].positionName,
+          maxCandidates: data[key].maxCandidates,
+        });
+      }
+
+      setPositions(loadedPositions);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getPartiesFromDatabase = async () => {
+    try {
+      const response = await fetch(
+        "https://dekutso-evote-backend.onrender.com/api/parties",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      const data = await response.json();
+      const loadedParties = [];
+
+      for (const key in data) {
+        loadedParties.push({
+          partyName: data[key].partyName,
+          partySlogan: data[key].partySlogan,
+        });
+      }
+
+      setParties(loadedParties);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCandidatesFromDatabase = async () => {
+    try {
+      const response = await fetch(
+        "https://dekutso-evote-backend.onrender.com/api/candidates",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      const data = await response.json();
+      const loadedCandidates = [];
+
+      for (const key in data) {
+        loadedCandidates.push({
+          candidateName: data[key].candidateName,
+          position: data[key].position,
+          party: data[key].party,
+        });
+      }
+
+      setChoicesList(loadedCandidates);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getVotersFromDatabase = async () => {
+    try {
+      const response = await fetch(
+        "https://dekutso-evote-backend.onrender.com/api/voters",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      const data = await response.json();
+      const loadedVoters = [];
+
+      for (const key in data) {
+        loadedVoters.push({
+          voterName: data[key].voterName,
+          regNo: data[key].regNo,
+          email: data[key].email,
+          voted: data[key].voted,
+        });
+      }
+
+      setVotersList(loadedVoters);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const token = localStorage.getItem("token");
-
-  // maintaining loginStatus
-  // const fetchUserData = async (token) => {
-  //   try {
-  //     const response = await fetch(`https://dekutso-evote-backend.onrender.com/${
-  //       userState.signUpStatus === "ADMIN SIGNUP" ? "admin/signup" : "signup"
-  //     }`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     if (!response.ok) {
-  //       throw new Error("Failed to fetch user data");
-  //     }
-  //     return await response.json();
-  //   } catch (error) {
-  //     throw new Error("Error fetching user data");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-
-  //   if (token) {
-  //     fetchUserData(token)
-  //       .then((userData) => {
-  //         setCurrentuserEmail(userData.email);
-  //         getElectionsFromDatabase();
-  //         Navigate("/dashboard");
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error fetching user data:", error);
-  //         localStorage.removeItem("token");
-  //       });
-  //   }
-  // }, []);
+  window.onload = () => {
+    if (token && currentUserEmail) {
+      getElectionsFromDatabase();
+    }
+  };
 
   const [electionId, setElectionId] = useState("");
 
@@ -221,6 +314,10 @@ function App() {
           handleElectionData,
           handleAddElection,
           getElectionsFromDatabase,
+          getPartiesFromDatabase,
+          getPositionFromDatabase,
+          getCandidatesFromDatabase,
+          getVotersFromDatabase,
         }}
       >
         <UserContext.Provider
@@ -326,6 +423,10 @@ function App() {
               <Route path="/voting" element={<Voting />} />
               <Route path="/voting/:position" element={<Voting />} />
               <Route path="/main/:electionId" element={<MainSec />} />
+              <Route
+                path="/CreateCandidate/:position"
+                element={<CreateCandidate />}
+              />
 
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
