@@ -22,7 +22,7 @@ body {
   max-width: 1280px;
 }
 
-.user{
+.user {
   display: flex;
   align-items: center;
   gap: 0.1rem;
@@ -30,14 +30,11 @@ body {
   justify-self: center;
   align-self: center;
   margin-top: 1rem;
-
-   
 }
 
 .user:hover {
   color: blue;
 }
-
 
 fieldset {
   display: flex;
@@ -49,7 +46,6 @@ fieldset {
   border-radius: 0.5rem;
   margin-top: 0.5rem;
   color: rgb(8, 49, 2);
-  
 }
 
 legend {
@@ -133,7 +129,7 @@ a {
   color: blue;
   cursor: pointer;
   text-decoration: unset;
-  transition: all 0.2s ease-in-out; 
+  transition: all 0.2s ease-in-out;
 }
 
 .check {
@@ -218,8 +214,8 @@ input[type="checkbox"] {
 .link:hover {
   color: greenyellow;
   text-transform: uppercase;
-  font-size: 1.2em; 
-  transition: all 0.2s ease-in-out; 
+  font-size: 1.2em;
+  transition: all 0.2s ease-in-out;
 }
 
 .links {
@@ -233,7 +229,6 @@ input[type="checkbox"] {
   gap: 1rem;
   justify-self: flex-start;
   margin-left: 2rem;
-  
 }
 
 .regLinks {
@@ -258,4 +253,43 @@ input[type="checkbox"] {
   color: red;
   font-style: italic;
   margin-top: -1rem;
+}
+
+.logOpts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-self: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: rgb(0, 41, 128);
+  transition: all 0.2s ease-in-out;
+}
+
+.optHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.topLine,
+.bottomLine {
+  width: 3rem;
+  height: 0.1rem;
+  background-color: rgb(4, 143, 23);
+  margin: 0.5rem 0;
+}
+
+.optIcon {
+  width: 3rem;
+  height: 3rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.optIcon:hover {
+  width: 3.5rem;
+  height: 3.5rem;
+
+  transition: all 0.2s ease-in-out;
 }

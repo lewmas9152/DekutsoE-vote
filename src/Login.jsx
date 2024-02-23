@@ -1,5 +1,8 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import logo from "/assets/logo.svg";
+import facebook2 from "/assets/facebook2.svg";
+import apple from "/assets/apple.png";
+import google from "/assets/google.svg";
 import { UserContext } from "./App";
 import { useNavigate } from "react-router-dom";
 import Disclaimer from "./Disclaimer";
@@ -122,6 +125,21 @@ const Login = () => {
               </h3>
             </a>
           </div>
+
+          <div className="logOpts">
+          <div className="optHeader">
+            <div className="topLine"></div>
+            <h4>Login with</h4>
+            <div className="bottomLine"></div>
+          </div>
+
+          <div className="optIcons">
+            <img src={facebook2} alt="facebook" className="optIcon" />
+            <img src={apple} alt="apple" className="optIcon" />
+            <img src={google} alt="google" className="optIcon" />
+          </div>
+          </div>
+
           <form onSubmit={handleSubmit}>
             <div className="inputItem">
               <label htmlFor="email">Email</label>

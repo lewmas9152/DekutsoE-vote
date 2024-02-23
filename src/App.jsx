@@ -375,6 +375,10 @@ function App() {
                   )}
                 </div>
 
+                <NavLink to="/login" className="link">
+                      Login
+                    </NavLink>
+
                 {currentUserEmail ? (
                   <NavLink key="profile">
                     <div className="user">
