@@ -8,7 +8,7 @@ import "./Ballot.css";
 import { Link, useNavigate } from "react-router-dom";
 import MainNav from "./MainNav";
 import MainSecHeader from "./MainSecHeader";
-import { ChoicesContext, UserContext } from "./App";
+import { ChoicesContext, UserContext, ElectionContext } from "./App";
 
 const Ballot = () => {
   const {
@@ -21,7 +21,7 @@ const Ballot = () => {
 
   const { userState } = useContext(UserContext);
 
-
+  const { parties } = useContext(ChoicesContext);
 
   const navigate = useNavigate();
 
@@ -45,6 +45,10 @@ const Ballot = () => {
   const countChoicesForPosition = (positionName) => {
     return choicesList.filter((choice) => choice.position === positionName)
       .length;
+  };
+
+  const countChoicesForParty = (partyName) => {
+    return choicesList.filter((choice) => choice.party === partyName).length;
   };
 
   return (
@@ -119,45 +123,25 @@ const Ballot = () => {
                   <th>No of Candidates</th>
                 </tr>
               </thead>
-
               <tbody>
-                <tr>
-                  <td>Comrades Alliance Party</td>
-                  <td>5</td>
-                </tr>
+                {parties.length > 0 ? (
+                  parties.map((party, index) => (
+                    <tr key={index} className="position">
+                      <td>{party.partyName}</td>
+                      <td>{countChoicesForParty(party.partyName)}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr className="emptySmall">
+                    <td>
+                      <img src={sad} alt="voteIcon" className="sad" />
+                    </td>
 
-                <tr>
-                  <td>United Democratic Party</td>
-                  <td>6</td>
-                </tr>
-
-                <tr>
-                  <td>Utumishi Kwa Wote Party</td>
-                  <td>3</td>
-                </tr>
-
-                <tr>
-                  <td>Utumishi Kwa Wote Party</td>
-                  <td>3</td>
-                </tr>
-
-                <tr>
-                  <td>Utumishi Kwa Wote Party</td>
-                  <td>3</td>
-                </tr>
-
-                <tr>
-                  <td>Utumishi Kwa Wote Party</td>
-                  <td>3</td>
-                </tr>
-                <tr>
-                  <td>Utumishi Kwa Wote Party</td>
-                  <td>3</td>
-                </tr>
-                <tr>
-                  <td>Utumishi Kwa Wote Party</td>
-                  <td>3</td>
-                </tr>
+                    <td id="animation-container">
+                      <h3>No Parties created yet</h3>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
 

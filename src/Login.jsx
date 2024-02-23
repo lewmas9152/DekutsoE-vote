@@ -13,7 +13,11 @@ const Login = () => {
     handleLoginStatusChange,
   } = useContext(UserContext);
 
-  const { getElectionsFromDatabase } = useContext(ElectionContext);
+  const {
+    getElectionsFromDatabase,
+    getPartiesFromDatabase,
+    getPositionFromDatabase,
+  } = useContext(ElectionContext);
   const [activeOption, setActiveOption] = useState("ADMIN LOGIN");
 
   const navigate = useNavigate();
@@ -51,7 +55,6 @@ const Login = () => {
 
     const isFilled = isvalid();
 
-
     if (isFilled) {
       let url = `https://dekutso-evote-backend.onrender.com/${
         userState.loginStatus === "ADMIN LOGIN" ? "admin/login" : "login"
@@ -80,13 +83,13 @@ const Login = () => {
         navigate("/dashboard");
         event.target.reset();
         getElectionsFromDatabase();
+        getPartiesFromDatabase();
       });
     } else {
       alert("Please fill in all the required Details");
     }
   };
 
-  
   return (
     <main>
       <img src={logo} alt="logo" className="logoB" />

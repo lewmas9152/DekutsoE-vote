@@ -1,13 +1,13 @@
-import React, { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import logo from "/assets/logo.svg";
 import "./NewParty.css";
 import Disclaimer from "./Disclaimer";
-import { ChoicesContext , ElectionContext} from "./App";
+import { ChoicesContext, ElectionContext } from "./App";
 import { useNavigate } from "react-router-dom";
 
 const NewParty = () => {
-  const {parties,setParties} = useContext(ChoicesContext)
-  const {getPartiesFromDatabase} = useContext(ElectionContext)
+  const { parties, setParties } = useContext(ChoicesContext);
+  const { getPartiesFromDatabase } = useContext(ElectionContext);
   const [partyInfo, setPartyInfo] = useState({
     partyName: "",
     partyLogo: "",
@@ -17,7 +17,6 @@ const NewParty = () => {
   const navigate = useNavigate();
 
   const handlePartyData = (event) => {
-
     setPartyInfo({
       ...partyInfo,
       [event.target.name]: event.target.value,
@@ -26,19 +25,23 @@ const NewParty = () => {
 
   const handlePartyAdd = (e) => {
     e.preventDefault();
-    const partyExists = parties.some(party => party.partyName === partyInfo.partyName);
+    const partyExists = parties.some(
+      (party) => party.partyName === partyInfo.partyName
+    );
 
     if (partyExists) {
       alert("Party already exists");
       return;
     }
 
+    setParties([...parties, partyInfo]);
+
     let url = `https://dekutso-evote-backend.onrender.com/api/parties`;
 
     let data = {
       name: partyInfo.partyName,
-      slogan: partyInfo.partySlogan
-    }
+      slogan: partyInfo.partySlogan,
+    };
 
     let fetchOptions = {
       method: "POST",
@@ -56,19 +59,17 @@ const NewParty = () => {
       }
       getPartiesFromDatabase();
     });
-  
-    // setParties([...parties, partyInfo]);
 
-    // setPartyInfo({
-    //   partyName: "",
-    //   partyLogo: "",
-    //   partySlogan: "",
-    // });
+    setPartyInfo({
+      partyName: "",
+      partyLogo: "",
+      partySlogan: "",
+    });
   };
 
-  const handleNavigation =() => {
-    navigate("/Ballot")
-  }
+  const handleNavigation = () => {
+    navigate("/Ballot");
+  };
 
   return (
     <>

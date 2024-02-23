@@ -12,8 +12,13 @@ import { UserContext } from "./App";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const { elections, setElectionId, getElectionsFromDatabase } =
-    useContext(ElectionContext);
+  const {
+    elections,
+    setElectionId,
+    getElectionsFromDatabase,
+    getPositionFromDatabase,
+    getPartiesFromDatabase,
+  } = useContext(ElectionContext);
   const { userState } = useContext(UserContext);
   const [electionToDelete, setElectionToDelete] = useState(null);
   const [dropDownVisible, setDropDownVisible] = useState(false);
@@ -91,7 +96,9 @@ const Dashboard = () => {
 
   const navigateElection = (electionId) => {
     setElectionId(electionId);
+    getPositionFromDatabase(electionId);
     navigate(`/main/${electionId}`);
+   
   };
 
   return (

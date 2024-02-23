@@ -13,7 +13,7 @@ const SignUp = () => {
     handleSignUpStatusChange,
   } = useContext(UserContext);
 
-  const { getElectionsFromDatabase } = useContext(ElectionContext);
+  const { getElectionsFromDatabase , getPartiesFromDatabase,getPositionFromDatabase} = useContext(ElectionContext);
   const [activeOption, setActiveOption] = useState("ADMIN SIGNUP");
 
   const navigate = useNavigate();
@@ -94,6 +94,7 @@ const SignUp = () => {
         navigate("/dashboard");
         event.target.reset();
         getElectionsFromDatabase();
+        getPartiesFromDatabase();
       });
     }
   };

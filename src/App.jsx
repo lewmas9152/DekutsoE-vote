@@ -188,11 +188,12 @@ function App() {
         }
       );
       const data = await response.json();
+
       const loadedPositions = [];
 
       for (const key in data) {
         loadedPositions.push({
-          positionName: data[key].positionName,
+          positionName: data[key].name,
           maxCandidates: data[key].maxCandidates,
         });
       }
@@ -220,8 +221,8 @@ function App() {
 
       for (const key in data) {
         loadedParties.push({
-          partyName: data[key].partyName,
-          partySlogan: data[key].partySlogan,
+          partyName: data[key].name,
+          partySlogan: data[key].slogan,
         });
       }
 
