@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import logo from "/assets/logo.svg";
-import facebook2 from "/assets/facebook2.svg";
+import facebook2 from "/assets/facebook2.png";
 import apple from "/assets/apple.png";
 import google from "/assets/google.svg";
 import { UserContext } from "./App";
