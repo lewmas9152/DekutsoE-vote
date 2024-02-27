@@ -395,7 +395,7 @@ function App() {
               </div>
             </nav>
 
-            <Routes>
+            <Routes basename ="/DekutsoE-vote/">
               <Route path="/" element={<Homepage />} />
               <Route path="/CreateCandidate" element={<CreateCandidate />} />
               <Route path="/dashboard" element={<Dashboard />} />
