@@ -15,8 +15,20 @@
   border-radius: 1rem;
 }
 
+.positions:hover {
+  box-shadow: 0 0 10px 5px #f1da02;
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+
+.position:hover {
+  background-color: #d4c704;
+  color: white;
+  cursor: pointer;
+}
+
 table {
-  max-width: 20rem;
+  max-width: 30rem;
   height: 15rem;
   overflow-y: auto;
   display: block;
@@ -54,16 +66,25 @@ table tr td:first-child::before {
 td,
 tr {
   text-align: center;
+  border: unset;
+  text-align: left;
 }
 
 td {
   margin-bottom: 1rem;
   padding: 0.5rem;
+  text-align: center;
+}
+
+td:first-child {
+  text-align: left;
+  padding-left: 1rem;
 }
 
 .addBtn {
   text-transform: none;
-  align-self: flex-end;
+  transform: translateX(100%);
+  margin-top: 1rem;
 }
 
 .emptySmall {
@@ -74,6 +95,10 @@ td {
   margin-top: 25%;
   font-weight: 800;
   color: rgb(35, 94, 1);
+}
+
+.emptySmall tr {
+  content: unset;
 }
 
 .navTd {
@@ -91,4 +116,12 @@ td {
   background-color: #d4c704;
   color: white;
   cursor: pointer;
+}
+
+.tally:hover {
+  box-shadow: 0 0 5px 5px #d3be01;
+  color: white;
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
 }

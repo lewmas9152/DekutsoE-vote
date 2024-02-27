@@ -40,6 +40,8 @@ const Ballot = () => {
       navigate(`/CreateCandidate/${encodeURIComponent(position)}`);
     }
     navigate(`/Voting/${encodeURIComponent(position)}`);
+
+    // navigate(`/CreateCandidate/${encodeURIComponent(position)}`);
   };
 
   const countChoicesForPosition = (positionName) => {
@@ -89,20 +91,23 @@ const Ballot = () => {
                         )
                       }
                     >
-                      <td>{position.positionName}</td>
+                      <td >
+                        {position.positionName}
+                      </td>
                       <td>{countChoicesForPosition(position.positionName)}</td>
                     </tr>
                   ))
                 ) : (
                   <tr className="emptySmall">
-                    <td>
-                      <img src={sad} alt="voteIcon" className="sad" />
-                    </td>
-
+                  <td>
+                    <img src={sad} alt="voteIcon" className="sad" />
                     <td id="animation-container">
                       <h3>No Positions created yet</h3>
                     </td>
-                  </tr>
+                  </td>
+                 
+              
+                </tr>
                 )}
               </tbody>
             </table>
@@ -128,18 +133,21 @@ const Ballot = () => {
                   parties.map((party, index) => (
                     <tr key={index} className="position">
                       <td>{party.partyName}</td>
-                      <td>{countChoicesForParty(party.partyName)}</td>
+                      <td className="num">
+                        {countChoicesForParty(party.partyName)}
+                      </td>
                     </tr>
                   ))
                 ) : (
                   <tr className="emptySmall">
                     <td>
                       <img src={sad} alt="voteIcon" className="sad" />
+                      <td id="animation-container">
+                        <h3>No Parties created yet</h3>
+                      </td>
                     </td>
-
-                    <td id="animation-container">
-                      <h3>No Parties created yet</h3>
-                    </td>
+                   
+                
                   </tr>
                 )}
               </tbody>

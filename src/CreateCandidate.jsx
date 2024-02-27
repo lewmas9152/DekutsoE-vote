@@ -5,7 +5,7 @@ import sad from "/assets/sad.gif";
 import "./CreateCandidate.css";
 import { ChoicesContext } from "./App";
 import { useNavigate } from "react-router-dom";
-import { set } from "react-hook-form";
+
 
 const CreateCandidate = () => {
   const {
