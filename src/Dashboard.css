@@ -49,6 +49,13 @@
   min-width:20ch ;
 }
 
+.electionTitle:hover {
+  text-decoration: underline;
+  text-decoration-color: rgb(2, 71, 2);
+  text-decoration-thickness: 0.2rem;
+  transition: all 0.3s ease-in-out;
+}
+
 .date {
   display: flex;
   flex-direction: column;

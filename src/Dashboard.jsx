@@ -97,8 +97,8 @@ const Dashboard = () => {
   const navigateElection = (electionId) => {
     setElectionId(electionId);
     getPositionFromDatabase(electionId);
+    getPartiesFromDatabase();
     navigate(`/main/${electionId}`);
-   
   };
 
   return (
@@ -174,12 +174,13 @@ const Dashboard = () => {
           noFilteredElectionsMessage
         ) : (
           reversedFilteredElections.map((election) => (
-            <div
-              key={election._id}
-              className="item"
-              onClick={() => navigateElection(election._id)}
-            >
-              <h3 className="electionTitle">{election.title}</h3>
+            <div key={election._id} className="item">
+              <h3
+                className="electionTitle"
+                onClick={() => navigateElection(election._id)}
+              >
+                {election.title}
+              </h3>
               <section className="dateSec">
                 <div className="date">
                   <h3 className="dateHeader">

@@ -6,3 +6,15 @@
   gap: 1rem;
   padding: 0.5rem;
 }
+
+.cardVote {
+  display: flex;
+  flex-direction: column;
+  transform: translateX(65%);
+}
+
+.cardVote table {
+  display: flex;
+  flex-direction: column;
+
+}

@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import overview from "/assets/overview.svg";
 import ballot from "/assets/ballot.svg";
+import vote from "/assets/vote.svg";
 import voters from "/assets/voters.svg";
 import launch from "/assets/launch.svg";
 import { UserContext } from "./App";
@@ -36,6 +37,14 @@ const MainNav = () => {
             </p>
           </Link>
         ) : null}
+
+        <Link to="/voting">
+          <p className="navigate">
+            {" "}
+            <img src={vote} alt="Ballot" className="iconNav" />
+            Vote
+          </p>
+        </Link>
 
         <p className="navigate">
           {" "}

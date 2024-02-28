@@ -38,10 +38,9 @@ const Ballot = () => {
       userState.loginStatus === "ADMIN LOGIN"
     ) {
       navigate(`/CreateCandidate/${encodeURIComponent(position)}`);
+    } else {
+      navigate(`/Voting/${encodeURIComponent(position)}`);
     }
-    navigate(`/Voting/${encodeURIComponent(position)}`);
-
-    // navigate(`/CreateCandidate/${encodeURIComponent(position)}`);
   };
 
   const countChoicesForPosition = (positionName) => {
