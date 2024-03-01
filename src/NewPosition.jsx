@@ -60,6 +60,7 @@ const NewPosition = () => {
   };
 
 
+
   const handleNavigation = () => {
     navigate("/Ballot");
   };
@@ -109,12 +110,13 @@ const NewPosition = () => {
             </thead>
 
             <tbody>
-              {positions.map((position, index) => (
-                <tr key={index}>
+              {positions.map((position, id) => (
+                <tr key={id}>
                   <td>{position.positionName}</td>
                   <td>{position.maxCandidates}</td>
                 </tr>
-              ))}
+              ))
+              }
             </tbody>
           </table>
         </div>

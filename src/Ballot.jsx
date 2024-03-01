@@ -98,12 +98,12 @@ const Ballot = () => {
                   ))
                 ) : (
                   <tr className="emptySmall">
-                  <td>
+                  <>
                     <img src={sad} alt="voteIcon" className="sad" />
                     <td id="animation-container">
                       <h3>No Positions created yet</h3>
                     </td>
-                  </td>
+                  </>
                  
               
                 </tr>
@@ -139,12 +139,12 @@ const Ballot = () => {
                   ))
                 ) : (
                   <tr className="emptySmall">
-                    <td>
+                    <>
                       <img src={sad} alt="voteIcon" className="sad" />
                       <td id="animation-container">
                         <h3>No Parties created yet</h3>
                       </td>
-                    </td>
+                    </>
                    
                 
                   </tr>

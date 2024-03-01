@@ -46,11 +46,13 @@ const MainNav = () => {
           </p>
         </Link>
 
-        <p className="navigate">
-          {" "}
-          <img src={launch} alt="Launch" className="iconNav" />
-          Launch
-        </p>
+        <Link to="/results">
+          <p className="navigate">
+            {" "}
+            <img src={launch} alt="Launch" className="iconNav" />
+            Results
+          </p>
+        </Link>
       </nav>
     </>
   );

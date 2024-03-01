@@ -64,18 +64,17 @@ const CreateCandidate = () => {
               required
               className="inputPos"
             >
+              <option value="">Select a position</option>
               {positions.length === 0 ? (
                 <option value="">No positions available</option>
               ) : (
                 positions.map((position) => (
-                  <>
-                    <option
-                      value={position.positionName}
-                      key={position.positionName}
-                    >
-                      {position.positionName}
-                    </option>
-                  </>
+                  <option
+                    value={position.positionName}
+                    key={position.positionName}
+                  >
+                    {position.positionName}
+                  </option>
                 ))
               )}
             </select>
@@ -105,16 +104,16 @@ const CreateCandidate = () => {
                 required
                 className="inputPos"
               >
+                <option value="">Select a party</option>
                 {parties.length === 0 ? (
-                  <option value="">No parties available</option>
+                  <option key="no-parties" value="">
+                    No parties available
+                  </option>
                 ) : (
                   parties.map((party, index) => (
-                    <>
-                      <option>Select a party</option>
-                      <option value={party.partyName} key={index}>
-                        {party.partyName}
-                      </option>
-                    </>
+                    <option value={party.partyName} key={index}>
+                      {party.partyName}
+                    </option>
                   ))
                 )}
               </select>

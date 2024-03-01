@@ -1,0 +1,28 @@
+.charts {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 3rem;
+  background-color: rgb(83, 71, 1);
+  color: green;
+  align-self: center;
+  justify-self: center;
+  padding: 2rem;
+  width: 90%;
+  border-radius: 1rem;
+  transform: translateX(1rem);
+}
+
+.resultSec {
+  display: flex;
+  flex-direction: column;
+}
+
+.resultsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.resultsContainer .disclaimer { 
+  margin-top: 15%;
+}

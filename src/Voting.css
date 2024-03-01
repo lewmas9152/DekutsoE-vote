@@ -10,7 +10,7 @@
 .cardVote {
   display: flex;
   flex-direction: column;
-  transform: translateX(65%);
+  transform: translateX(45%);
 }
 
 .cardVote table {
@@ -18,3 +18,7 @@
   flex-direction: column;
 
 }
+
+
+
+

@@ -15,7 +15,7 @@ import "./App.css";
 import NewParty from "./NewParty";
 import Voting from "./Voting";
 import NewPosition from "./NewPosition";
-import { set } from "react-hook-form";
+import Results from "./Results";
 
 export const ElectionContext = createContext({
   elections: [],
@@ -50,10 +50,12 @@ export const ChoicesContext = createContext({
   position: "",
   positionInfo: "",
   parties: [],
+  votes: {},
   choicesList: [],
   choiceInfo: { choices: "", party: "" },
   selectedPosition: "",
   selectedChoices: [],
+  setVotes: () => {},
   setParties: () => {},
   setPositionInfo: () => {},
   setChoicesList: () => {},
@@ -77,6 +79,7 @@ function App() {
   });
 
   const [positionInfo, setPositionInfo] = useState({
+    _id: "",
     positionName: "",
     maxCandidates: "",
   });
@@ -88,6 +91,7 @@ function App() {
   // const [positions, setPositions] = useState("");
   const [parties, setParties] = useState([]);
   const [position, setPosition] = useState("");
+  const [votes, setVotes] = useState({});
   const [positions, setPositions] = useState([]);
   const [choiceInfo, setChoiceInfo] = useState({
     choices: "",
@@ -195,6 +199,7 @@ function App() {
 
       for (const key in data) {
         loadedPositions.push({
+          id: data[key]._id,
           positionName: data[key].name,
           maxCandidates: data[key].maxCandidates,
         });
@@ -247,7 +252,7 @@ function App() {
   const getCandidatesFromDatabase = async () => {
     try {
       const response = await fetch(
-        "https://dekutso-evote-backend.onrender.com/api/candidates",
+        `https://dekutso-evote-backend.onrender.com/api/candidates/election/${electionId}`,
         {
           method: "GET",
           headers: {
@@ -261,9 +266,9 @@ function App() {
 
       for (const key in data) {
         loadedCandidates.push({
-          candidateName: data[key].candidateName,
-          position: data[key].position,
-          party: data[key].party,
+          candidateName: data[key].name,
+          position: data[key].positionId,
+          party: data[key].partyId,
         });
       }
 
@@ -311,6 +316,7 @@ function App() {
   };
 
   const [electionId, setElectionId] = useState("");
+  console.log("Votes:", votes);
 
   return (
     <>
@@ -346,6 +352,7 @@ function App() {
           <ChoicesContext.Provider
             value={{
               positions,
+              votes,
               positionInfo,
               parties,
               position,
@@ -353,6 +360,7 @@ function App() {
               choiceInfo,
               selectedPosition,
               selectedChoices,
+              setVotes,
               setChoicesList,
               setPositionInfo,
               setParties,
@@ -387,41 +395,6 @@ function App() {
                     </NavLink>
                   )}
                 </div>
-{/* 
-                <NavLink to="/dashboard" className="link">
-                  Dashboard
-                </NavLink>
-
-                <NavLink to="/createCandidate" className="link">
-                  CreateCandidate
-                </NavLink>
-
-                <NavLink to="/NewParty" className="link">
-                  NewParty
-                </NavLink>
-
-                <NavLink to="/voting" className="link">
-                  Voting
-                </NavLink>
-
-                <NavLink to="/NewPosition" className="link">
-                  NewPosition
-                </NavLink>
-
-                <NavLink to="/NewElection" className="link">
-                  NewElection
-                </NavLink>
-
-                <NavLink to="/Voters" className="link">
-                  Voters
-                </NavLink>
-                <NavLink to="/ballot" className="link">
-                  Ballot
-                </NavLink>
-
-                <NavLink to="/main" className="link">
-                  Main
-                </NavLink> */}
 
                 {currentUserEmail ? (
                   <NavLink key="profile">
@@ -470,6 +443,8 @@ function App() {
               <Route path="/Voters" element={<Voters />} />
               <Route path="/NewParty" element={<NewParty />} />
               <Route path="/voting" element={<Voting />} />
+              <Route path="/results" element={<Results />} />
+
               <Route path="/voting/:position" element={<Voting />} />
               <Route path="/main/:electionId" element={<MainSec />} />
               <Route

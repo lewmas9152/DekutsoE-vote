@@ -6,6 +6,7 @@ import MainNav from "./MainNav";
 
 const Voting = () => {
   const {
+    setVotes,
     selectedPosition,
     selectedChoices,
     position,
@@ -20,15 +21,17 @@ const Voting = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Selected choice:", selectedChoice);
+    setVotes((prevVotes) => ({
+      ...prevVotes,
+      [selectedChoice]: (prevVotes[selectedChoice] || 0) + 1,
+    }));
   };
-
-
 
   return (
     <>
       <main className="container">
         <MainNav />
+
         <div className="cardVote">
           <img src={logo} alt="logo" className="logoB" />
 
@@ -40,7 +43,10 @@ const Voting = () => {
                 <select
                   name="position"
                   id="position"
-                  value={position || (position.length > 0 ? positions[0].positionName:'')}
+                  value={
+                    position ||
+                    (position.length > 0 ? positions[0].positionName : "")
+                  }
                   onChange={(e) => handlePositionChange(e.target.value)}
                   required
                   className="inputPos"
