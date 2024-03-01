@@ -1,11 +1,17 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import logo from "/assets/logo.svg";
 import { ChoicesContext } from "./App";
 import "./Voting.css";
 import MainNav from "./MainNav";
 
 const Voting = () => {
-  const { selectedPosition, selectedChoices } = useContext(ChoicesContext);
+  const {
+    selectedPosition,
+    selectedChoices,
+    position,
+    positions,
+    handlePositionChange,
+  } = useContext(ChoicesContext);
   const [selectedChoice, setSelectedChoice] = useState("");
 
   const handleRadioChange = (event) => {
@@ -17,6 +23,8 @@ const Voting = () => {
     console.log("Selected choice:", selectedChoice);
   };
 
+
+
   return (
     <>
       <main className="container">
@@ -27,7 +35,30 @@ const Voting = () => {
           <fieldset>
             <legend>{selectedPosition}</legend>
             <form onSubmit={handleSubmit}>
-              {" "}
+              <div className="input">
+                <label htmlFor="position">Position</label>
+                <select
+                  name="position"
+                  id="position"
+                  value={position || (position.length > 0 ? positions[0].positionName:'')}
+                  onChange={(e) => handlePositionChange(e.target.value)}
+                  required
+                  className="inputPos"
+                >
+                  {positions.length === 0 ? (
+                    <option value="">No positions available</option>
+                  ) : (
+                    positions.map((position) => (
+                      <option
+                        value={position.positionName}
+                        key={position.positionName}
+                      >
+                        {position.positionName}
+                      </option>
+                    ))
+                  )}
+                </select>
+              </div>{" "}
               <table>
                 <thead>
                   <tr>

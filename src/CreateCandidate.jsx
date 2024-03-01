@@ -6,7 +6,6 @@ import "./CreateCandidate.css";
 import { ChoicesContext } from "./App";
 import { useNavigate } from "react-router-dom";
 
-
 const CreateCandidate = () => {
   const {
     positions,
@@ -18,6 +17,7 @@ const CreateCandidate = () => {
     position,
     setPosition,
     handleChoiceInfo,
+    handlePositionChange,
   } = useContext(ChoicesContext);
   const navigate = useNavigate();
 
@@ -35,22 +35,16 @@ const CreateCandidate = () => {
       return;
     }
 
-    const newChoice = { choice: choiceInfo.choices, party: choiceInfo.party, position: position};
+    const newChoice = {
+      choice: choiceInfo.choices,
+      party: choiceInfo.party,
+      position: position,
+    };
     setChoicesList([...choicesList, newChoice]);
     setChoiceInfo({ choices: "", party: "" });
   };
 
   console.log("choiceList", choicesList);
-
-  const handlePositionChange = (newPosition) => {
-    const updatedChoices = choicesList.map((choice) => ({
-      ...choice,
-      position: newPosition,
-    }));
-    setChoicesList(updatedChoices);
-    setPosition(newPosition);
-  };
-
 
   return (
     <main>
@@ -74,12 +68,14 @@ const CreateCandidate = () => {
                 <option value="">No positions available</option>
               ) : (
                 positions.map((position) => (
-                  <option
-                    value={position.positionName}
-                    key={position.positionName}
-                  >
-                    {position.positionName}
-                  </option>
+                  <>
+                    <option
+                      value={position.positionName}
+                      key={position.positionName}
+                    >
+                      {position.positionName}
+                    </option>
+                  </>
                 ))
               )}
             </select>
@@ -112,18 +108,19 @@ const CreateCandidate = () => {
                 {parties.length === 0 ? (
                   <option value="">No parties available</option>
                 ) : (
-                  parties.map((party) => (
-                    <option value={party.partyName} key={party.partyName}>
-                      {party.partyName}
-                    </option>
+                  parties.map((party, index) => (
+                    <>
+                      <option>Select a party</option>
+                      <option value={party.partyName} key={index}>
+                        {party.partyName}
+                      </option>
+                    </>
                   ))
                 )}
               </select>
             </div>
 
-            <button type="submit">
-              Add Choice
-            </button>
+            <button type="submit">Add Choice</button>
           </div>
         </form>
 

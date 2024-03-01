@@ -15,6 +15,7 @@ import "./App.css";
 import NewParty from "./NewParty";
 import Voting from "./Voting";
 import NewPosition from "./NewPosition";
+import { set } from "react-hook-form";
 
 export const ElectionContext = createContext({
   elections: [],
@@ -62,6 +63,7 @@ export const ChoicesContext = createContext({
   setPositions: () => {},
   handleChoiceInfo: () => {},
   handleAddChoice: () => {},
+  handlePositionChange: () => {},
 });
 
 function App() {
@@ -202,6 +204,16 @@ function App() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handlePositionChange = (newPosition) => {
+    const updatedChoices = choicesList.map((choice) => ({
+      ...choice,
+      position: newPosition,
+    }));
+    setChoicesList(updatedChoices);
+    setPosition(newPosition);
+    setSelectedPosition(newPosition);
   };
 
   const getPartiesFromDatabase = async () => {
@@ -350,6 +362,7 @@ function App() {
               handleChoiceInfo,
               setSelectedPosition,
               setSelectedChoices,
+              handlePositionChange,
             }}
           >
             <nav className="nav routeNav">
@@ -374,6 +387,41 @@ function App() {
                     </NavLink>
                   )}
                 </div>
+{/* 
+                <NavLink to="/dashboard" className="link">
+                  Dashboard
+                </NavLink>
+
+                <NavLink to="/createCandidate" className="link">
+                  CreateCandidate
+                </NavLink>
+
+                <NavLink to="/NewParty" className="link">
+                  NewParty
+                </NavLink>
+
+                <NavLink to="/voting" className="link">
+                  Voting
+                </NavLink>
+
+                <NavLink to="/NewPosition" className="link">
+                  NewPosition
+                </NavLink>
+
+                <NavLink to="/NewElection" className="link">
+                  NewElection
+                </NavLink>
+
+                <NavLink to="/Voters" className="link">
+                  Voters
+                </NavLink>
+                <NavLink to="/ballot" className="link">
+                  Ballot
+                </NavLink>
+
+                <NavLink to="/main" className="link">
+                  Main
+                </NavLink> */}
 
                 {currentUserEmail ? (
                   <NavLink key="profile">
