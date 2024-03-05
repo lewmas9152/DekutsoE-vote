@@ -83,8 +83,9 @@ td:first-child {
 
 .addBtn {
   text-transform: none;
-  transform: translateX(100%);
+  transform: translateX(90%);
   margin-top: 1rem;
+  font-size: small;
 }
 
 .emptySmall {
