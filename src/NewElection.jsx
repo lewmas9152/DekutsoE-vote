@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import logo from "/assets/logo.svg";
 import dateIcon from "/assets/date.svg";
 import TimezoneSelect from "react-timezone-select";

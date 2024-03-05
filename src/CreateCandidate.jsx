@@ -15,7 +15,7 @@ const CreateCandidate = () => {
     choiceInfo,
     setChoiceInfo,
     position,
-    setPosition,
+    setSelectedPosition,
     handleChoiceInfo,
     handlePositionChange,
   } = useContext(ChoicesContext);
@@ -39,9 +39,11 @@ const CreateCandidate = () => {
       choice: choiceInfo.choices,
       party: choiceInfo.party,
       position: position,
+      positionId: positions.find((p) => p.positionName === position).id,
     };
     setChoicesList([...choicesList, newChoice]);
     setChoiceInfo({ choices: "", party: "" });
+    setSelectedPosition("");
   };
 
   console.log("choiceList", choicesList);
@@ -69,10 +71,7 @@ const CreateCandidate = () => {
                 <option value="">No positions available</option>
               ) : (
                 positions.map((position) => (
-                  <option
-                    value={position.positionName}
-                    key={position.positionName}
-                  >
+                  <option value={position.positionName} key={position.id}>
                     {position.positionName}
                   </option>
                 ))

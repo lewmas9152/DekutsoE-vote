@@ -88,7 +88,6 @@ function App() {
     setElections([...elections, { ...newElectionData }]);
   };
 
-  // const [positions, setPositions] = useState("");
   const [parties, setParties] = useState([]);
   const [position, setPosition] = useState("");
   const [votes, setVotes] = useState({});
@@ -212,11 +211,7 @@ function App() {
   };
 
   const handlePositionChange = (newPosition) => {
-    const updatedChoices = choicesList.map((choice) => ({
-      ...choice,
-      position: newPosition,
-    }));
-    setChoicesList(updatedChoices);
+    setChoicesList([]);
     setPosition(newPosition);
     setSelectedPosition(newPosition);
   };
@@ -316,7 +311,6 @@ function App() {
   };
 
   const [electionId, setElectionId] = useState("");
-  console.log("Votes:", votes);
 
   return (
     <>
