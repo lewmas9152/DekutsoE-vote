@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import logo from "/assets/logo.svg";
 import vote from "/assets/vote.png";
 import sad from "/assets/sad.gif";
@@ -35,9 +35,15 @@ const CreateCandidate = () => {
       return;
     }
 
+    const selectedParty = parties.find((party) => party.partyName === choiceInfo.party);
+    if (!selectedParty) {
+      return; 
+    }
+
     const newChoice = {
       choice: choiceInfo.choices,
       party: choiceInfo.party,
+      partyId: selectedParty.partyId,
       position: position,
       positionId: positions.find((p) => p.positionName === position).id,
     };
@@ -111,6 +117,7 @@ const CreateCandidate = () => {
                 ) : (
                   parties.map((party, index) => (
                     <option value={party.partyName} key={index}>
+                      {party.id}
                       {party.partyName}
                     </option>
                   ))

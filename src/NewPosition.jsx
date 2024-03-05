@@ -5,7 +5,7 @@ import { ChoicesContext, ElectionContext } from "./App";
 import { useNavigate } from "react-router-dom";
 
 const NewPosition = () => {
-  const { positions, positionInfo, setPositionInfo} =
+  const { positions, positionInfo, setPositionInfo } =
     useContext(ChoicesContext);
   const { electionId, getPositionFromDatabase } = useContext(ElectionContext);
 
@@ -31,7 +31,6 @@ const NewPosition = () => {
     let url = `https://dekutso-evote-backend.onrender.com/api/positions/${electionId}`;
 
     let data = {
-      
       name: positionInfo.positionName,
       maxCandidates: positionInfo.maxCandidates,
     };
@@ -52,15 +51,13 @@ const NewPosition = () => {
       }
       getPositionFromDatabase();
 
-  console.log(positionInfo);
+      console.log(positionInfo);
       setPositionInfo({
         positionName: "",
         maxCandidates: "",
       });
     });
   };
-
-
 
   const handleNavigation = () => {
     navigate("/Ballot");
@@ -116,8 +113,7 @@ const NewPosition = () => {
                   <td>{position.positionName}</td>
                   <td>{position.maxCandidates}</td>
                 </tr>
-              ))
-              }
+              ))}
             </tbody>
           </table>
         </div>

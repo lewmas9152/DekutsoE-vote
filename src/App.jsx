@@ -233,6 +233,7 @@ function App() {
 
       for (const key in data) {
         loadedParties.push({
+          partyId: data[key]._id,
           partyName: data[key].name,
           partySlogan: data[key].slogan,
         });
@@ -390,6 +391,7 @@ function App() {
                   )}
                 </div>
 
+               
                 {currentUserEmail ? (
                   <NavLink key="profile">
                     <div className="user">
