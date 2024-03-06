@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 
 
 export default defineConfig({
-  base:"/DekutsoE-vote ",
+  // base:"/DekutsoE-vote ",
   plugins: [react()],
 })

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import logo from "/assets/logo.svg";
 import { ChoicesContext } from "./App";
 import "./Voting.css";
@@ -7,6 +7,7 @@ import MainNav from "./MainNav";
 const Voting = () => {
   const {
     setVotes,
+    choicesList,
     selectedPosition,
     selectedChoices,
     position,
@@ -14,6 +15,15 @@ const Voting = () => {
     handlePositionChange,
   } = useContext(ChoicesContext);
   const [selectedChoice, setSelectedChoice] = useState("");
+  const [selectedPositionChoices, setSelectedPositionChoices] = useState([]);
+  
+  useEffect(() => {
+
+    const positionChoices = choicesList.filter(
+      (choice) => choice.position === selectedPosition
+    );
+    setSelectedPositionChoices(positionChoices);
+  }, [selectedPosition, choicesList]);
 
   const handleRadioChange = (event) => {
     setSelectedChoice(event.target.value);
@@ -74,7 +84,7 @@ const Voting = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {selectedChoices.map((choice, index) => (
+                  {selectedPositionChoices.map((choice, index) => (
                     <tr key={index}>
                       <td>
                         <label htmlFor={index}>{choice.choice}</label>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import  { useContext, useEffect } from "react";
 import ballot from "/assets/ballot.svg";
 import voters from "/assets/voters.svg";
 import launch from "/assets/launch.svg";
@@ -8,12 +8,11 @@ import "./Ballot.css";
 import { Link, useNavigate } from "react-router-dom";
 import MainNav from "./MainNav";
 import MainSecHeader from "./MainSecHeader";
-import { ChoicesContext, UserContext, ElectionContext } from "./App";
+import { ChoicesContext, UserContext} from "./App";
 
 const Ballot = () => {
   const {
     positions,
-    selectedPosition,
     choicesList,
     setSelectedPosition,
     setSelectedChoices,
