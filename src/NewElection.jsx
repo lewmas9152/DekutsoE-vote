@@ -20,6 +20,8 @@ const NewElection = () => {
     });
   };
 
+
+
   const isTimeDifferenceValid = () => {
     const start = new Date(electionData.startDate);
     const end = new Date(electionData.endDate);

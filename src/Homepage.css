@@ -1,14 +1,4 @@
-main {
-  display: flex;
-  flex-direction: column;
-  min-width: 60vw;
-  min-height: 45vw;
-  border-radius: 1rem;
-  border-top-left-radius: unset;
-  border-top-right-radius: unset;
-  overflow: hidden;
-  background-color: rgb(86, 133, 68);
-}
+
 
 .homepage {
   display: flex;

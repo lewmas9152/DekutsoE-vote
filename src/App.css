@@ -1,5 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&display=swap");
 
+
+main {
+  display: flex;
+  flex-direction: column;
+  min-width: 60vw;
+  min-height: 45vw;
+  border-radius: 1rem;
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
+  overflow: hidden;
+  background: rgba(135, 155, 155, 1);
+
+}
+
+
 body {
   background-color: rgb(5, 20, 1);
   display: flex;
@@ -173,32 +188,14 @@ input[type="checkbox"] {
   align-items: center;
 }
 
-.currentView {
-  display: flex;
-  justify-content: space-between;
-  background-color: rgb(77, 214, 13);
-  align-content: center;
-  align-items: center;
-  padding: 0rem 2rem;
-  border-bottom-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-}
 
-.new {
-  display: flex;
-  width: 9rem;
-  align-items: center;
-  justify-content: center;
-  margin: 0.5rem;
-}
+
 
 .new:hover {
   width: 10rem;
 }
 
-.current {
-  text-transform: uppercase;
-}
+
 
 .link {
   color: rgb(224, 191, 5);

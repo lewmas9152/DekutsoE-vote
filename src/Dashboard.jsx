@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import add from "/assets/add.svg";
 import "./Dashboard.css";
 import search from "/assets/search.svg";
@@ -6,10 +6,12 @@ import dropDown from "/assets/dropDown.svg";
 import date from "/assets/date.svg";
 import { Link } from "react-router-dom";
 import sad from "/assets/sad.gif";
+import time from "/assets/time.svg"
 import remove from "/assets/delete.svg";
 import { ElectionContext } from "./App";
 import { UserContext } from "./App";
 import { useNavigate } from "react-router-dom";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   const {
@@ -187,7 +189,13 @@ const Dashboard = () => {
                     <img src={date} alt="calender" className="icon" />
                     Start Date
                   </h3>
-                  <p>{election.startDate}</p>
+                  <p>{new Date(election.startDate).toLocaleDateString()}</p>
+
+                  <h3 className="dateHeader">
+                    <img src={time} alt="calender" className="icon" />
+                    Start Time
+                  </h3>
+                  <p>{new Date(election.startDate).toLocaleTimeString()}</p>
                 </div>
 
                 <div className="date">
@@ -195,7 +203,13 @@ const Dashboard = () => {
                     <img src={date} alt="calender" className="icon" />
                     End Date
                   </h3>
-                  <p>{election.endDate}</p>
+                  <p>{new Date(election.endDate).toLocaleDateString()}</p>
+
+                  <h3 className="dateHeader">
+                    <img src={time} alt="calender" className="icon" />
+                    End Time
+                  </h3>
+                  <p>{new Date(election.endDate).toLocaleTimeString()}</p>
                 </div>
               </section>
 
@@ -215,7 +229,7 @@ const Dashboard = () => {
               {electionToDelete === election._id && (
                 <div className="deletion">
                   <div className="delPopUp">
-                    <h4>!!!Dangerous action no recovery on delete</h4>
+                    <h4>!!!Dangerous action</h4>
                     <div className="delOptions">
                       <p
                         className="option"
@@ -224,7 +238,7 @@ const Dashboard = () => {
                           handleDeletion(election._id);
                         }}
                       >
-                        Delete Anyway
+                        Delete
                       </p>
                       <p
                         className="option"
