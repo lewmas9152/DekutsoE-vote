@@ -16,13 +16,7 @@ const Testimonials = () => {
   const testimonialsPerPage = 3;
 
   const testimonials = [
-    {
-      id: 1,
-      statement:
-        "I never voted before because it was confusing and intimidating. This app made it clear and accessible.",
-      name: "Jane P., Previously Disenfranchised Voter",
-      avatar: avatar1,
-    },
+   
     {
       id: 2,
       statement:

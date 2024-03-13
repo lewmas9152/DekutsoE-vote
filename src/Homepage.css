@@ -15,7 +15,6 @@ main {
   flex-direction: column;
   align-items: center;
   background-image: url(/assets/background.jpg);
-  background-size: cover;
   background-repeat: no-repeat;
   min-width: 60vw;
   min-height: 45vw;
@@ -24,6 +23,10 @@ main {
 h2 {
   color: rgb(143, 129, 4);
   margin-bottom: -0.5rem;
+}
+
+h3 {
+  color: crimson;
 }
 
 .nav {
@@ -60,37 +63,88 @@ li:hover {
 .dropDown {
   width: 1rem;
 }
+.titleHome {
+  display: flex;
+  margin: 1rem;
+  gap: 0.5rem;
+}
+.topHomepage {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.topHomepage p {
+  max-width: 40ch;
+  margin-left: 2rem;
+}
+
+.topHomepage span {
+  color: rgb(2, 2, 126);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.stroke {
+  width: 0.5rem;
+  border-radius: 1rem;
+  height: 2rem;
+  background-color: blue;
+}
 
 .slogan {
   display: flex;
-  flex-direction: column;
-  max-width: 50ch;
-  margin-top: 10%;
+  margin-top: 2rem;
+  margin-left: 1rem;
   color: rgb(2, 2, 2);
   font-weight: 500;
   gap: 1rem;
   text-align: center;
-  background-color: rgba(22, 71, 3, 0.7);
-  padding: 3rem 2rem;
-  border-radius: 1rem;
   font-style: italic;
   justify-self: flex-start;
+}
+
+.mSlogan {
+  max-width: 30ch;
+  text-align: left;
+  padding: 2rem 2rem;
+  padding-top: 1rem;
+  border-radius: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.slogan:hover {
+.transparent {
+  background: rgba(48, 80, 80, 1);
+}
+
+.secure {
+  background: rgba(78, 61, 61, 0.8);
+}
+
+.credible {
+  background: rgba(121, 175, 164, 1);
+}
+
+.mSlogan:hover {
   background-color: rgba(22, 71, 3, 0.9);
   transform: scale(1.05);
   box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
   transition: all 0.3s ease;
 }
 
+.sloganIcon {
+  height: 2rem;
+  width: 2rem;
+}
+
 .contacts {
   display: flex;
   flex-direction: column;
+  background: rgba(51, 51, 51, 0.9);
+
   gap: 1rem;
   text-align: center;
-  width: 90%;
+  width: 100%;
   color: rgb(6, 6, 138);
   margin-top: -9%;
 }
@@ -133,25 +187,14 @@ li:hover {
   font-weight: 500;
 }
 
-.contLink:hover .hiddenText {
-  display: block;
-  opacity: 1;
-  transition: opacity 20s ease-in-out;
-}
-
-.hiddenText {
-  display: none;
-  opacity: 0;
-  transition: opacity 20s ease-in-out;
-}
-
 .logoIcon {
   width: 2rem;
 }
 
 .logoIcon:hover {
-  color: red;
   width: 2.5rem;
+  height: 3rem;
+  transition: all 3s ease-in-out;
 }
 
 .logoIcon:hover + .hiddenText {
@@ -179,9 +222,8 @@ li:hover {
 .homeTop {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  justify-content: center;
-  align-items: center;
-  margin-left: -35rem;
   margin-bottom: -5rem;
+  background: rgba(48, 80, 80, 0.9);
+  width: 100%;
+  padding-bottom: 2rem;
 }

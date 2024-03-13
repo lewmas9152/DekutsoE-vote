@@ -391,6 +391,8 @@ function App() {
                   )}
                 </div>
 
+                
+
                 {currentUserEmail ? (
                   <NavLink key="profile">
                     <div className="user">
